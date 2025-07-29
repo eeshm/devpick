@@ -1,53 +1,32 @@
-const snippet ={
-  "items": [
-    {
-      "kind": "youtube#searchResult",
-      "etag": "ahMYOBwkOXL78UPVB7VdnChB16Q",
-      "id": {
-        "kind": "youtube#playlist",
-        "playlistId": "PLinedj3B30sDby4Al-i13hQJGQoRQDfPo"
-      },
-      "snippet": {
-        "publishedAt": "2023-01-03T06:49:44Z",
-        "channelId": "UCf9T51_FmMlfhiGpoes0yFA",
-        "title": "Master NodeJS",
-        "description": "Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. It allows developers to run JavaScript on the server side, ...",
-        "thumbnails": {
-          "default": {
-            "url": "https://i.ytimg.com/vi/ohIAiuHMKMI/default.jpg",
-            "width": 120,
-            "height": 90
-          },
-          "medium": {
-            "url": "https://i.ytimg.com/vi/ohIAiuHMKMI/mqdefault.jpg",
-            "width": 320,
-            "height": 180
-          },
-          "high": {
-            "url": "image",
-            "width": 480,
-            "height": 360
-          }
-        },
-        "channelTitle": "Piyush Garg",
-        "liveBroadcastContent": "none",
-        "publishTime": "2023-01-03T06:49:44Z"
-      }
-    }
-  ]
+import { CardSpotlight } from "@/components/ui/card-spotlight";
+
+export default function CardSpotlightDemo() {
+  return (
+    <CardSpotlight className="h-96 w-96">
+      <p className="text-xl font-bold relative z-20 mt-2 text-white">
+        Authentication steps
+      </p>
+      <div className="text-neutral-200 mt-4 relative z-20">
+        Follow these steps to secure your account:
+        <ul className="list-none  mt-2">
+          <Step title="Enter your email address" />
+          <Step title="Create a strong password" />
+          <Step title="Set up two-factor authentication" />
+          <Step title="Verify your identity" />
+        </ul>
+      </div>
+      <p className="text-neutral-300 mt-4 relative z-20 text-sm">
+        Ensuring your account is properly secured helps protect your personal
+        information and data.
+      </p>
+    </CardSpotlight>
+  );
 }
 
-import Image from "next/image";
-
-export default function Card(){
-    return (
-    <div className="bg-black shadow-md rounded-lg overflow-hidden max-w-sm mx-auto hover:shadow-xl transition duration-300">
-        <Image 
-        src={"https://i.ytimg.com/vi/ohIAiuHMKMI/mqdefault.jpg"} 
-        alt="Playlist Thumbnail"
-        width={480}
-        height={360}
-        className="w-full h-48 object-cover" />
-        </div>
-    )
-}
+const Step = ({ title }: { title: string }) => {
+  return (
+    <li className="flex gap-2 items-start">
+      <p className="text-white">{title}</p>
+    </li>
+  );
+};

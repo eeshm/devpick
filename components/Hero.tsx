@@ -2,14 +2,14 @@ import Image from "next/image";
 import Card from "./Card";
 export default function Hero(){
 return(
-    <div className="items-center mt-10 flex flex-col h-screen">
+    <div className="items-center mt-10 flex flex-col">
         <Image
             src="/image.png"
             alt="Logo"
             width={150}
             height={150}
             className="rounded-none " />
-        <h1 className="lg:w-full mt-5  max-w-xl mx-auto -z-10 text-black tracking-tighter font-display text-center text-5xl font-bold  drop-shadow-sm md:text-6xl md:leading-[5rem]">
+        <h1 className="text-4xl md:text-5xl  font-medium  font-sans tracking-tight text-center">
             Playlist for every <p className="text-white leading-12">tech-stack</p>  
         </h1>
         <div className="flex flex-col items-center justify-center mt-9">
