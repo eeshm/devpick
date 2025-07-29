@@ -3,7 +3,7 @@ export default function Container({ children,className } : {
     className?: string;
 }) {
     return (
-        <div className="max-w-5xl mx-auto px-4 md:px-8 relative z-10 h-full w-full flex flex-col overflow-y-auto items-center justify-center">
+        <div className="max-w-4xl mx-auto h-full px-4 md:px-8 relative z-10 w-full flex flex-col items-center justify-center ">
             {children}
         </div>
     );
