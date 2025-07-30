@@ -1,8 +1,16 @@
-const techStack= [
+import { ReactNode } from "react";
+export type TechStackItem = {
+  name: string;
+  type: string;
+  symbol: ReactNode;
+  description: string;
+  useCases: string[];
+};
+const techStack :TechStackItem [] = [
   {
     "name": "Next.js",
     "type": "Full-Stack Framework",
-    "symbol": "➡️",
+    "symbol": <Nextjs size="lg"/>,
     "description": "A React-based framework for building fast, SEO-friendly websites and apps. Supports server-side rendering, static site generation, and API routes.",
     "useCases": ["SEO websites", "Dashboards", "Full-stack React apps"]
   },
@@ -135,26 +143,27 @@ const techStack= [
 ]
 
 import { CardSpotlight } from "@/components/ui/card-spotlight";
+import Nextjs from "./icons/Nextjs";
 
 
 
 interface TechStack {
     name: string;
     description: string;
-    symbol?: string;
+    symbol?: ReactNode ;
     useCases?: string[];
 }
 export default function TechStacks(){
     return(
         <div className="flex flex-col mt-10 items-center justify-center h-full">
-            <h2 className="text-3xl font-bold mb-6">Tech Stacks</h2>
+            <h2 className="text-3xl font-bold mb-6">Major Tech Stacks</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-6xl">
                 {techStack.map((tech, index) => (
                     <TechStackCard 
                         key={index} 
                         name={tech.name} 
                         description={tech.description} 
-                        symbol={tech.symbol || ""} 
+                        symbol={tech.symbol} 
                         useCases={tech.useCases || []}
                     />
                 ))}
@@ -167,7 +176,7 @@ export default function TechStacks(){
 function TechStackCard({name,description,symbol,useCases} :TechStack ) {
     return(
     <CardSpotlight className="h-80 w-80  overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300">
-    <div className="flex flex-col text-4xl text-center">
+    <div className="flex flex-col items-center justify- text-4xl text-center">
       {symbol} 
     <p className="font-bold relative z-20 mt-2 text-white">
       {name}
@@ -183,11 +192,9 @@ function TechStackCard({name,description,symbol,useCases} :TechStack ) {
         <ul className="flex flex-wrap gap-2 mt-5 overflow-y-auto max-h-28 ">
           {useCases.map((useCase, index) => (
             <div className="inline-flex justify-center items-center text-center rounded-xs 
-             border px-2  text-xs transition-colors
-             focus:outline-none focus:ring-2 focus:ring-ring
-             focus:ring-offset-2 border-transparent bg-primary 
-            text-black font-semibold shadow hover:bg-primary/80 break-words max-w-full">
-            <li key={index} className="mb-1">{useCase}</li>
+             border px-2  text-xs bg-black/30
+            text-white font-semibold break-words max-w-full">
+            <li key={index} className="p-0.5 py-">{useCase}</li>
             </div>
           ))}
         </ul>

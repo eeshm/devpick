@@ -6,13 +6,15 @@ import { Button } from "@/components/ui/button";
 import Card from "@/components/Card";
 import { Car } from "lucide-react";
 import TechStacks from "@/components/TechStacks";
+import YoutubeLogo from "@/components/icons/Youtube";
 
 export default function Home() {
   return (
-    <div className=" flex flex-col h-full items-center relative bg-gradient-to-t from-red-900 ">
+    <div className=" flex flex-col h-full items-center bg-fixed relative bg-gradient-to-t from-red-900 ">
       <div className="">
     <Container>
       <Hero />
+      {/* <YoutubeLogo /> */}
     {/* <Card /> */}
       {/* <Button  variant={"outline"} size={"lg"}/> */}
       <TechStacks />
