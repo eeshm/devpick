@@ -16,7 +16,7 @@
       "Performance overhead compared to bare-metal in some cases"
     ],
     "learning_curve": "Intermediate",
-    "major_use_cases": [
+    "major_use_cases":[
       "Containerization",
       "DevOps workflows",
       "Microservices deployment"
