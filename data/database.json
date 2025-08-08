@@ -1,0 +1,137 @@
+[
+  {
+    "name": "PostgreSQL",
+    "slug": "postgresql",
+    "short_description": "PostgreSQL is a powerful, open-source relational database known for reliability, extensibility, and standards compliance. Developers choose it for complex queries, strong data integrity, and active community support.",
+    "detailed_description": "PostgreSQL is an advanced, open-source relational database management system (RDBMS) that emphasizes extensibility, performance, and compliance with SQL standards. Often called 'Postgres', it supports complex queries, ACID transactions, JSON data types, and advanced indexing methods. PostgreSQL is ideal for applications that require high data integrity, transactional consistency, or sophisticated analytics.\n\nIt is widely used in industries like fintech, analytics, SaaS, and government. Key features include support for stored procedures, triggers, window functions, full-text search, and extensions like PostGIS for geospatial data. The PostgreSQL ecosystem includes tools for replication, monitoring, and backup, and it integrates easily with modern ORMs and languages.\n\nIts learning curve is moderate, but the documentation is thorough, and the community is very active. PostgreSQL has become an industry standard for developers looking for a reliable, scalable, and standards-driven RDBMS.",
+    "official_docs": "https://www.postgresql.org/docs/",
+    "pros": [
+      "Robust SQL support with full ACID compliance",
+      "Highly extensible with powerful indexing and data types",
+      "Large community and excellent documentation"
+    ],
+    "cons": [
+      "Can be complex for simple use cases",
+      "Requires tuning for very high-performance workloads",
+      "Replication setup is more manual than some alternatives"
+    ],
+    "learning_curve": "Intermediate",
+      "major_use_cases": [
+      "Complex queries",
+      "Transactional systems",
+      "Geospatial analytics"
+    ],
+    "basic_prerequisites": [
+      "SQL"
+    ],
+    "popularity": "high"
+  },
+  {
+    "name": "MySQL",
+    "slug": "mysql",
+    "short_description": "MySQL is a widely-used open-source relational database, known for speed, ease of use, and reliability. It's especially popular for web applications and beginner-friendly projects.",
+    "detailed_description": "MySQL is an open-source relational database management system owned by Oracle and used by millions of developers worldwide. Known for its simplicity, performance, and integration with PHP and the LAMP stack, MySQL powers a large portion of the web, including platforms like WordPress, Drupal, and Joomla.\n\nIt supports standard SQL syntax, primary keys, foreign keys, and basic indexing. MySQL is highly optimized for read-heavy workloads and works well with small to medium-scale applications. Tools like phpMyAdmin, MySQL Workbench, and built-in replication features support ease of development and management.\n\nWhile MySQL lacks some advanced features of PostgreSQL (like full SQL compliance or custom data types), it makes up for it with accessibility and documentation. Its learning curve is beginner-friendly, making it a great first RDBMS for aspiring developers or students.",
+    "official_docs": "https://dev.mysql.com/doc/",
+    "pros": [
+      "Beginner-friendly with broad community support",
+      "Fast performance on read-heavy web apps",
+      "Strong ecosystem with lots of tools and integrations"
+    ],
+    "cons": [
+      "Less strict about SQL standards and data integrity",
+      "Weaker support for complex queries and analytics",
+      "Owned by Oracle, which can raise licensing concerns for some users"
+    ],
+    "learning_curve": "Beginner",
+     "major_use_cases": [
+      "Web applications",
+      "Content management",
+      "Beginner projects"
+    ],
+    "basic_prerequisites": [
+      "SQL"
+    ],
+    "popularity": "high"
+  },
+  {
+    "name": "MongoDB",
+    "slug": "mongodb",
+    "short_description": "MongoDB is a leading NoSQL document database designed for scalability and flexibility. It’s schema-less, JSON-based, and ideal for fast-evolving, data-rich applications.",
+    "detailed_description": "MongoDB is a document-oriented NoSQL database that stores data in flexible, JSON-like BSON documents. It was built for modern applications that require scalability, agility, and ease of development. Unlike traditional SQL databases, MongoDB does not require a fixed schema, making it ideal for applications with evolving or unstructured data.\n\nIts rich feature set includes indexing, aggregation pipelines, native replication, sharding, full-text search, and geospatial queries. MongoDB supports horizontal scaling through sharding and integrates seamlessly with popular programming languages like Node.js, Python, and Java. The managed cloud version, MongoDB Atlas, simplifies deployment and scaling even further.\n\nMongoDB is particularly popular in startups, microservices, IoT applications, and real-time analytics. However, it’s not ideal for strict transactional applications like banking or inventory systems without extra engineering considerations. The learning curve is accessible for developers familiar with JSON and JavaScript, making it a go-to choice for many web and backend developers.",
+    "official_docs": "https://www.mongodb.com/docs/",
+    "pros": [
+      "Flexible schema design supports rapid iteration",
+      "Great for hierarchical or JSON-like data structures",
+      "Easy to scale horizontally with built-in sharding"
+    ],
+    "cons": [
+      "Not ACID-compliant by default across multiple documents",
+      "Poor fit for complex joins or highly relational data",
+      "Write-heavy applications require tuning to avoid performance bottlenecks"
+    ],
+    "learning_curve": "Beginner",
+     "major_use_cases": [
+      "Flexible schema apps",
+      "Real-time analytics",
+      "Microservices"
+    ],
+    "basic_prerequisites": [
+      "NoSQL"
+    ],
+    "popularity": "high"
+  },
+  {
+    "name": "Redis",
+    "slug": "redis",
+    "short_description": "Redis is an in-memory key-value data store used for caching, real-time analytics, and pub/sub systems. It’s blazing fast and ideal for performance-critical applications.",
+    "detailed_description": "Redis (REmote DIctionary Server) is an open-source, in-memory key-value store widely used for caching, session storage, real-time analytics, and message brokering. It supports a variety of data types including strings, lists, sets, sorted sets, and hashes, making it more than just a basic cache.\n\nRedis is known for its lightning-fast performance and low latency, since all data is stored in RAM. It supports persistence via snapshots and append-only files (AOF), and offers replication, high availability (Redis Sentinel), and automatic partitioning (Redis Cluster) for scalability.\n\nRedis is often paired with primary databases to handle high-throughput operations or reduce load. Use cases include caching database queries, leaderboard tracking, job queues, and rate limiting. While Redis is easy to get started with, mastering its advanced features like persistence and cluster management requires deeper knowledge. It's best suited for developers who need sub-millisecond response times or transient data structures.",
+    "official_docs": "https://redis.io/docs/",
+    "pros": [
+      "Extremely fast in-memory performance",
+      "Supports rich data types and atomic operations",
+      "Ideal for caching, pub/sub, and real-time applications"
+    ],
+    "cons": [
+      "Data stored in RAM limits capacity without extra cost",
+      "Persistence is optional and must be carefully configured",
+      "Not suitable as a standalone primary database for most applications"
+    ],
+    "learning_curve": "Intermediate",
+      "major_use_cases": [
+      "Caching",
+      "Real-time analytics",
+      "Pub/sub messaging"
+    ],
+    "basic_prerequisites": [
+      "In-memory"
+    ],
+    "popularity": "medium"
+  },
+  {
+    "name": "SQLite",
+    "slug": "sqlite",
+    "short_description": "SQLite is a self-contained, serverless relational database embedded into applications. It’s lightweight, fast, and perfect for mobile, desktop, and local prototyping.",
+    "detailed_description": "SQLite is a lightweight, file-based relational database engine that doesn’t require a separate server process. It stores the entire database as a single file on disk, making it incredibly easy to deploy and use. It supports most of the SQL standard and provides ACID-compliant transactions, indexes, and triggers.\n\nSQLite is commonly used in mobile apps (including Android and iOS), embedded systems, IoT devices, and desktop applications. It’s also a favorite for unit testing and prototyping due to its simplicity and zero-configuration setup.\n\nDespite its size, SQLite is robust and reliable. It’s not suitable for high-concurrency or massive multi-user web apps, but excels in scenarios with low to moderate write traffic and local data needs. Its learning curve is minimal, especially for developers familiar with SQL. SQLite is often a gateway to more complex RDBMS systems and a go-to tool in many developer toolkits.",
+    "official_docs": "https://www.sqlite.org/docs.html",
+    "pros": [
+      "Serverless and zero configuration — runs out of the box",
+      "Perfect for embedded, local, or mobile applications",
+      "Fast and reliable with full SQL support"
+    ],
+    "cons": [
+      "Not designed for high-concurrency or multi-user environments",
+      "Lacks advanced RDBMS features like stored procedures",
+      "Limited scalability beyond single-user or low-load applications"
+    ],
+    "learning_curve": "Beginner",
+    "major_use_cases": [
+      "Embedded apps",
+      "Prototyping",
+      "Mobile/local storage"
+    ],
+    "basic_prerequisites": [
+      "SQL"
+    ],
+    "popularity": "medium"
+  }
+]

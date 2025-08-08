@@ -1,0 +1,170 @@
+[
+  {
+    "name": "TensorFlow",
+    "slug": "tensorflow",
+    "short_description": "TensorFlow is a powerful open-source ML framework developed by Google. It's widely used for deep learning and neural networks, offering flexibility, scalability, and robust production tools.",
+    "detailed_description": "TensorFlow is an open-source machine learning framework developed by Google. Designed for both research and production, TensorFlow supports deep learning, numerical computation, and large-scale machine learning with optimized GPU and TPU execution. It provides high-level APIs like Keras for easy model building and lower-level operations for greater control. TensorFlow excels in neural networks, computer vision, NLP, and time series forecasting. Its ecosystem includes TensorFlow Lite for mobile, TensorFlow Extended (TFX) for production pipelines, and TensorBoard for visualization. While powerful, TensorFlow's complexity can be daunting for beginners, especially when using its low-level API. It remains a top choice for enterprise and research teams due to its scalability, performance, and extensive documentation.",
+    "official_docs": "https://www.tensorflow.org/",
+    "pros": [
+      "Highly scalable for production and research-grade projects",
+      "Strong ecosystem including TensorFlow Lite, TFX, and TensorBoard",
+      "Backed by Google with extensive community and support"
+    ],
+    "cons": [
+      "Steeper learning curve for beginners compared to PyTorch",
+      "Verbose and complex low-level API",
+      "Occasional inconsistencies between versions"
+    ],
+    "learning_curve": "Intermediate",
+    "popularity": "High",
+    "basic_prerequisites": ["Python", "ML fundamentals"],
+    "major_use_cases": ["Deep Learning", "Computer Vision", "NLP", "Time Series Forecasting", "Production Deployment"]
+  },
+  {
+    "name": "PyTorch",
+    "slug": "pytorch",
+    "short_description": "PyTorch is a flexible, Pythonic deep learning framework favored for research and experimentation. Its dynamic graphing makes debugging and model development intuitive.",
+    "detailed_description": "PyTorch is an open-source deep learning library developed by Facebook AI Research. It is known for its dynamic computation graph, making it easier to debug and write models in an intuitive, Pythonic way. PyTorch is highly popular among researchers and academics due to its flexibility and clean design, but has grown into a strong production tool with the introduction of TorchScript and PyTorch Lightning. It's used in a wide range of AI domains like computer vision, NLP, and reinforcement learning. PyTorch has a thriving ecosystem, including tools like torchvision, torchaudio, and Hugging Face Transformers for pre-trained models. Its community is highly active, and its documentation is beginner-friendly, making it an excellent starting point for developers new to AI.",
+    "official_docs": "https://pytorch.org/",
+    "pros": [
+      "Intuitive and Pythonic syntax ideal for experimentation",
+      "Dynamic computation graph simplifies debugging",
+      "Strong adoption in academia and growing in industry"
+    ],
+    "cons": [
+      "Slightly less optimized for production compared to TensorFlow",
+      "Limited out-of-the-box deployment tools",
+      "Model serialization can be tricky across versions"
+    ],
+    "learning_curve": "Beginner",
+    "popularity": "High",
+    "basic_prerequisites": ["Python", "ML fundamentals"],
+    "major_use_cases": ["Research", "Experimentation", "Computer Vision", "NLP", "Reinforcement Learning"]
+  },
+  {
+    "name": "scikit-learn",
+    "slug": "scikit-learn",
+    "short_description": "scikit-learn is a user-friendly Python library for classical machine learning. It’s ideal for data analysis, modeling, and prototyping with clear APIs and strong documentation.",
+    "detailed_description": "scikit-learn is a high-level machine learning library in Python that focuses on classical ML algorithms such as regression, classification, clustering, and dimensionality reduction. Built on NumPy, SciPy, and matplotlib, it is ideal for data scientists and ML practitioners working with structured data. scikit-learn provides a consistent API for a wide range of models and tools for preprocessing, model selection, and evaluation. Its simplicity, speed, and well-written documentation make it one of the most accessible libraries for beginners. However, it doesn't support deep learning or GPU acceleration. scikit-learn is widely used in industry and academia for tasks like credit scoring, customer segmentation, and time series forecasting when neural networks are not required.",
+    "official_docs": "https://scikit-learn.org/",
+    "pros": [
+      "Easy-to-use and consistent API for ML tasks",
+      "Extensive documentation and community support",
+      "Great for structured data and classical ML techniques"
+    ],
+    "cons": [
+      "No native support for deep learning or GPU acceleration",
+      "Not suitable for unstructured data like images or text",
+      "May require integration with other tools for production"
+    ],
+    "learning_curve": "Beginner",
+    "popularity": "High",
+    "basic_prerequisites": ["Python", "Basic Statistics"],
+    "major_use_cases": ["Classical ML", "Data Analysis", "Regression", "Classification", "Clustering"]
+  },
+  {
+    "name": "Keras",
+    "slug": "keras",
+    "short_description": "Keras is a high-level neural networks API built for ease of use and fast prototyping. It runs on top of TensorFlow and abstracts away complex model-building details.",
+    "detailed_description": "Keras is a user-friendly, high-level neural network API written in Python. Originally developed as an independent project, it is now fully integrated into TensorFlow. Keras simplifies the process of building, training, and evaluating deep learning models by providing a clean and modular API. It supports both sequential and functional models and is ideal for quick experimentation. While it trades off some flexibility for simplicity, it is highly accessible for newcomers to deep learning. Keras also supports callbacks, custom layers, and integration with TensorBoard. It's used in education, startups, and rapid prototyping environments. However, its abstraction limits fine-tuned control compared to raw TensorFlow or PyTorch.",
+    "official_docs": "https://keras.io/",
+    "pros": [
+      "Simplifies deep learning with a clean and intuitive API",
+      "Ideal for beginners and fast prototyping",
+      "Integrated into TensorFlow ecosystem"
+    ],
+    "cons": [
+      "Limited flexibility for complex or custom model architectures",
+      "Dependent on TensorFlow backend",
+      "Less suitable for cutting-edge research tasks"
+    ],
+    "learning_curve": "Beginner",
+    "popularity": "Medium",
+    "basic_prerequisites": ["Python", "ML fundamentals"],
+    "major_use_cases": ["Rapid Prototyping", "Education", "Deep Learning"]
+  },
+  {
+    "name": "Hugging Face Transformers",
+    "slug": "hugging-face-transformers",
+    "short_description": "Hugging Face Transformers provides state-of-the-art NLP models with pre-trained weights and a simple API. It's the go-to library for modern language tasks.",
+    "detailed_description": "Hugging Face Transformers is an open-source library that provides access to thousands of pre-trained models for natural language processing (NLP), including BERT, GPT, RoBERTa, T5, and more. Built on top of PyTorch and TensorFlow, it allows developers to fine-tune or use models for tasks such as text classification, translation, question answering, summarization, and conversational AI. The library offers a consistent API, model hub, and integration with datasets via the Hugging Face Hub. It’s become the standard for transformer-based NLP development in both academia and industry. Despite its power, it may be overwhelming for beginners unfamiliar with deep learning or NLP. It also demands significant compute resources for training large models.",
+    "official_docs": "https://huggingface.co/docs/transformers",
+    "pros": [
+      "Access to cutting-edge pre-trained models for NLP",
+      "Simple interface built on top of PyTorch and TensorFlow",
+      "Large and active open-source community"
+    ],
+    "cons": [
+      "High resource requirements for training or fine-tuning",
+      "NLP-specific; not suitable for computer vision or other domains",
+      "Steep learning curve for those new to transformers"
+    ],
+    "learning_curve": "Intermediate",
+    "popularity": "High",
+    "basic_prerequisites": ["Python", "NLP basics"],
+    "major_use_cases": ["NLP", "Text Classification", "Translation", "Question Answering", "Conversational AI"]
+  },
+  {
+    "name": "Apache Spark MLlib",
+    "slug": "apache-spark-mllib",
+    "short_description": "MLlib is Spark’s scalable machine learning library designed for big data processing. It's ideal for distributed ML tasks like clustering and classification at scale.",
+    "detailed_description": "Apache Spark MLlib is a distributed machine learning library built on Apache Spark, tailored for scalable data processing. It supports various ML tasks such as classification, regression, clustering, and collaborative filtering. MLlib is optimized for performance across large datasets and integrates with the broader Spark ecosystem including Spark SQL and DataFrames. It’s particularly valuable for organizations dealing with large-scale ETL pipelines and batch processing workflows. However, MLlib's algorithm set is more limited compared to modern ML libraries like scikit-learn or TensorFlow, and it lacks support for deep learning. It’s best suited for traditional ML problems that require horizontal scaling across clusters rather than experimentation or complex model design.",
+    "official_docs": "https://spark.apache.org/mllib/",
+    "pros": [
+      "Scales efficiently for massive datasets across clusters",
+      "Seamless integration with Spark ecosystem",
+      "Ideal for traditional ML on big data"
+    ],
+    "cons": [
+      "Limited algorithm selection compared to Python ML libraries",
+      "No native support for deep learning",
+      "Requires knowledge of Spark and distributed systems"
+    ],
+    "learning_curve": "Advanced",
+    "popularity": "Medium",
+    "basic_prerequisites": ["Spark", "Distributed Systems"],
+    "major_use_cases": ["Big Data ML", "Distributed ML", "Clustering", "Classification"]
+  },
+  {
+    "name": "OpenCV",
+    "slug": "opencv",
+    "short_description": "OpenCV is a powerful open-source library for computer vision and image processing. It enables real-time applications across domains like robotics, surveillance, and AR.",
+    "detailed_description": "OpenCV (Open Source Computer Vision Library) is a widely-used, open-source toolkit designed for real-time computer vision and image processing tasks. Written primarily in C++ with bindings for Python and Java, OpenCV provides a rich set of functions for manipulating images and video, including face detection, object recognition, feature extraction, and motion tracking. It supports GPU acceleration with CUDA and OpenCL, making it suitable for high-performance applications. OpenCV is extensively used in fields like robotics, augmented reality, and medical imaging. While it's not a machine learning library per se, it integrates with ML frameworks to perform tasks such as training classifiers or feeding preprocessed data into neural networks. Its extensive capabilities come at the cost of a steeper learning curve, particularly for developers unfamiliar with low-level image processing concepts.",
+    "official_docs": "https://docs.opencv.org/",
+    "pros": [
+      "Extensive and mature library for image and video processing",
+      "Supports real-time applications with GPU acceleration",
+      "Cross-platform with bindings for multiple languages"
+    ],
+    "cons": [
+      "Steep learning curve for advanced image processing techniques",
+      "Less intuitive API compared to modern Python ML libraries",
+      "Limited built-in support for deep learning models"
+    ],
+    "learning_curve": "Advanced",
+    "popularity": "Medium",
+    "basic_prerequisites": ["C++ / Python", "Image Processing"],
+    "major_use_cases": ["Computer Vision", "Real-time Image Processing", "Robotics", "AR/VR"]
+  },
+  {
+    "name": "fastai",
+    "slug": "fastai",
+    "short_description": "fastai is a high-level deep learning library built on PyTorch. It’s optimized for rapid experimentation and making deep learning accessible to everyone.",
+    "detailed_description": "fastai is an open-source deep learning library built on top of PyTorch, designed to simplify the process of training highly accurate models with minimal code. Created by Jeremy Howard and Sylvain Gugger, fastai abstracts many of the complexities of model training while still allowing full access to PyTorch's flexibility. It offers high-level components for computer vision, NLP, tabular data, and collaborative filtering, enabling practitioners to build models quickly and efficiently. fastai is often praised for its strong emphasis on best practices (like learning rate finding and transfer learning) and its educational roots — it's also the core of the popular 'Practical Deep Learning for Coders' course. However, while excellent for rapid prototyping and education, it may lack the fine-grained control needed for cutting-edge research or large-scale production systems.",
+    "official_docs": "https://docs.fast.ai/",
+    "pros": [
+      "Simplifies deep learning with powerful abstractions",
+      "Ideal for beginners and educational use",
+      "Built on top of PyTorch, allowing deeper customization when needed"
+    ],
+    "cons": [
+      "Less suitable for custom or highly experimental architectures",
+      "Limited support for production-level deployment",
+      "May feel opinionated or restrictive for advanced users"
+    ],
+    "learning_curve": "Beginner",
+    "popularity": "Medium",
+    "basic_prerequisites": ["Python", "ML fundamentals"],
+    "major_use_cases": ["Education", "Rapid Prototyping", "Computer Vision", "NLP"]
+  }
+]

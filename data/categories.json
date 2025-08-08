@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Frontend Development",
+    "slug": "frontend-development",
+    "description": "Client-side web technologies focused on user interfaces and user experience. This category covers JavaScript frameworks, libraries, and tools used to build interactive, responsive web applications that run in the browser.",
+    "logo": "React logo",
+    "tech_stacks": ["React", "Vue.js", "Angular", "Next.js", "Svelte", "TypeScript", "Vite", "Webpack"]
+  },
+  {
+    "name": "Backend Development",
+    "slug": "backend-development",
+    "description": "Server-side technologies and frameworks that handle business logic, data processing, and API development. These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.",
+    "logo": "server icon",
+    "tech_stacks": ["Node.js", "Python/Django", "Spring Boot", "Express.js", "FastAPI", "Ruby on Rails", "ASP.NET Core", "Go/Gin"]
+  },
+  {
+    "name": "Mobile Development",
+    "slug": "mobile-development", 
+    "description": "Native and cross-platform mobile application development frameworks and tools. This category includes technologies for building iOS and Android apps, from native solutions to hybrid frameworks that work across multiple platforms.",
+    "logo": "mobile phone icon",
+    "tech_stacks": ["React Native", "Flutter", "Swift", "Kotlin", "Xamarin", "Ionic", "Cordova", "Native Script"]
+  },
+  {
+    "name": "Database Systems",
+    "slug": "database-systems",
+    "description": "Data storage and management solutions including relational and NoSQL databases. These technologies handle data persistence, querying, and management for applications of all scales, from simple web apps to enterprise systems.",
+    "logo": "database icon",
+    "tech_stacks": ["PostgreSQL", "MongoDB", "MySQL", "Redis", "Firebase", "Cassandra", "SQLite", "Elasticsearch"]
+  },
+  {
+    "name": "DevOps & Cloud",
+    "slug": "devops-cloud",
+    "description": "Infrastructure, deployment, and cloud services that enable scalable application development and operations. This category covers containerization, CI/CD pipelines, cloud platforms, and tools for automating software delivery and infrastructure management.",
+    "logo": "cloud icon",
+    "tech_stacks": ["Docker", "Kubernetes", "AWS", "Azure", "Google Cloud", "Jenkins", "GitHub Actions", "Terraform"]
+  },
+  {
+    "name": "AI/ML & Data Science",
+    "slug": "ai-ml-data-science",
+    "description": "Machine learning frameworks, data analysis tools, and artificial intelligence platforms. These technologies enable developers to build intelligent applications, analyze large datasets, and implement machine learning models for various use cases.",
+    "logo": "brain/AI icon",
+    "tech_stacks": ["TensorFlow", "PyTorch", "scikit-learn", "Pandas", "NumPy", "Jupyter", "OpenAI API", "Hugging Face"]
+  },
+  {
+    "name": "Testing Frameworks",
+    "slug": "testing-frameworks",
+    "description": "Quality assurance and testing tools that ensure application reliability and performance. This category includes unit testing, integration testing, end-to-end testing, and performance testing frameworks used throughout the development lifecycle.",
+    "logo": "checkmark icon",
+    "tech_stacks": ["Jest", "Cypress", "Selenium", "Playwright", "JUnit", "PyTest", "Mocha", "Testing Library"]
+  },
+  {
+    "name": "CSS Frameworks",
+    "slug": "css-frameworks",
+    "description": "Styling and UI component libraries that accelerate frontend development and ensure consistent design. These frameworks provide pre-built components, utility classes, and design systems for creating modern, responsive user interfaces.",
+    "logo": "paint brush icon",
+    "tech_stacks": ["Tailwind CSS", "Bootstrap", "Material-UI", "Chakra UI", "Ant Design", "Bulma", "Foundation", "Semantic UI"]
+  }
+]
