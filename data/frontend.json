@@ -23,7 +23,10 @@
       "Large-scale web apps"
     ],
     "basic_prerequisites": ["JavaScript", "HTML", "CSS"],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"frontend-development"
+
   },
   {
     "name": "Vue.js",
@@ -49,7 +52,10 @@
       "Content management systems (CMS)"
     ],
     "basic_prerequisites": ["JavaScript", "HTML", "CSS"],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"frontend-development"
+
   },
   {
     "name": "Svelte",
@@ -75,7 +81,10 @@
       "Performance-critical apps"
     ],
     "basic_prerequisites": ["JavaScript", "HTML", "CSS"],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"frontend-development"
+
   },
   {
     "name": "Angular",
@@ -101,7 +110,10 @@
       "Large-scale business solutions"
     ],
     "basic_prerequisites": ["TypeScript", "JavaScript", "HTML", "CSS"],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"frontend-development"
+
   },
   {
     "name": "Next.js",
@@ -127,7 +139,10 @@
       "Full-stack React apps"
     ],
     "basic_prerequisites": ["React", "JavaScript", "HTML", "CSS"],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"frontend-development"
+
   },
   {
     "name": "SolidJS",
@@ -153,7 +168,10 @@
       "Real-time apps"
     ],
     "basic_prerequisites": ["JavaScript", "HTML", "CSS"],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"frontend-development"
+
   },
   {
     "name": "Qwik",
@@ -179,7 +197,10 @@
       "E-commerce apps"
     ],
     "basic_prerequisites": ["JavaScript", "HTML", "CSS"],
-    "popularity": "low"
+    "popularity": "low",
+        "logo":"",
+        "category_slug":"frontend-development"
+
   },
   {
     "name": "Astro",
@@ -205,7 +226,10 @@
       "SEO-optimized blogs"
     ],
     "basic_prerequisites": ["JavaScript", "HTML", "CSS"],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"frontend-development"
+
   },
   {
     "name": "Remix",
@@ -231,7 +255,10 @@
       "Dynamic websites with complex data"
     ],
     "basic_prerequisites": ["React", "JavaScript", "HTML", "CSS", "HTTP"],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"frontend-development"
+
   },
   {
     "name": "Lit",
@@ -257,7 +284,10 @@
       "Interoperable UIs"
     ],
     "basic_prerequisites": ["JavaScript", "HTML", "CSS"],
-    "popularity": "low"
+    "popularity": "low",
+        "logo":"",
+        "category_slug":"frontend-development"
+
 
   },
   {
@@ -284,7 +314,10 @@
       "Long-term projects"
     ],
     "basic_prerequisites": ["JavaScript", "HTML", "CSS"],
-    "popularity": "low"
+    "popularity": "low",
+        "logo":"",
+        "category_slug":"frontend-development"
+
   },
   {
     "name": "Alpine.js",
@@ -310,7 +343,10 @@
       "Progressive enhancement"
     ],
     "basic_prerequisites": ["JavaScript", "HTML", "CSS"],
-    "popularity": "low"
+    "popularity": "low",
+        "logo":"",
+        "category_slug":"frontend-development"
+
   },
   {
     "name": "Tailwind CSS",
@@ -336,6 +372,9 @@
       "Customizable design systems"
     ],
     "basic_prerequisites": ["HTML", "CSS"],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"frontend-development"
+
   }
 ]

@@ -18,7 +18,9 @@
     "learning_curve": "Intermediate",
     "popularity": "High",
     "basic_prerequisites": ["Python", "ML fundamentals"],
-    "major_use_cases": ["Deep Learning", "Computer Vision", "NLP", "Time Series Forecasting", "Production Deployment"]
+    "major_use_cases": ["Deep Learning", "Computer Vision", "NLP", "Time Series Forecasting", "Production Deployment"],
+    "logo":"",
+    "category_slug":"ai-ml-data-science"
   },
   {
     "name": "PyTorch",
@@ -39,7 +41,10 @@
     "learning_curve": "Beginner",
     "popularity": "High",
     "basic_prerequisites": ["Python", "ML fundamentals"],
-    "major_use_cases": ["Research", "Experimentation", "Computer Vision", "NLP", "Reinforcement Learning"]
+    "major_use_cases": ["Research", "Experimentation", "Computer Vision", "NLP", "Reinforcement Learning"],
+    "logo":"",
+    "category_slug":"ai-ml-data-science"
+
   },
   {
     "name": "scikit-learn",
@@ -60,7 +65,10 @@
     "learning_curve": "Beginner",
     "popularity": "High",
     "basic_prerequisites": ["Python", "Basic Statistics"],
-    "major_use_cases": ["Classical ML", "Data Analysis", "Regression", "Classification", "Clustering"]
+    "major_use_cases": ["Classical ML", "Data Analysis", "Regression", "Classification", "Clustering"],
+    "logo":"",
+    "category_slug":"ai-ml-data-science"
+
   },
   {
     "name": "Keras",
@@ -81,8 +89,11 @@
     "learning_curve": "Beginner",
     "popularity": "Medium",
     "basic_prerequisites": ["Python", "ML fundamentals"],
-    "major_use_cases": ["Rapid Prototyping", "Education", "Deep Learning"]
-  },
+    "major_use_cases": ["Rapid Prototyping", "Education", "Deep Learning"],
+    "logo":"",
+    "category_slug":"ai-ml-data-science"
+
+   },
   {
     "name": "Hugging Face Transformers",
     "slug": "hugging-face-transformers",
@@ -102,7 +113,10 @@
     "learning_curve": "Intermediate",
     "popularity": "High",
     "basic_prerequisites": ["Python", "NLP basics"],
-    "major_use_cases": ["NLP", "Text Classification", "Translation", "Question Answering", "Conversational AI"]
+    "major_use_cases": ["NLP", "Text Classification", "Translation", "Question Answering", "Conversational AI"],
+        "logo":"",
+        "category_slug":"ai-ml-data-science"
+
   },
   {
     "name": "Apache Spark MLlib",
@@ -123,7 +137,10 @@
     "learning_curve": "Advanced",
     "popularity": "Medium",
     "basic_prerequisites": ["Spark", "Distributed Systems"],
-    "major_use_cases": ["Big Data ML", "Distributed ML", "Clustering", "Classification"]
+    "major_use_cases": ["Big Data ML", "Distributed ML", "Clustering", "Classification"],
+        "logo":"",
+        "category_slug":"ai-ml-data-science"
+
   },
   {
     "name": "OpenCV",
@@ -144,7 +161,10 @@
     "learning_curve": "Advanced",
     "popularity": "Medium",
     "basic_prerequisites": ["C++ / Python", "Image Processing"],
-    "major_use_cases": ["Computer Vision", "Real-time Image Processing", "Robotics", "AR/VR"]
+    "major_use_cases": ["Computer Vision", "Real-time Image Processing", "Robotics", "AR/VR"],
+        "logo":"",
+        "category_slug":"ai-ml-data-science"
+
   },
   {
     "name": "fastai",
@@ -165,6 +185,9 @@
     "learning_curve": "Beginner",
     "popularity": "Medium",
     "basic_prerequisites": ["Python", "ML fundamentals"],
-    "major_use_cases": ["Education", "Rapid Prototyping", "Computer Vision", "NLP"]
+    "major_use_cases": ["Education", "Rapid Prototyping", "Computer Vision", "NLP"],
+        "logo":"",
+        "category_slug":"ai-ml-data-science"
+
   }
 ]

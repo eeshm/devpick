@@ -24,7 +24,10 @@
     "basic_prerequisites": [
       "SQL"
     ],
-    "popularity": "high"
+    "popularity": "high",
+   "logo":"",
+   "category_slug":"database-systems"
+
   },
   {
     "name": "MySQL",
@@ -51,7 +54,10 @@
     "basic_prerequisites": [
       "SQL"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"database-systems"
+
   },
   {
     "name": "MongoDB",
@@ -78,7 +84,10 @@
     "basic_prerequisites": [
       "NoSQL"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"database-systems"
+
   },
   {
     "name": "Redis",
@@ -105,7 +114,10 @@
     "basic_prerequisites": [
       "In-memory"
     ],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"database-systems"
+
   },
   {
     "name": "SQLite",
@@ -132,6 +144,9 @@
     "basic_prerequisites": [
       "SQL"
     ],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"database-systems"
+
   }
 ]

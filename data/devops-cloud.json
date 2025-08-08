@@ -24,7 +24,10 @@
     "basic_prerequisites": [
       "CLI"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"devops-cloud"
+
   },
   {
     "name": "Kubernetes",
@@ -51,7 +54,10 @@
     "basic_prerequisites": [
       "Containers"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"devops-cloud"
+
   },
   {
     "name": "Terraform",
@@ -78,7 +84,10 @@
     "basic_prerequisites": [
       "Cloud"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"devops-cloud"
+
   },
   {
     "name": "AWS (Amazon Web Services)",
@@ -105,7 +114,10 @@
     "basic_prerequisites": [
       "Cloud"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"devops-cloud"
+
   },
   {
     "name": "GitHub Actions",
@@ -132,7 +144,10 @@
     "basic_prerequisites": [
       "Git"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"devops-cloud"
+
   },
   {
     "name": "Azure",
@@ -159,7 +174,10 @@
     "basic_prerequisites": [
       "Cloud"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"devops-cloud"
+
   },
   {
     "name": "Google Cloud Platform (GCP)",
@@ -186,7 +204,10 @@
     "basic_prerequisites": [
       "Cloud"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"devops-cloud"
+
   },
   {
     "name": "Jenkins",
@@ -213,7 +234,10 @@
     "basic_prerequisites": [
       "Java"
     ],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"devops-cloud"
+
   },
   {
     "name": "Prometheus + Grafana",
@@ -240,6 +264,10 @@
     "basic_prerequisites": [
       "Monitoring"
     ],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"devops-cloud"
+
+        
   }
 ]

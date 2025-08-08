@@ -26,7 +26,10 @@
       "React",
       "Mobile development"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"mobile-development"
+
   },
   {
     "name": "Flutter",
@@ -55,7 +58,10 @@
       "UI design",
       "Mobile development"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"mobile-development"
+
   },
   {
     "name": "Swift (iOS)",
@@ -84,7 +90,10 @@
       "Xcode",
       "iOS development"
     ],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"mobile-development"
+
   },
   {
     "name": "Kotlin (Android)",
@@ -113,7 +122,10 @@
       "Android SDK",
       "Mobile development"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"mobile-development"
+
   },
   {
     "name": "Xamarin",
@@ -142,6 +154,9 @@
       ".NET",
       "Mobile development"
     ],
-    "popularity": "low"
+    "popularity": "low",
+        "logo":"",
+        "category_slug":"mobile-development"
+
   }
 ]

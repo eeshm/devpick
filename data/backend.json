@@ -27,7 +27,9 @@
       "Asynchronous programming",
       "Basic knowledge of HTTP and REST APIs"
     ],
-    "popularity": "high"
+    "popularity": "high",
+    "logo":"",
+    "category_slug":"backend-development"
   },
   {
     "name": "Django",
@@ -57,7 +59,10 @@
       "MVC/MVT architecture",
       "Relational databases"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"backend-development"
+
   },
   {
     "name": "Express.js",
@@ -86,7 +91,10 @@
       "JavaScript and Node.js basics",
       "Middleware and routing"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"backend-development"
+
     },
   {
     "name": "Laravel",
@@ -115,7 +123,10 @@
       "PHP",
       "Relational databases"
     ],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"backend-development"
+
   },
   {
     "name": "Ruby on Rails",
@@ -143,7 +154,9 @@
       "Basic Ruby programming",
       "Familiarity with databases and ORM"
     ],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+      "category_slug":"backend-development"
   },
   {
     "name": "Go (Standard net/http)",
@@ -172,7 +185,10 @@
       "Understanding of HTTP protocol",
       "Familiarity with concurrency concepts"
     ],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"backend-development"
+
   },
   {
     "name": "Spring Boot",
@@ -201,7 +217,10 @@
       "Java programming basics",
       "Familiarity with Spring framework"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"backend-development"
+
   },
   {
     "name": "FastAPI",
@@ -231,7 +250,10 @@
       "Basic async/await concepts",
       "Understanding of REST APIs"
     ],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"backend-development"
+
   },
   {
     "name": "NestJS",
@@ -260,7 +282,10 @@
       "TypeScript fundamentals",
       "Node.js knowledge"
     ],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"backend-development"
+
   },
   {
     "name": "Phoenix",
@@ -289,7 +314,10 @@
       "Basic Elixir programming",
       "Understanding of functional programming"
     ],
-    "popularity": "low"
+    "popularity": "low",
+        "logo":"",
+        "category_slug":"backend-development"
+
   },
   {
     "name": "AdonisJS",
@@ -318,7 +346,10 @@
       "JavaScript or TypeScript basics",
       "Node.js fundamentals"
     ],
-    "popularity": "low"
+    "popularity": "low",
+        "logo":"",
+        "category_slug":"backend-development"
+
   },
   {
     "name": "Flask",
@@ -347,7 +378,10 @@
       "Basic Python programming",
       "Understanding of HTTP and REST"
     ],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+        "category_slug":"backend-development"
+
   }
 ]
 

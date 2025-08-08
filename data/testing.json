@@ -26,7 +26,10 @@
       "React",
       "Node.js"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+        "category_slug":"testing-frameworks"
+
   },
   {
     "name": "Mocha",
@@ -54,7 +57,10 @@
       "JavaScript",
       "Node.js"
     ],
-    "popularity": "medium"
+    "popularity": "medium",
+    "logo":"",
+    "category_slug":"testing-frameworks"
+
   },
   {
     "name": "Playwright",
@@ -83,7 +89,10 @@
       "TypeScript",
       "Node.js"
     ],
-    "popularity": "high"
+    "popularity": "high",
+     "logo":"",
+     "category_slug":"testing-frameworks"
+
   },
   {
     "name": "JUnit",
@@ -110,7 +119,10 @@
     "basic_prerequisites": [
       "Java"
     ],
-    "popularity": "high"
+    "popularity": "high",
+    "logo":"",
+    "category_slug":"testing-frameworks"
+
   },
   {
     "name": "Robot Framework",
@@ -137,6 +149,9 @@
     "basic_prerequisites": [
       "Python"
     ],
-    "popularity": "low"
+    "popularity": "low",
+    "logo":"",
+     "category_slug":"testing-frameworks"
+
   }
 ]

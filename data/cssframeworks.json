@@ -26,7 +26,9 @@
       "CSS",
       "Node"
     ],
-    "popularity": "high"
+    "popularity": "high",
+    "logo":"",
+    "category_slug":"css-frameworks"
   },
   {
     "name": "Bootstrap",
@@ -55,7 +57,11 @@
       "CSS",
       "JavaScript"
     ],
-    "popularity": "high"
+    "popularity": "high",
+        "logo":"",
+
+    "category_slug":"css-frameworks"
+
   },
   {
     "name": "Bulma",
@@ -84,7 +90,11 @@
       "CSS",
       "Flexbox"
     ],
-    "popularity": "medium"
+    "popularity": "medium",
+        "logo":"",
+
+    "category_slug":"css-frameworks"
+
   },
   {
     "name": "Foundation",
@@ -113,7 +123,11 @@
       "CSS",
       "Sass"
     ],
-    "popularity": "low"
+    "popularity": "low",
+        "logo":"",
+
+    "category_slug":"css-frameworks"
+
   },
   {
     "name": "Materialize",
@@ -142,6 +156,10 @@
       "CSS",
       "JavaScript"
     ],
-    "popularity": "low"
+    "popularity": "low",
+        "logo":"",
+
+    "category_slug":"css-frameworks"
+
   }
 ]
