@@ -1,21 +1,15 @@
 import Image from "next/image";
 export default function Hero(){
 return(
-    <div className="items-center mt-10 flex flex-col">
-        <Image
-            src="/image.png"
-            alt="Logo"
-            width={150}
-            height={150}
-            className="rounded-none " />
-        <h1 className="text-4xl md:text-5xl  font-medium  font-sans tracking-tight text-center">
-            One stop for choosing perfect<p className="text-white leading-12">tech-stack</p>  
+    <div className="items-center mt-10 flex flex-col gap-y-2">
+        <h1 className="text-4xl md:text-5xl  font-seminbold font-sans tracking-tight text-center">
+        Find Your Perfect Tech Stack
         </h1>
+        <p className="font-mono text-center max-w-md">
+            Browse by category, explore pros & cons, and compare options before deciding
+        </p>
         <div className="flex flex-col items-center justify-center mt-9">
-            <h1 className="text-2xl font-bold text-center">search bar</h1>
-            <h1 className="text-2xl font-bold text-center">filtes</h1>
-            <h1 className="text-2xl font-bold text-center">filters</h1>
-            </div>
+        </div>
     </div>
 )
 }

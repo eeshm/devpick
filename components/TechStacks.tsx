@@ -171,9 +171,9 @@ interface TechStack {
 }
 export default function TechStacks(){
     return(
-        <div className="flex flex-col mt-10 items-center justify-center h-full">
+        <div className="flex flex-col mt-10 items-center justify-center ">
             <h2 className="text-3xl font-bold mb-6">Major Tech Stacks</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-6xl">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 ">
                 {techStack.map((tech, index) => (
                     <TechStackCard 
                         key={index} 
