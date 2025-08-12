@@ -14,7 +14,7 @@ export default function Home() {
       <Container>
         <Hero />
         <Categories />
-        {/* <TechStacks /> */}
+        <TechStacks />
       </Container>
     </div>
   );

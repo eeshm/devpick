@@ -7,6 +7,18 @@ const categories = [
     {
         "name": "Backend Development",
         "slug": "backend-development",
+        "description": "Server-side technologies and frameworks that handle business logic, data processing, and API development. These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.",
+        "logo": "server icon"
+    },
+    {
+        "name": "Backend Development",
+        "slug": "backend-development",
+        "description": "Server-side technologies and frameworks that handle business logic, data processing, and API development. These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.",
+        "logo": "server icon"
+    },
+    {
+        "name": "Backend Development",
+        "slug": "backend-development",
         "description": "Server-side technologies and frameworks that handle business logic, data processing, and API development. These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.",
         "logo": "server icon"
     }
@@ -22,10 +34,10 @@ interface Categories {
 export default function Categories() {
     return (
         <div className="flex flex-col gap-4 items-center justify-center mt-10">
-            <h2 className="text-4xl mb-6  font-thin font-mono border-b-2">
+            <h2 className="text-4xl mb-6 font-thin font-mono border-b-2 tracking-tight">
                 Major categories
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 ">
             {categories.map((category, index) => (
                 <CategoryCard
                     key={index}
@@ -48,7 +60,7 @@ function CategoryCard({ name, description, slug, logo }: Categories) {
                 </p>
                 {logo}
             </div>
-            <div className="text-neutral-200 mt-4 relative z-20 line-clamp-8 text-sm ">
+            <div className="text-neutral-200 mt-4 relative z-20 line-clamp-7 text-sm ">
                 <p> {description}</p>
             </div>
             <Link href={`/categories/${slug}`}>
