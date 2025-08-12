@@ -5,6 +5,7 @@ import Image from "next/image";
 import TechStacks from "@/components/TechStacks";
 import { Button } from "@/components/ui/button";
 import BackgroundEffect from "@/components/BackgroundEffect";
+import Categories from "@/components/Cateogories";
 
 export default function Home() {
   return (
@@ -12,7 +13,8 @@ export default function Home() {
       <BackgroundEffect />
       <Container>
         <Hero />
-        <TechStacks />
+        <Categories />
+        {/* <TechStacks /> */}
       </Container>
     </div>
   );

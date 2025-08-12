@@ -220,28 +220,6 @@ function TechStackCard({name,description,symbol,useCases} :TechStack ) {
     </CardSpotlight>
     )
 }
-
-// function TechStackCard({ name, description, symbol, useCases }: TechStack) {
-//   return (
-    
-//     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 flex flex-col h-full">
-//       <div className="flex items-center mb-4">
-//         <h3 className="text-2xl font-semibold text-gray-900 dark:text-white flex-grow">
-//           {name} {symbol && <span className="ml-2 text-xl">{symbol}</span>}
-//         </h3>
-//       </div>
-//       <p className="text-gray-700 dark:text-gray-300 mb-2">{description}</p>
-//       {useCases && useCases.length > 0 && (
-//         <ul className="list-disc pl-5 text-gray-600 dark:text-gray-400">
-//           {useCases.map((useCase, index) => (
-//             <li key={index} className="mb-1">{useCase}</li>
-//           ))}
-//         </ul>
-//       )}    
-//     </div>
-//     )
-// }
-
 const Step = ({ title }: { title: string }) => {
   return (
     <li className="flex gap-2 items-start">
