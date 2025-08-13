@@ -19,7 +19,7 @@ export interface Category{
     created_at:string
 }
 
-export interface Tech_stack{
+export interface TechStack{
     id:string
     name:string
     slug:string
