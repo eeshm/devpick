@@ -1,3 +1,4 @@
+import { statSync } from "fs";
 import { supabase,type Category,type TechStack ,type DatabaseResponse} from "./supabase";
 
 //getallcategories logic 
@@ -206,4 +207,124 @@ export async function getTechStackBySlug(slug:string):Promise<DatabaseResponse<T
             error:"An unexpected error occurred while fetching tech stacks"
         }
     }
+}
+
+
+//comparison logic 
+export async function getTechStacksForComparison(categorySlug:string):Promise<DatabaseResponse<TechStack[]>> {
+    try{
+      if(!categorySlug || categorySlug.trim()==""){
+        return {
+          data:null,
+          error: 'Category slug is required for comparison'
+        }
+      }
+
+      const categoryCheck=  await getCategoryBySlug(categorySlug)
+      if (categoryCheck.error || !categoryCheck.data) {
+      return {
+        data: null,
+        error: categoryCheck.error || 'Category not found'
+        }
+      }
+      const {data,error}= await supabase
+      .from("tech_stacks")
+      .select(`
+        *,
+        categories!inner(
+          id,
+          name,
+          slug
+        )
+      `)
+      .eq("categories.slug",categorySlug.toLowerCase())
+         if (error) {
+      console.error('Database error fetching stacks for comparison:', error)
+      return {
+        data: null,
+        error: `Failed to fetch tech stacks for comparison: ${error.message}`
+      }
+    }
+    return {
+      data: data || [],
+      error: null
+    }
+  } catch (error) {
+    console.error('Unexpected error fetching stacks for comparison:', error)
+    return {
+      data: null,
+      error: 'An unexpected error occurred while fetching tech stacks for comparison'
+    }
+    }
+}
+
+export async function compareTechStacks(
+  stack1Slug:string,
+  stack2Slug:string,
+  categorySlug?:string
+) :Promise<DatabaseResponse<{stack1:TechStack,stack2:TechStack,category:string}>>{
+  try{
+    if(!stack1Slug || !stack2Slug){
+      return{
+        data:null,
+        error:"Both tech stack slugs are required for comparison"
+      }
+    }
+    if(stack1Slug == stack2Slug){
+      return{
+        data:null,
+        error:"Cannot compare the same tech stack with itself"
+      }
+    }
+    const[stack1Result,stack2Result]= await Promise.all([
+      getTechStackBySlug(stack1Slug),
+      getTechStackBySlug(stack2Slug)
+    ])
+    if(stack1Result.error || !stack1Result.data){
+      return{
+        data:null,
+        error: `First tech stack not found: ${stack1Result.error || 'Unknown error'}`
+      }
+    }
+    if(stack2Result.error || !stack2Result.data){
+      return{
+        data:null,
+        error: `Second tech stack not found: ${stack2Result.error || 'Unknown error'}`
+      }
+    }
+
+    if(categorySlug){
+      const stack1Category = stack1Result.data.category_slug
+      const stack2Category = stack2Result.data.category_slug
+
+      if(stack1Category !=categorySlug || stack2Category!=categorySlug){
+        return{
+          data:null,
+          error: 'Both tech stacks must belong to the specified category'
+        }
+      }
+    }else{
+      if(stack1Result.data.category_slug != stack2Result.data.category_slug){
+        return{
+          data:null,
+          error: 'Tech stacks must be from the same category to compare'
+        }
+      }
+    }
+    const category = stack1Result.data.category_slug!
+    return{
+      data:{
+        stack1:stack1Result.data,
+        stack2:stack2Result.data,
+        category
+      },
+      error:null
+    }
+  }catch (error) {
+    console.error('Unexpected error comparing tech stacks:', error)
+    return {
+      data: null,
+      error: 'An unexpected error occurred while comparing tech stacks'
+    }
+  }
 }
