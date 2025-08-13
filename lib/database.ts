@@ -1,30 +1,75 @@
+import { supabase,type Category,type Tech_stack ,type DatabaseResponse} from "./supabase";
 
-
-import { error } from "console";
-import { supabase,type Categories,type Tech_stacks } from "./supabase";
-
-
-export async function getCategoriesFromDatabase() :Promise<Categories[]>{
+//getallcategories logic 
+export async function getAllCategories() :Promise<DatabaseResponse<Category[]>>{
     try{
-        const {data,error}  = await supabase.from("categories").select("*").order("name")
-        if(error) throw error;
-        return data || [];
+        const {data,error}  = await supabase
+        .from("categories")
+        .select("*")
+        .order("name",{ascending:true})
+
+        if(error){
+            console.log("Database error fetching categories",error)
+            return {
+                data:null,
+                error:`Failed to getch categories ${error.message}`
+            }
+        }
+        return{
+            data:data||[],
+            error:null
+        }
+
     }
     catch(error){
-        console.error("Error fetching categories from database",error);
-        return [];
+        console.error("Unexpected error fetching category: ",error);
+        return{
+            data: null,
+            error:"An unexpected error occured while fetching category"
+        }
     }
 }
-//Testing queries from database
 
-export async function getTechStacksFromDatabase():Promise<Tech_stacks[]>{
+//getcategoriesbyslug
+export async function getCategoryBySlug(slug:string) : Promise<DatabaseResponse<Category>>{
     try{
-        const {data,error} = await supabase.from('tech_stacks').select("*").order("name");
-            if(error) throw error;
-            return data|| [];
-    }
-    catch(error){
-        console.log("Error fetching tech stacks",error)
-        return [];
+        if(!slug || slug.trim()==""){
+            return{
+                data:null,
+                error:"Category slug is required" 
+            }
+        }
+        const {data,error} = await supabase
+        .from('categories')
+        .select("*")
+        .eq('slug',slug.toLowerCase())
+        .single()
+
+        if(error){
+            if(error.code=='PGRST116'){
+                return{
+                    data:null,
+                    error:"Category not found"
+                }
+            }
+            console.error("Database error fetching category: ",error)
+            return{
+                data:null,
+                error:`Failed to fetch category: ${error.message}`
+            }
+        }
+        return{
+            data:data,
+            error:null
+        }
+    }catch(error){
+        console.error("Unexpected error fetching category: ",error)
+        return{
+            data:null,
+            error:"An unexpected error occurred while fetching category"
+        }
     }
 }
+
+//gettechstacksbycategory
+//gettechstackbyslug

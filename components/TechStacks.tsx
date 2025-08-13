@@ -59,7 +59,7 @@ interface TechStack {
   short_description: string;
   symbol?: ReactNode;
   major_use_cases?: string[];
-  slug?: string;
+  slug: string;
 }
 export default function TechStacks() {
   return (
@@ -74,6 +74,7 @@ export default function TechStacks() {
             short_description={tech.short_description}
             symbol={tech.symbol}
             major_use_cases={tech.major_use_cases || []}
+            slug={tech.slug}
           />
         ))}
       </div>
@@ -110,12 +111,13 @@ export function TechStackCard({ name, short_description, slug, symbol, major_use
         )}
       </div>
       </div>
-      <Link href={`/categories/${slug}`}>
+      
+      <Link href={`/tech-stacks/${slug}`}>
         <div className="mt-5">
           <Button variant={"default"}
             className="w-full  cursor-pointer text-xl  bg-gray-100 font-normal relative"
           >
-            <span className="mx-auto mb-1">know more</span>
+            <span className="mx-auto mb-1 tracking-tight">know more</span>
             <span className="absolute right-4">
               <RightArrow />
             </span>
