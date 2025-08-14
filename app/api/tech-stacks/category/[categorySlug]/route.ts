@@ -3,9 +3,6 @@
 
 import { NextResponse } from "next/server";
 import { getTechStacksByCategory } from "@/lib/database";
-import { count, error } from "console";
-import { data } from "framer-motion/client";
-import Categories from "@/components/Cateogories";
 
 export async function GET(
     request:Request,
