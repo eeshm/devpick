@@ -1,80 +1,107 @@
-"use client"
-import { Button } from "./ui/button";
-import { CardSpotlight } from "./ui/card-spotlight";
-import RightArrow from "./icons/RightArrow";
-import Link from "next/link";
-const categories = [
-    {
-        "name": "Backend Development",
-        "slug": "backend-development",
-        "description": "Server-side technologies and frameworks that handle business logic, data processing, and API development. These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.",
-        "logo": "server icon"
-    },
-    {
-        "name": "Backend Development",
-        "slug": "backend-development",
-        "description": "Server-side technologies and frameworks that handle business logic, data processing, and API development. These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.",
-        "logo": "server icon"
-    },
-    {
-        "name": "Backend Development",
-        "slug": "backend-development",
-        "description": "Server-side technologies and frameworks that handle business logic, data processing, and API development. These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.",
-        "logo": "server icon"
-    }
-]
+'use client'
+import React,{ ReactNode, useEffect, useState } from "react"
+import CategoryCard from "./CategoryCard"
+// const categories = [
+//     {
+//         "id":"dadfdfad",
+//         "name": "Backend Development",
+//         "slug": "backend-development",
+//         "description": "Server-side technologies and frameworks that handle business logic, data processing, and API development. These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.",
+//         "logo": "server icon",
+//         "created_at":"2323"
+//     },
+//     {
+//         "id":"dfafda",
+//         "name": "Backend Development",
+//         "slug": "backend-development",
+//         "description": "Server-side technologies and frameworks that handle business logic, data processing, and API development. These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.",
+//         "logo": "server icon",
+//         "created_at":"2323"
+//     }
+// ]
 
-interface Categories {
+interface Category {
+    id?:string,
     name: string,
     description: string,
     slug: string,
-    logo?: string,
+    logo?: string ,
+    created_at?:string
+}
+
+interface Apiresponse<T>{
+    success:boolean;
+    error:string | null;
+    data:T;
+    count?:number;
 }
 
 export default function Categories() {
+    const [categories,setCategories] =useState<Category[]>([])
+    const[loading,setLoading] = useState(true)
+    const[searchItem,setSearchItem]=useState("")
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(()=>{
+        async function fetchCategories(){
+        try{
+            const response = await fetch("api/categories"); //backend
+            const json : Apiresponse<Category[]> = await response.json()
+
+            if(json.success){
+                setCategories(json.data)
+            }else{
+                setError(json.error || "Failed to load categories");
+            }
+        }catch(error){
+            setError("An error occurred while fetching categories.")
+        }finally{
+            setLoading(false)
+        }
+    }
+    fetchCategories();
+    },[])
+
+
+
+
     return (
-        <div className="flex flex-col gap-4 items-center justify-center mt-10">
-            <h2 className="text-4xl mb-6 font-thin font-sans border-b-2 tracking-tight">
+        <div>
+            <div className="flex justify-center">
+            <h2 className=" inline-block flex-col justify-center items-center text-4xl mb-6 font-thin font-opensans border-b-2 tracking-tight">
                 Major categories
             </h2>
+            </div>
+        {loading ? (
+                <div className="flex flex-col gap-4 items-center justify-center mt-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[...Array(6)].map((_, i) => (
+                  <div key={i} className="h-80 w-80 p-8 bg-white/5 backdrop-blur-lg rounded-xl border border-white/10 animate-pulse">
+                  <div className="w-16 h-16 bg-gray-600 rounded-2xl mb-6 "></div>
+                  <div className="h-6 bg-gray-600 rounded mb-3"></div>
+                  <div className="h-4 bg-gray-700 rounded mb-2"></div>
+                  <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+                </div>
+              ))}
+            </div>
+            </div>
+        ):(
+            <div className="flex flex-col gap-4 items-center justify-center mt-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 ">
-            {categories.map((category, index) => (
+            {categories.map((category) => (
                 <CategoryCard
-                    key={index}
+                    key={category.id}
                     name={category.name}
                     description={category.description}
                     slug={category.slug}
-                    logo={category.logo} />
+                    logo={category.logo} 
+                    created_at={category.created_at}/>
             ))}
         </div>
+    </div>
+        )
+    }
         </div>
     )
 }
 
-function CategoryCard({ name, description, slug, logo }: Categories) {
-    return (
-        <CardSpotlight className="h-80 w-80 overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <div className="flex  items-center text-2xl ">
-                <p className="font-semibold relative z-20 mt-2 text-white">
-                    {name}
-                </p>
-                {logo}
-            </div>
-            <div className="text-neutral-200 mt-4 relative z-20 line-clamp-7 text-sm ">
-                <p> {description}</p>
-            </div>
-            <Link href={`/categories/${slug}`}>
-            <div className="mt-5">
-                <Button variant={"default"} 
-                className="w-full text-gray-800 cursor-pointer text-xl  bg-gray-100 font-normal relative"
-                >
-                    <span className="mx-auto mb-1 ">explore</span>
-                    <span className="absolute right-4">
-                        <RightArrow />
-                    </span>
-                </Button>
-            </div>
-            </Link>
-        </CardSpotlight>
-    )
-}

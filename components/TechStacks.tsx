@@ -64,7 +64,7 @@ interface TechStack {
 export default function TechStacks() {
   return (
     <div className="flex flex-col mt-10 items-center justify-center ">
-      <h2 className="text-4xl font-light font-sans mb-6 border-b-2 tracking-tight">Major Tech Stacks - categorie name</h2>
+      <h2 className="text-4xl font-light font-opensans mb-6 border-b-2 tracking-tight">Major Tech Stacks - categorie name</h2>
       {techStack && techStack.length>0 &&(
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 ">
         {techStack.map((tech, index) => (
