@@ -1,11 +1,8 @@
-
+//api/tech-stacks/compare/[stack1Slug]/[stack2Slug]
 import { NextResponse } from "next/server";
 import { compareTechStacks} from "@/lib/database";
-import { Params } from "next/dist/server/request/params";
-import { error } from "console";
-import { data } from "framer-motion/client";
 
-export default async function GET(request:Request,
+export async function GET(request:Request,
     {params} :{params:{stack1Slug:string,stack2Slug:string}}
 ) {
     try{
@@ -41,7 +38,7 @@ export default async function GET(request:Request,
 
             return NextResponse.json({
                 success:true,
-                errro:null,
+                error:null,
                 data:result.data
             },{status:200})
     }catch (error){

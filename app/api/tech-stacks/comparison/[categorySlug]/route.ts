@@ -1,14 +1,11 @@
 import { NextResponse } from "next/server";
 import { getTechStacksForComparison } from "@/lib/database";
-import { error } from "console";
-import { data } from "framer-motion/client";
 
-export default async function GET(request:Request,
+export async function GET(request:Request,
     {params} :{params:{categorySlug:string}}
 ){
     try{
         const {categorySlug}=params
-        const searchParams = new URL(request.url)
 
         const result = await getTechStacksForComparison(categorySlug)
 

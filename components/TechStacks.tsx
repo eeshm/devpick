@@ -64,7 +64,7 @@ interface TechStack {
 export default function TechStacks() {
   return (
     <div className="flex flex-col mt-10 items-center justify-center ">
-      <h2 className="text-4xl font-light font-mono mb-6 border-b-2 tracking-tight">Major Tech Stacks - categorie name</h2>
+      <h2 className="text-4xl font-light font-sans mb-6 border-b-2 tracking-tight">Major Tech Stacks - categorie name</h2>
       {techStack && techStack.length>0 &&(
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 ">
         {techStack.map((tech, index) => (
@@ -89,7 +89,7 @@ export function TechStackCard({ name, short_description, slug, symbol, major_use
     <CardSpotlight className="h-80 w-80  overflow-hidden  hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between ">
       <div className="flex-grow">
       <div className="flex  justify-between items-center justify- text-4xl text-center">
-        <p className="font-bold relative z-20 mt-2 text-white">
+        <p className="font-normal relative z-20 mt-2 text-white">
           {name}
         </p>
         {symbol}
@@ -115,9 +115,9 @@ export function TechStackCard({ name, short_description, slug, symbol, major_use
       <Link href={`/tech-stacks/${slug}`}>
         <div className="mt-5">
           <Button variant={"default"}
-            className="w-full  cursor-pointer text-xl  bg-gray-100 font-normal relative"
+            className="w-full  cursor-pointer text-xl text-gray-800  bg-gray-100 font-normal relative"
           >
-            <span className="mx-auto mb-1 tracking-tight">know more</span>
+            <span className="mx-auto mb-1 ">know more</span>
             <span className="absolute right-4">
               <RightArrow />
             </span>

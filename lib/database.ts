@@ -1,4 +1,3 @@
-import { statSync } from "fs";
 import { supabase,type Category,type TechStack ,type DatabaseResponse} from "./supabase";
 
 //getallcategories logic 
@@ -125,7 +124,7 @@ export async function getTechStacksByCategory(
     // Apply ordering
     switch (orderBy) {
       case 'popularity':
-        query = query.order('popularity_score', { ascending: orderDirection === 'asc' })
+        query = query.order('popularity', { ascending: orderDirection === 'asc' })
         break
       case 'name':
         query = query.order('name', { ascending: orderDirection === 'asc' })
@@ -134,7 +133,7 @@ export async function getTechStacksByCategory(
         query = query.order('created_at', { ascending: orderDirection === 'asc' })
         break
       default:
-        query = query.order('popularity_score', { ascending: false })
+        query = query.order('popularity', { ascending: false })
     }
     const {data,error,count}= await query
     if(error){

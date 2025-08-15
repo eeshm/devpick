@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getTechStackBySlug } from "@/lib/database";
 import { data, param } from "framer-motion/client";
 
-export default async function GET(
+export async function GET(
     request:Request,
     {params}:{params:{slug:string}}
 ){

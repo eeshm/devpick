@@ -1,15 +1,15 @@
 import { NextResponse,NextRequest } from "next/server";
 import { getAllCategories} from "@/lib/database";
 
-export default async  function GET(req:NextRequest){
-
+export async function GET(){
     try{
         const result = await getAllCategories();
         if(result.error){
+            console.log(`${result.error}`)
             return NextResponse.json(
                 {
                     success:false,
-                    error:result.data,
+                    error:result.error,
                     data:null
                 },{status:404})
         }

@@ -34,7 +34,7 @@ interface Categories {
 export default function Categories() {
     return (
         <div className="flex flex-col gap-4 items-center justify-center mt-10">
-            <h2 className="text-4xl mb-6 font-thin font-mono border-b-2 tracking-tight">
+            <h2 className="text-4xl mb-6 font-thin font-sans border-b-2 tracking-tight">
                 Major categories
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 ">
@@ -66,9 +66,9 @@ function CategoryCard({ name, description, slug, logo }: Categories) {
             <Link href={`/categories/${slug}`}>
             <div className="mt-5">
                 <Button variant={"default"} 
-                className="w-full  cursor-pointer text-xl tracking-wider bg-gray-100 font-normal relative"
+                className="w-full text-gray-800 cursor-pointer text-xl  bg-gray-100 font-normal relative"
                 >
-                    <span className="mx-auto mb-1">explore</span>
+                    <span className="mx-auto mb-1 ">explore</span>
                     <span className="absolute right-4">
                         <RightArrow />
                     </span>
