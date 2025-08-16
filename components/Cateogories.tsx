@@ -67,13 +67,13 @@ export default function Categories() {
 
     return (
         <div>
-            <div className="flex justify-center">
-            <h2 className=" inline-block flex-col justify-center items-center text-4xl mb-6 font-thin font-opensans border-b-2 tracking-tight">
+            <div className="mt-10 flex justify-center">
+            <h2 className=" inline-block flex-col justify-center items-center text-4xl font-thin font-opensans border-b-2 tracking-tight">
                 Major categories
             </h2>
             </div>
         {loading ? (
-                <div className="flex flex-col gap-4 items-center justify-center mt-10">
+            <div className="flex flex-col gap-4 items-center justify-center mt-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[...Array(6)].map((_, i) => (
                   <div key={i} className="h-80 w-80 p-8 bg-white/5 backdrop-blur-lg rounded-xl border border-white/10 animate-pulse">

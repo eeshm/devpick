@@ -111,7 +111,7 @@ export function TechStackCard({ name, short_description, slug, symbol, major_use
         )}
       </div>
       </div>
-      
+       
       <Link href={`/tech-stacks/${slug}`}>
         <div className="mt-5">
           <Button variant={"default"}
