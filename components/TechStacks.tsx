@@ -54,37 +54,38 @@ import Phoenix from "./icons/Phoenix";
 
 
 
+interface Category {
+  id: string
+  name: string
+  slug: string
+  description: string
+}
+
 interface TechStack {
-  name: string;
-  short_description: string;
-  symbol?: ReactNode;
-  major_use_cases?: string[];
-  slug: string;
-}
-export default function TechStacks() {
-  return (
-    <div className="flex flex-col mt-10 items-center justify-center ">
-      <h2 className="text-4xl font-light font-opensans mb-6 border-b-2 tracking-tight">Major Tech Stacks - categorie name</h2>
-      {techStack && techStack.length>0 &&(
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 ">
-        {techStack.map((tech, index) => (
-          <TechStackCard
-            key={index}
-            name={tech.name}
-            short_description={tech.short_description}
-            symbol={tech.symbol}
-            major_use_cases={tech.major_use_cases || []}
-            slug={tech.slug}
-          />
-        ))}
-      </div>
-      )}
-    </div>
-  )
+  id: string
+  name: string
+  slug: string
+  category_slug: string
+  logo: string
+  logo_url?: string
+  short_description: string
+  detailed_description: string
+  official_docs: string
+  learning_curve?: number
+  popularity?: number
+  pros: string[]
+  cons: string[]
+  major_use_cases: string[]
+  basic_prerequisites: string[]
+  created_at: string
+  categories?: Category
 }
 
 
-export function TechStackCard({ name, short_description, slug, symbol, major_use_cases }: TechStack) {
+
+
+
+export function TechStackCard({ name, short_description, slug, logo, major_use_cases }: TechStack) {
   return (
     <CardSpotlight className="h-80 w-80  overflow-hidden  hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between ">
       <div className="flex-grow">
@@ -92,7 +93,7 @@ export function TechStackCard({ name, short_description, slug, symbol, major_use
         <p className="font-normal relative z-20 mt-2 text-white">
           {name}
         </p>
-        {symbol}
+        {logo}
       </div>
       <div className="text-neutral-200 text-sm mt-4 relative z-20 line-clamp-5">
         <p>{short_description}</p>

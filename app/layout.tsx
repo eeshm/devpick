@@ -35,9 +35,6 @@ export default function RootLayout({
           forcedTheme="dark"
         >
           {children}
-          <div className="container mx-auto px-4 relative z-10 ">
-            <Footer />
-          </div>
         </ThemeProvider>
       </body>
     </html>

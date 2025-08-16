@@ -3,7 +3,7 @@ export default function Container({ children,className } : {
     className?: string;
 }) {
     return (
-        <div className="container mx-auto h-full pt-20 relative z-10 w-full flex flex-col  ">
+        <div className={`container mx-auto h-full pt-20 relative z-10 w-full flex flex-col ${className}`}>
             {children}
         </div>
     );
