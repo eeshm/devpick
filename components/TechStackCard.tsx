@@ -54,28 +54,36 @@ export function TechStackCard({ id, name, short_description, slug, logo, major_u
         </div>
       </div>
 
-      <div className="mt-5 flex justify-between gap-2 font-sans tracking-tight">
-          <Button variant={'default'}
-            className="inline-flex items-center w-1/2 h-10 cursor-pointer transition hover:-translate-y-0.5 hover:brightness-110 text-gray-800 hover:bg-white focus-visible:ring-1 bg-gray-200 font-medium relative"
+      <div className="mt-5 flex justify-between gap-2 font-sans tracking-tight w-full">
+          <Link 
+              href={`/tech-stacks/${slug}`}
+              rel="noopener noreferrer"
+              className="w-1/2">
+            <Button variant={'default'}
+              className="inline-flex items-center w-full h-10 cursor-pointer transition hover:-translate-y-0.5 hover:brightness-110 text-gray-800 hover:bg-white focus-visible:ring-1 bg-gray-200 font-medium relative"
+            >
+              <span className="mx-auto mb-1 ">Know more</span>
+              <span className="absolute right-2">
+                <RightArrow />
+              </span>
+            </Button>
+          </Link>
+          <Link
+            href={official_docs}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-1/2"
           >
-        <Link href={`/tech-stacks/${slug}`}>
-            <span className="mx-auto mb-1 ">Know more</span>
-            <span className="absolute right-2">
-              <RightArrow />
-            </span>
-        </Link>
-          </Button>
-          <Button
-            className="inline-flex items- border-black border-1 bg-black/60 w-1/2 h-10 focus-visible:ring-1 transition hover:-translate-y-0.5 hover:brightness-110 cursor-pointer font-medium  text-white  hover:bg-gray-500  relative"
-          >
-        <Link href={official_docs}>
-            <span className="mx-auto mb-1 ">Docs</span>
-            <span className="absolute right-2">
-              <RightArrow />
-            </span>
-        </Link>
-          </Button>
-      </div>
+            <Button
+              className="inline-flex items- border-black border bg-black/60 w-full h-10 focus-visible:ring-1 transition hover:-translate-y-0.5 hover:brightness-110 cursor-pointer font-medium  text-white  hover:bg-gray-500  relative"
+            >
+              <span className="mx-auto mb-1 ">Docs</span>
+              <span className="absolute right-2">
+                <RightArrow />
+              </span>
+            </Button>
+          </Link>
+        </div>
 
     </CardSpotlight>
   )

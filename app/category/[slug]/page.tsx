@@ -1,5 +1,5 @@
 'use client';
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Filter, SortAsc, SortDesc, TrendingDownIcon, TrendingUp } from "lucide-react";
 import { filter, i } from "framer-motion/client";
 import BackgroundEffect from "@/components/BackgroundEffect";
@@ -7,6 +7,7 @@ import { TechStackCard } from "@/components/TechStackCard";
 import Container from "@/components/Container";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 
 interface Category {
   id: string
@@ -37,27 +38,27 @@ interface TechStack {
 
 
 interface ApiResponse<T> {
-    success: boolean;
-    error: string | null;
-    data:T
-    count?: number;
+  success: boolean;
+  error: string | null;
+  data: T
+  count?: number;
 }
 
 
 export default function TechStacks() {
-    const [techStacks, setTechStacks] = useState<TechStack[]>([]);
-    const [category, setCategory] = useState<Category | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [searchItem, setSearchItem] = useState<string>('');
-    const [sortBy, setSortBy] = useState<'popularity' | 'name' | 'created_at'>('popularity')
-    const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
-    const [showFilters, setShowFilters] = useState<boolean>(false);
-    const[selectedForComparison, setSelectedForComparison] = useState<string[]>([]);
+  const [techStacks, setTechStacks] = useState<TechStack[]>([]);
+  const [category, setCategory] = useState<Category | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [searchItem, setSearchItem] = useState<string>('');
+  const [sortBy, setSortBy] = useState<'popularity' | 'name' | 'created_at'>('popularity')
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
+  const [showFilters, setShowFilters] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
 
-    const categorySlug = 'frontend'; // his would come from router params
+  const categorySlug = 'frontend'; // his would come from router params
 
-    useEffect(() => {
+  useEffect(() => {
     setLoading(true)
     // Simulate API calls
     setTimeout(() => {
@@ -67,7 +68,7 @@ export default function TechStacks() {
         slug: 'frontend',
         description: 'Data storage and management solutions including relational and NoSQL databases. These technologies handle data persistence, querying, and management for applications of all scales, from simple web apps to enterprise systems.'
       })
-      
+
       setTechStacks([
         {
           id: '1',
@@ -139,14 +140,14 @@ export default function TechStacks() {
         }
       ])
       setLoading(false)
-    },0)
+    }, 0)
   }, [categorySlug])
 
 
-  const filterStacks  = techStacks.filter((stack)=>{
+  const filterStacks = techStacks.filter((stack) => 
     stack.name.toLowerCase().includes(searchItem.toLowerCase()) ||
     stack.short_description.toLowerCase().includes(searchItem.toLowerCase())
-  })
+  )
 
 
   const getDifficultyColor = (difficulty: string) => {
@@ -156,15 +157,15 @@ export default function TechStacks() {
     return 'text-gray-500';
   }
 
-  const handleComparisonToggle = (slug: string) => {
-    setSelectedForComparison(prev => {
-      if (prev.includes(slug)) {
-        return prev.filter(item => item !== slug);
-      } else {
-        return [...prev, slug];
-      }
-    });
-  }
+  // const handleComparisonToggle = (slug: string) => {
+  //   setSelectedForComparison(prev => {
+  //     if (prev.includes(slug)) {
+  //       return prev.filter(item => item !== slug);
+  //     } else {
+  //       return [...prev, slug];
+  //     }
+  //   });
+  // }
 
   const handleSortChange = (newSortBuy: typeof sortBy) => {
     if (newSortBuy === sortBy) {
@@ -177,98 +178,97 @@ export default function TechStacks() {
 
 
 
-    return(
-      <div className="min-h-screen">
-        <BackgroundEffect/>
-        <Container className="max-w-4xl py-8 px-4 ">
-          {/* Header */}
-          <div className="flex flex-col ">
-            <div className="flex flex-col space-y-2">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-grostek">{category ? category.name : "Loading..."}</h1>
-              <p className="text-sm max-w-3xl">{category ? category.description :" " }</p>
-            </div>
+  return (
+    <div className="min-h-screen">
+      <BackgroundEffect />
+      <Container className="max-w-4xl py-8 px-4 ">
+        {/* Header */}
+        <div className="flex flex-col ">
+          <div className="flex flex-col space-y-2">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-grostek">{category ? category.name : "Loading..."}</h1>
+            <p className="text-sm max-w-3xl">{category ? category.description : " "}</p>
           </div>
+        </div>
 
-          {/*Controls  */}
-          <div className="flex flex-col gap-2 mb-4">
+        {/*Controls  */}
+        <div className="flex flex-col gap-2 mb-4">
 
-            {/* Search */}
+          {/* Search */}
           <div className="flex-1 relative bg-black/40 mt-5">
-            <Input type="text" placeholder="Tech stacks"  className=""/>
+            <Input type="text" placeholder="Tech stacks" className="" onChange={(e)=>setSearchItem(e.target.value)}/>
           </div>
 
 
           {/* Sort options */}
           <div className="flex gap-2">
-            <Button onClick={()=>handleSortChange('popularity')}
-            className={`flex items-center px-4 py-3 rounded-sm border transition-all ${
-              sortBy=="popularity"? "bg-black/40  text-white hover:bg-black/80"
-                  :'bg-white/10 border-white/20 text-gray-300 hover:bg-white/20'
-            }`}>
-              <TrendingUp className="w-4 h-4"/>
+            <Button onClick={() => handleSortChange('popularity')}
+              className={`flex items-center px-4 py-3 rounded-sm border transition-all ${sortBy == "popularity" ? "bg-black/40  text-white hover:bg-black/80"
+                  : 'bg-white/10 border-white/20 text-gray-300 hover:bg-white/20'
+                }`}>
+              <TrendingUp className="w-4 h-4" />
               <span>Popularity</span>
               {sortBy == "popularity" && (
-                sortDirection =='desc' ? <SortDesc className=""/> : <SortAsc className=""/> 
+                sortDirection == 'desc' ? <SortDesc className="" /> : <SortAsc className="" />
               )}
-              </Button>
+            </Button>
           </div>
 
           {/* Results */}
           <div className="flex items-center justify-between  mt-3">
             <p className="text-gray-500">Showing {filterStacks.length} of {techStacks.length} technologies </p>
-          </div> 
+          </div>
 
           {/* Techstacks */}
           {loading ? (
-            <div>
-              Loading...
+            <div className="flex flex-col mt-5 justify-between px-2">
+              <div className="grid grid-cols-1 gap-6">
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="p-6 h-full w-full bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 animate-pulse">
+                    <div className="flex items-start space-x-4">
+                      <div className="w-16 h-16 bg-gray-600 rounded-xl"></div>
+                      <div className="flex-1">
+                        <div className="h-6 bg-gray-600 rounded mb-2"></div>
+                        <div className="h-4 bg-gray-700 rounded mb-4"></div>
+                        <div className="flex gap-2">
+                          <div className="h-8 w-20 bg-gray-600 rounded"></div>
+                          <div className="h-8 w-24 bg-gray-600 rounded"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          ):(
+          ) : (
             <div className="flex flex-col mt-5 justify-center px-2">
-            <div className="grid grid-cols-1 gap-4">
-              {techStacks.map((stack,id)=>(
-                <TechStackCard 
-                id={stack.id}
-                name={stack.name}
-                short_description={stack.short_description}
-                logo={stack.logo}
-                major_use_cases={stack.major_use_cases}
-                slug={stack.slug}
-                official_docs={stack.official_docs}/>
-              ))}
+              <div className="grid grid-cols-1 gap-4">
+                {filterStacks.map((stack, id) => (
+                  <TechStackCard
+                    id={stack.id}
+                    name={stack.name}
+                    short_description={stack.short_description}
+                    logo={stack.logo}
+                    major_use_cases={stack.major_use_cases}
+                    slug={stack.slug}
+                    official_docs={stack.official_docs} />
+                ))}
+              </div>
             </div>
+          )}
+
+          {!loading && filterStacks.length == 0 && (
+            <div className="flex justify-center flex-col items-center gap-y-2">
+              <div>
+                <Search size={"34px"} />
+              </div>
+              <div className="text-gray-500 w-56 font-medium text-center">
+                Sorry! Couldn't find any matching categories.
+              </div>
             </div>
           )}
 
         </div>
-        </Container>
-
-        </div>
-    );   
+      </Container>
+    </div>
+  );
 } 
-
-
-
-
-
-        // <div className="container mx-auto px-4 py-8">
-          {/* <h1 className="text-4xl font-bold mb-6">{category ? category.name : 'Loading...'}</h1> */}
-          {/* <p className="text-gray-600 mb-6">{category ? category.description : ''}</p> */}
-          {/* {loading ? ( */}
-            // <p>Loading tech stacks...</p>
-          // ) : (
-            // <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* {techStacks.map((stack) =>  */}
-              // <TechStackCard 
-              //   key={stack.id}
-              //   name={stack.name}
-              //   short_description={stack.short_description}
-              //   logo={stack.logo}
-              //   major_use_cases={stack.major_use_cases}
-              //   slug={s
-                
-
-
-            {/* </div> */}
-            // )}
-            {/* </div> */}
