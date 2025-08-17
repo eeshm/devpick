@@ -75,7 +75,7 @@ export default function TechStacks() {
           slug: 'react',
           category_slug: 'frontend',
           logo: '⚛️',
-          short_description: 'A JavaScript library for building user interfaces with component-based architecture',
+          short_description: 'A JavaScript library for building user interfaces with component-based architectureA JavaScript library for building user interfaces with component-based architectureA JavaScript library for building user interfaces with component-based architectureA JavaScript library for building user interfaces with component-based architecture',
           detailed_description: 'React is a free and open-source front-end JavaScript library...',
           official_docs: 'https://reactjs.org',
           learning_curve: 3,
@@ -214,26 +214,29 @@ export default function TechStacks() {
           </div>
 
           {/* Results */}
-          <div className="flex items-center justify-between mb-5 -mt-1">
+          <div className="flex items-center justify-between  mt-3">
             <p className="text-gray-500">Showing {filterStacks.length} of {techStacks.length} technologies </p>
-          </div>
+          </div> 
 
           {/* Techstacks */}
           {loading ? (
             <div>
-              loadin...
+              Loading...
             </div>
           ):(
-            <div className="grid grid-cols-1">
-              {filterStacks.map((stack)=>(
+            <div className="flex flex-col mt-5 justify-center px-2">
+            <div className="grid grid-cols-1 gap-4">
+              {techStacks.map((stack,id)=>(
                 <TechStackCard 
-                key={stack.id}
+                id={stack.id}
                 name={stack.name}
                 short_description={stack.short_description}
                 logo={stack.logo}
                 major_use_cases={stack.major_use_cases}
-                slug={stack.slug}/>
+                slug={stack.slug}
+                official_docs={stack.official_docs}/>
               ))}
+            </div>
             </div>
           )}
 
