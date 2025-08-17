@@ -26,7 +26,7 @@ export default function CategoryCard({ name, description, slug, logo }: Categori
                 <p>{description}</p>
             </div>
             </div>
-            <Link href={`/categories/${slug}`}>
+            <Link href={`/category/${slug}`}>
 
             <div className="mt-5">
              <Button variant={"default"}

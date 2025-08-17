@@ -1,6 +1,7 @@
 'use client'
 import React, { ReactNode, useEffect, useState } from "react"
 import CategoryCard from "./CategoryCard"
+import { Search } from "lucide-react";
 // const categories = [
 //     {
 //         "id":"dadfdfad",
@@ -52,7 +53,7 @@ export default function Categories() {
                 if (json.success && isMounted) {
                     setCategories(json.data)
                 } else {
-                    setError(json.error || "Failed to load categories");
+                    setError(json.error || "Sorry! Failed to load categories");
                 }
             } catch (error) {
                 if (isMounted)
@@ -104,7 +105,7 @@ export default function Categories() {
                 </div>
             ) : error ? (
                 <div className="flex flex-col gap-4 items-center justify-center mt-10">
-                    <div className="text-red-500 text-2xl font-medium">
+                    <div className="text-red-900 text-2xl font-medium">
                         {error}
                     </div>
                 </div>
@@ -112,8 +113,11 @@ export default function Categories() {
                 <div className="flex flex-col gap-4 items-center justify-center mt-10">
                         {categories.filter((category => category.name.toLowerCase().includes(searchItem.toLowerCase())
                             || category.description.toLowerCase().includes(searchItem.toLowerCase()))).length === 0 && (
-                                <div className="flex justify-center  items-center">
-                                    <div className="text-black text-2xl  font-medium text-center">
+                                <div className="flex justify-center flex-col items-center gap-y-2">
+                                    <div>
+                                        <Search size={"34px"}/>
+                                        </div>
+                                    <div className="text-gray-500 w-56 font-medium text-center">
                                         Sorry! Couldn't find any matching categories.
                                     </div>
                                 </div>

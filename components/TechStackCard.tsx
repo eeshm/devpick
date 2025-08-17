@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 export type TechStackItem = {
   name: string;
   slug: string;
-  symbol: ReactNode;
+  logo: string;
   short_description: string;
   major_use_cases: string[];
 };
@@ -13,24 +13,17 @@ const techStack: TechStackItem[] = [
   {
     "name": "Next.js",
     "slug": "next-js",
-    "symbol": <Nextjs size="lg" />,
+    "logo": "dfaa",
     "short_description": "A React-based framework for building fast, SEO-friendly websites and apps. Supports server-side rendering, static site generation, and API routes A React-based framework for building fast, SEO-friendly websites and apps. Supports server-side rendering, static site generation, and API routes.",
     "major_use_cases": ["SEO websites", "Dashboards", "Full-stack React apps"]
   },
   {
     "name": "React",
     "slug": "next-js",
-    "symbol": <ReactLogo size="lg" />,
+    "logo": "dfad",
     "short_description": "A JavaScript library for building user interfaces using reusable components. Ideal for dynamic, interactive web apps.",
     "major_use_cases": ["SPAs", "Web dashboards", "User interfaces"]
   },
-  {
-    "name": "Angular",
-    "slug": "next-js",
-    "symbol": <Angular size="lg" />,
-    "short_description": "A full-featured frontend framework by Google. Includes built-in routing, forms, and state management using TypeScript.",
-    "major_use_cases": ["Enterprise apps", "Dashboards", "Complex SPAs"]
-  }
 ]
 
 import { CardSpotlight } from "@/components/ui/card-spotlight";
@@ -81,11 +74,32 @@ interface TechStack {
   categories?: Category
 }
 
+ export default function TechStacks() {
+  return (
+    <div className="flex flex-col mt-10 items-center justify-center ">
+      <h2 className="text-4xl font-light font-opensans mb-6 border-b-2 tracking-tight">Major Tech Stacks - categorie name</h2>
+      {techStack && techStack.length>0 &&(
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 ">
+        {techStack.map((tech, index) => (
+          <TechStackCard
+            key={index}
+            name={tech.name}
+            short_description={tech.short_description}
+            logo={tech.logo}
+            major_use_cases={tech.major_use_cases || []}
+            slug={tech.slug}
+          />
+        ))}
+      </div>
+      )}
+    </div>
+  )
+}
 
 
 
 
-export function TechStackCard({ name, short_description, slug, logo, major_use_cases }: TechStack) {
+export function TechStackCard({ name, short_description, slug, logo, major_use_cases }: TechStackItem) {
   return (
     <CardSpotlight className="h-80 w-80  overflow-hidden  hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between ">
       <div className="flex-grow">
