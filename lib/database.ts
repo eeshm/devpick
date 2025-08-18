@@ -73,12 +73,6 @@ export async function getCategoryBySlug(slug:string) : Promise<DatabaseResponse<
 //get techstack by category
 export async function getTechStacksByCategory(
   categorySlug: string,
-  options: {
-    limit?: number
-    offset?: number
-    orderBy?: 'popularity' | 'name' | 'created_at'
-    orderDirection?: 'asc' | 'desc'
-  } = {}
 ): Promise<DatabaseResponse<TechStack[]> & { count: number }> {
   try {
     if (!categorySlug || categorySlug.trim() === '') {
@@ -88,14 +82,7 @@ export async function getTechStacksByCategory(
         count: 0
       }
     }
-
-    const {
-      limit = 50,
-      offset = 0,
-      orderBy = 'popularity',
-      orderDirection = 'desc'
-    } = options
-
+    
     // First, verify category exists
     const categoryCheck = await getCategoryBySlug(categorySlug)
     if (categoryCheck.error || !categoryCheck.data) {
@@ -119,22 +106,7 @@ export async function getTechStacksByCategory(
         )
       `, { count: 'exact' })
       .eq('categories.slug', categorySlug.toLowerCase())
-      .range(offset, offset + limit - 1)
-
-    // Apply ordering
-    switch (orderBy) {
-      case 'popularity':
-        query = query.order('popularity', { ascending: orderDirection === 'asc' })
-        break
-      case 'name':
-        query = query.order('name', { ascending: orderDirection === 'asc' })
-        break
-      case 'created_at':
-        query = query.order('created_at', { ascending: orderDirection === 'asc' })
-        break
-      default:
-        query = query.order('popularity', { ascending: false })
-    }
+      
     const {data,error,count}= await query
     if(error){
         return{

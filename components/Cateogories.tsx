@@ -2,25 +2,8 @@
 import React, { ReactNode, useEffect, useState } from "react"
 import CategoryCard from "./CategoryCard"
 import { Search } from "lucide-react";
-// const categories = [
-//     {
-//         "id":"dadfdfad",
-//         "name": "Backend Development",
-//         "slug": "backend-development",
-//         "description": "Server-side technologies and frameworks that handle business logic, data processing, and API development. These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.",
-//         "logo": "server icon",
-//         "created_at":"2323"
-//     },
-//     {
-//         "id":"dfafda",
-//         "name": "Backend Development",
-//         "slug": "backend-development",
-//         "description": "Server-side technologies and frameworks that handle business logic, data processing, and API development. These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.These technologies power the behind-the-scenes functionality that enables web applications to process requests and manage data.",
-//         "logo": "server icon",
-//         "created_at":"2323"
-//     }
-// ]
 
+import { AlertTriangle } from "lucide-react";
 interface Category {
     id?: string,
     name: string,
@@ -55,12 +38,14 @@ export default function Categories() {
                 } else {
                     setError(json.error || "Sorry! Failed to load categories");
                 }
-            } catch (error) {
-                if (isMounted)
-                    setError("An error occurred while fetching categories.")
+            } catch (error: any) {
+                if (error.name === "AbortError") {
+                    return;
+                }
+                setError("An error occurred while fetching categories.")
+
             } finally {
-                if (isMounted)
-                    setLoading(false)
+                setLoading(false)
             }
         }
         fetchCategories();
@@ -104,39 +89,47 @@ export default function Categories() {
                     </div>
                 </div>
             ) : error ? (
-                <div className="flex flex-col gap-4 items-center justify-center mt-10">
-                    <div className="text-red-900 text-2xl font-medium">
-                        {error}
+                    <div className="text-center py-16">
+                        <div className="w-24 h-24 bg-black/70 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <AlertTriangle className="w-12 h-12 text-red-800" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-white mb-2">Error Loading Data</h3>
+                        <p className="text-gray-400 mb-4">{error}</p>
+                        <button
+                            onClick={() => window.location.reload()}
+                            className="px-6 py-3 bg-gradient-to-r cursor-pointer from-blue-500 to-purple-600 text-white rounded hover:shadow-lg transition-all"
+                        >
+                            Try Again
+                        </button>
                     </div>
-                </div>
-            ) : (
-                <div className="flex flex-col gap-4 items-center justify-center mt-10">
+                    ) : (
+                    <div className="flex flex-col gap-4 items-center justify-center mt-10">
                         {categories.filter((category => category.name.toLowerCase().includes(searchItem.toLowerCase())
                             || category.description.toLowerCase().includes(searchItem.toLowerCase()))).length === 0 && (
                                 <div className="flex justify-center flex-col items-center gap-y-2">
                                     <div>
-                                        <Search size={"34px"}/>
-                                        </div>
+                                        <Search size={"34px"} />
+                                    </div>
                                     <div className="text-gray-500 w-56 font-medium text-center">
                                         Sorry! Couldn't find any matching categories.
                                     </div>
                                 </div>
                             )}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 ">
-                        {filteredCategories.map((category) => (
-                            <CategoryCard
-                                key={category.id}
-                                name={category.name}
-                                description={category.description}
-                                slug={category.slug}
-                                logo={category.logo}
-                                created_at={category.created_at} />
-                        ))}
-                    </div>
-                </div >
-            )
+                            {filteredCategories.map((category) => (
+                                <CategoryCard
+                                    key={category.id}
+                                    name={category.name}
+                                    description={category.description}
+                                    slug={category.slug}
+                                    logo={category.logo}
+                                    created_at={category.created_at} />
+                            ))}
+                        </div>
+                    </div >
+                    )
             }
-        </div >
-    );
+                </div >
+            );
 }
 
