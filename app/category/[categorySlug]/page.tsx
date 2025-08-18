@@ -1,4 +1,3 @@
-// app/category/[categorySlug]/page.tsx
 import TechStacks from "@/components/CategoryTechStacks";
 import BackgroundEffect from "@/components/BackgroundEffect";
 

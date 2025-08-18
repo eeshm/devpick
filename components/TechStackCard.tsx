@@ -45,8 +45,8 @@ export function TechStackCard({ id, name, short_description, slug, logo, major_u
               {major_use_cases.map((usecases, index) => (
                 <div className="inline-flex justify-center items-center text-center rounded-xs 
              border px-2  text-xs bg-black/30
-            text-white font-semibold break-words max-w-full">
-                  <li key={index} className="p-0.5 py-0.5 inline-flex">{usecases}</li>
+            text-white font-semibold break-words max-w-full" key={index}>
+                  <li className="p-0.5 py-0.5 inline-flex">{usecases}</li>
                 </div>
               ))}
             </ul>
