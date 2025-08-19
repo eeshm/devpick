@@ -1,6 +1,7 @@
 import React, { useState, useEffect, ReactNode } from "react"
 import Categories from "./Categories"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 import ReactLogo from "./icons/React"
 
 interface TechStack {
@@ -19,7 +20,6 @@ interface TechStack {
     cons?: string[]
     major_use_cases?: string[]
     basic_prerequisites?: string[]
-    created_at?: string
 }
 const techStack = [
     {
@@ -61,21 +61,21 @@ export default function Page() {
 }
 export function TechStackDetailCard(props: TechStack) {
     return (
-        <div className="max-w-7xl  mx-auto px-4">
+        <div className="max-w-7xl  mx-auto px-4 text-sm">
             <div className="grid grid-cols-12 gap-6">
                 {/* //Left column */}
-                <div className="col-span-3">
+                <div className="md:col-span-3 col-span-12">
                     <Side1 name={props.name} logo={props.logo} />
                 </div>
 
                 {/* Main */}
                 <div className="max-w-3xl col-span-12 md:col-span-6">
-                    {props.short_description}
+                    <Main detailed_description={props.detailed_description} pros={props.pros} cons={props.cons} />
                 </div>
 
                 {/* Right Column */}
-                <div className="col-span-3">
-                <Side2 name={props.name}/>
+                <div className="md:col-span-3 col-span-12">
+                    <Side2 name={props.name} official_docs={props.official_docs} />
                 </div>
             </div>
         </div>
@@ -85,11 +85,51 @@ export function TechStackDetailCard(props: TechStack) {
 
 
 
+
+
+
+function Main(props: TechStack) {
+    return (
+        <div className="flex flex-col gap-y-4 ">
+            <h1 className="text-3xl font-semibold font-mono">
+                Overview
+            </h1>
+            <div className="">
+                {props.detailed_description}
+            </div>
+            <div className="flex md:flex-row flex-col mt-4">
+                <div>
+                    <div className="font-semibold text-sm text-muted-foreground">Pros:</div>
+                    <ul className="list-disc pl-5 space-y-1 text-xs text-muted-foreground font-semibold">
+                        {props.pros?.map((pro, index) => (
+                            <li key={index} className="break-words">
+                                {pro}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <div>
+                    <div className="font-semibold text-sm text-muted-foreground">Cons:</div>
+                    <ul className="list-disc pl-5 space-y-1 text-xs text-muted-foreground font-semibold">
+                        {props.cons?.map((con, index) => (
+                            <li key={index} className="break-words">
+                                {con}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    )
+}
+
 function Side1({ name, logo }: TechStack) {
     return (
         <nav
             aria-label="Tech Details"
-            className="text-sm sticky top-20  overflow-auto pr-4 h-64"
+            className="text-sm sticky top-20 flex justify-end overflow-auto pr-4 "
         >
             <ul className="space-y-1 flex  text-4xl">
                 <li className="">
@@ -104,31 +144,28 @@ function Side1({ name, logo }: TechStack) {
     )
 }
 
-
-
-function Main(props: TechStack) {
-    return (
-        <div className="">
-            Description
-        </div>
-    )
-}
-
-
 function Side2(props: TechStack) {
     return (
         <nav
             aria-label="Tech Details"
-            className="text-sm sticky top-20  overflow-auto pr-4 h-64"
+            className="text-sm sticky top-20 overflow-clip pr-4 text-gray-400 font-medium"
         >
-            <ul className="space-y-1  text-4xl">
-                <li className="flex ">
-                    {props.name}
-                </li>
-                <li>
-                </li>
+            <div className="space-y-1 flex max-w-max flex-col">
+                <div className="pb-2" >
+                    Quick Links
+                </div>
+                <div className="inline-flex  hover:text-white border-b">
+                    {props.official_docs !== undefined && props.official_docs !== "" && (
+                        <Link href={props.official_docs}>
+                            Offical docs
+                        </Link>
+                    )}
+                </div>
 
-            </ul>
+                <div className="inline-flex hover:text-white border-b">
+                    Github
+                </div>
+            </div>
         </nav>
     )
 }
