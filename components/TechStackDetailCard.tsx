@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils"
 import Link from "next/link"
 import ReactLogo from "./icons/React"
 import { Clock } from "lucide-react"
+import { populate } from "dotenv"
 
 interface TechStack {
     id?: string
@@ -65,7 +66,7 @@ export function TechStackDetailCard(props: TechStack) {
             <div className="grid grid-cols-12 gap-6">
                 {/* //Left column */}
                 <div className="md:col-span-3 col-span-12">
-                    <Side1 name={props.name} logo={props.logo} basic_prerequisites={props.basic_prerequisites}  learning_curve={props.learning_curve}/>
+                    <Side1 name={props.name} logo={props.logo} basic_prerequisites={props.basic_prerequisites}  learning_curve={props.learning_curve} popularity={props.popularity}/>
                 </div>
 
                 {/* Main */}
@@ -143,17 +144,17 @@ function Main(props: TechStack) {
     )
 }
 
-function Side1({ name, logo, basic_prerequisites,learning_curve }: TechStack) {
+function Side1({ name, logo, basic_prerequisites,learning_curve,popularity }: TechStack) {
     const getDifficultyColor = (level?: string) => {
     if (!level) return 'text-gray-400'
-    if (level == "Intermediate") return 'text-yellow-400'
+    if (level == "Intermediate") return 'text-yellow-600'
     if (level == "Hard") return 'text-red-600'
-    return 'text-white'
+    return 'text-green-500'
   }
     return (
         <nav
             aria-label="Tech Details"
-            className="sticky top-0 flex flex-col min-h-full md:items-end gap-2 px-4 py-3 text-sm col-span-3"
+            className="sticky top-0 flex flex-col md:items-end gap-2 px-4 py-3 text-sm col-span-3"
         >
             {/* Header Section */}
             <div className="flex items-center gap-2 text-4xl">
@@ -162,7 +163,7 @@ function Side1({ name, logo, basic_prerequisites,learning_curve }: TechStack) {
             </div>
 
             {/* Prerequisites Section */}
-            <div className="mt-2 ">
+            <div className="mt-2">
                 <h2 className="uppercase underline md:text-right tracking-wide mb-1 px-2.5">
                     Prerequisites
                 </h2>
@@ -181,6 +182,11 @@ function Side1({ name, logo, basic_prerequisites,learning_curve }: TechStack) {
             <div className={`mt-2 px-2.5 flex gap-1 ${getDifficultyColor(learning_curve)}`}>
                 <Clock className="size-4 pt-1"/>
                 {learning_curve}
+            </div>
+
+
+            <div className={`mt-2 px-2.5 flex gap-1 text-gray-200 font-bold`}>
+                <span className="capitalize">{popularity} Popularity</span>
             </div>
         </nav>
     );
