@@ -36,7 +36,7 @@ interface ApiResponse<T> {
     error: string | null
     data: T
 }
-export default function TechStackDetailPage({ techStackSlug = 'react' }: { techStackSlug: string }) {
+export default function TechStackDetailPage({ techStackSlug ="react",categorySlug="frontend-development" }: { techStackSlug: string,categorySlug:string}) {
     const [techStack, setTechStack] = useState<TechStack | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null)
@@ -46,7 +46,7 @@ export default function TechStackDetailPage({ techStackSlug = 'react' }: { techS
         let ignore = false;
         async function fetchTechStack() {
             setLoading(true);
-            setTechStack(null);
+            setError(null)
 
             try {
                 const repsonse = await fetch(`/api/tech-stacks/${techStackSlug}`)
@@ -78,26 +78,7 @@ export default function TechStackDetailPage({ techStackSlug = 'react' }: { techS
             ignore = true;
         }
     }, [techStackSlug])
-
-
-
-    {
-        if (!techStack) {
-            return (
-                <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
-                    <div className="text-center">
-                        <h1 className="text-3xl font-bold text-white mb-4">Tech Stack Not Found</h1>
-                        <p className="text-gray-400 mb-6">The requested technology could not be found.</p>
-                        <button className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-lg">
-                            Back to Categories
-                        </button>
-                    </div>
-                </div>
-            )
-        }
-    }
-
-
+    
     return (
         <div className='min-h-screen'>
             <Container className='max-w-7xl py-8 px-4'>
@@ -121,8 +102,8 @@ export default function TechStackDetailPage({ techStackSlug = 'react' }: { techS
 
 
                 {loading ? (
-                    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-                        <div className="max-w-6xl mx-auto px-6 py-8">
+                    <div className="min-h-screen ">
+                        <div className="max-w-6xl mx-auto px-4">
                             <div className="animate-pulse">
                                 {/* Header skeleton */}
                                 <div className="flex items-center space-x-4 mb-8">
@@ -158,6 +139,12 @@ export default function TechStackDetailPage({ techStackSlug = 'react' }: { techS
                     <div className="flex justify-center flex-col items-center gap-y-2">
                         <h3 className="text-2xl font-bold text-white mb-2">No technology found</h3>
                         <p className="text-gray-400">Look for another techstack</p>
+                    </div>
+                )}
+                {!loading && !error && techStack?.category_slug != categorySlug && (
+                    <div className="flex justify-center flex-col items-center gap-y-2">
+                        <h3 className="text-2xl font-bold text-white mb-2">This technology can't be found in this category</h3>
+                        <p className="text-gray-400">Look for another techstack or category</p>
                     </div>
                 )}
 

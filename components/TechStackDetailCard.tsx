@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils"
 import Link from "next/link"
 import ReactLogo from "./icons/React"
 import { Clock } from "lucide-react"
+import { Button } from "./ui/button"
 
 interface TechStack {
     id?: string
@@ -24,25 +25,36 @@ interface TechStack {
 
 export function TechStackDetailCard(props: TechStack) {
     return (
-        <div className="max-w-7xl  mx-auto px-4">
+        <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-12 gap-6">
-                {/* //Left column */}
-                <div className="md:col-span-3 col-span-6">
-                    <Side1 name={props.name} logo={props.logo} basic_prerequisites={props.basic_prerequisites}  learning_curve={props.learning_curve} popularity={props.popularity}/>
+                <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3">
+                    <Side1 
+                        name={props.name} 
+                        logo={props.logo} 
+                        basic_prerequisites={props.basic_prerequisites} 
+                        learning_curve={props.learning_curve} 
+                        popularity={props.popularity} 
+                    />
                 </div>
 
-                {/* Main */}
-                <div className="max-w-3xl col-span-12 md:col-span-6">
-                    <Main detailed_description={props.detailed_description} pros={props.pros} cons={props.cons} major_use_cases={props.major_use_cases} />
+                <div className="col-span-12 sm:col-span-12 md:col-span-4 lg:col-span-6">
+                    <Main 
+                        detailed_description={props.detailed_description} 
+                        pros={props.pros} 
+                        cons={props.cons} 
+                        major_use_cases={props.major_use_cases} 
+                    />
                 </div>
 
-                {/* Right Column */}
-                <div className="md:col-span-3 col-span-6">
-                    <Side2 name={props.name} official_docs={props.official_docs} />
+                <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3">
+                    <Side2 
+                        name={props.name} 
+                        official_docs={props.official_docs} 
+                    />
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 
@@ -62,32 +74,32 @@ function Main(props: TechStack) {
             {/* Pros and cons */}
             {/* Pros and cons */}
             <div className="flex flex-col mt-5">
-            <h1 className="text-3xl font-semibold font-mono underline mb-2 tracking-tighter">Pros & Cons</h1>
-            <div className="flex md:flex-row flex-col gap-4">
-                {/* Pros Section */}
-                <div className="flex-1 rounded-lg shadow-md">
-                    <div className="font-semibold mb-1">Pros:</div>
-                    <ul className="list-disc pl-5 text-sm font-medium">
-                        {props.pros?.map((pro, index) => (
-                            <li key={index} className="hover:bg-black/40 transition-colors py-1 px-1 text-muted-foreground">
-                                {pro}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+                <h1 className="text-3xl font-semibold font-mono underline mb-2 tracking-tighter">Pros & Cons</h1>
+                <div className="flex md:flex-row flex-col gap-4">
+                    {/* Pros Section */}
+                    <div className="flex-1 rounded-lg shadow-md">
+                        <div className="font-semibold mb-1">Pros:</div>
+                        <ul className="list-disc pl-5 text-sm font-medium">
+                            {props.pros?.map((pro, index) => (
+                                <li key={index} className="hover:bg-black/40 transition-colors py-1 px-1 text-muted-foreground">
+                                    {pro}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
-                {/* Cons Section */}
-                <div className="flex-1 rounded-lg shadow-md">
-                    <div className="font-semibold mb-1">Cons:</div>
-                    <ul className="list-disc pl-5  text-sm font-medium">
-                        {props.cons?.map((con, index) => (
-                            <li key={index} className="hover:bg-black/40 transition-colors py-1 px-1 text-muted-foreground">
-                                {con}
-                            </li>
-                        ))}
-                    </ul>
+                    {/* Cons Section */}
+                    <div className="flex-1 rounded-lg shadow-md">
+                        <div className="font-semibold mb-1">Cons:</div>
+                        <ul className="list-disc pl-5  text-sm font-medium">
+                            {props.cons?.map((con, index) => (
+                                <li key={index} className="hover:bg-black/40 transition-colors py-1 px-1 text-muted-foreground">
+                                    {con}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
-            </div>
             </div>
 
 
@@ -106,27 +118,27 @@ function Main(props: TechStack) {
     )
 }
 
-function Side1({ name, logo, basic_prerequisites,learning_curve,popularity }: TechStack) {
+function Side1({ name, logo, basic_prerequisites, learning_curve, popularity }: TechStack) {
     const getDifficultyColor = (level?: string) => {
-    if (!level) return 'text-gray-400'
-    if (level == "Intermediate") return 'text-yellow-600'
-    if (level == "Hard") return 'text-red-600'
-    return 'text-green-500'
-  }
+        if (!level) return 'text-gray-400'
+        if (level == "Intermediate") return 'text-yellow-600'
+        if (level == "Hard") return 'text-red-600'
+        return 'text-green-500'
+    }
     return (
         <nav
             aria-label="Tech Details"
-            className="sticky top-0 flex flex-col md:items-end px-4 space-y-3 text-sm"
+            className="sticky top-0 flex flex-col md:items-end space-y-3 text-sm"
         >
             {/* Header Section */}
             <div className="flex items-center gap-2 text-4xl">
                 <span>{logo}</span>
-                <span className="font-mono font-medium">{name}</span>
+                <span className="font-medium">{name}</span>
             </div>
 
             {/* Prerequisites Section */}
-            <div className="">
-                <h2 className="uppercase underline md:text-right tracking-wide px-2.5">
+            <Button className="flex flex-col w-full h-full">
+                <h2 className="uppercase underline md:text-right tracking-wide">
                     Prerequisites
                 </h2>
                 <div className="flex flex-wrap md:justify-end gap-1">
@@ -139,17 +151,22 @@ function Side1({ name, logo, basic_prerequisites,learning_curve,popularity }: Te
                         </span>
                     ))}
                 </div>
-            </div>
+            </Button>
 
-            <div className={`px-2.5 flex gap-1 text-gray-200 font-bold`}>
-                <span>Popularity: </span>
-                <span className="capitalize">{popularity}</span>
-            </div>
+            <Button>
+                <div className={`flex gap-1 text-black `}>
+                    <span>Popularity: </span>
+                    <span className="capitalize">{popularity}</span>
+                </div>
+            </Button>
 
-            <div className={`px-2.5 flex ${getDifficultyColor(learning_curve)}`}>
-                <Clock className="size-4 pt-1"/>
-                {learning_curve}
-            </div>
+            <Button>
+                <div className={` flex ${getDifficultyColor(learning_curve)}`}>
+                    <Clock className="size-4 pt-1" />
+                    {learning_curve}
+
+                </div>
+            </Button>
 
 
         </nav>
@@ -161,13 +178,12 @@ function Side2(props: TechStack) {
     return (
         <nav
             aria-label="Quick Links"
-            className="text-sm sticky top-0 overflow-clip gap-2 px-4 py-3  text-gray-400 font-medium"
-        >
-            <div className="space-y-1 flex max-w-max flex-col">
+            className="text-sm sticky top-0 overflow-clip gap-2 px-4  text-gray-400 font-medium">
+            <div className="space-y-1 flex flex-col">
                 <div className="pb-2" >
                     Quick Links
                 </div>
-                <div className="inline-flex  hover:text-white border-b">
+                <div className="inline-flex  hover:text-white underline">
                     {props.official_docs !== undefined && props.official_docs !== "" && (
                         <Link href={props.official_docs}>
                             Offical docs
@@ -175,7 +191,7 @@ function Side2(props: TechStack) {
                     )}
                 </div>
 
-                <div className="inline-flex hover:text-white border-b">
+                <div className="inline-flex hover:text-white underline">
                     Github
                 </div>
             </div>

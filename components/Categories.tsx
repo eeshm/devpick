@@ -60,7 +60,7 @@ export default function Categories() {
     );
     return (
         <div>
-            <div className="mt-10 flex justify-center">
+            <div className="mt-5 flex justify-center">
                 <h2 className=" inline-block flex-col justify-center items-center text-4xl font-thin font-opensans border-b-2 tracking-tight">
                     Major categories
                 </h2>
