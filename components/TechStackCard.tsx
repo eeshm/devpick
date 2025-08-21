@@ -1,4 +1,3 @@
-import { ReactNode } from "react";
 import Link from "next/link";
 import RightArrow from "./icons/RightArrow";
 import { Button } from "./ui/button";
@@ -22,11 +21,11 @@ interface TechStack {
   logo_url?: string
   short_description: string
   official_docs: string
-  popularity?: number
+  popularity?: string
   major_use_cases: string[]
 }
 
-export function TechStackCard({ id, name, short_description, slug, logo, major_use_cases, official_docs }: TechStack) {
+export function TechStackCard({ id, name, short_description, slug, logo, major_use_cases, official_docs ,category_slug}: TechStack) {
   return (
     <CardSpotlight className="h-full w-full  overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between ">
       <div className="flex-grow">
@@ -56,7 +55,7 @@ export function TechStackCard({ id, name, short_description, slug, logo, major_u
 
       <div className="mt-5 flex justify-between gap-2 font-sans tracking-tight w-full">
           <Link 
-              href={`/tech-stacks/${slug}`}
+              href={`/category/${category_slug}/${slug}`}
               rel="noopener noreferrer"
               className="w-1/2">
             <Button variant={'default'}

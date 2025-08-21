@@ -2,12 +2,11 @@ import TechStacks from "@/components/CategoryTechStacks";
 import BackgroundEffect from "@/components/BackgroundEffect";
 
 export default async function CategoryPage({ params }: { params: { categorySlug: string } }) {
-  const {categorySlug }= await params
-  console.log('categorySlug is page: ', categorySlug)
-  return( 
+  const { categorySlug } = await params
+  return (
     <div>
-  <BackgroundEffect /> 
-  <TechStacks categorySlug={categorySlug} />;
-  </div>
+      <BackgroundEffect />
+      <TechStacks categorySlug={categorySlug} />;
+    </div>
   )
 }

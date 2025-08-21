@@ -87,7 +87,7 @@ export default function TechStacks({ categorySlug = 'frontend' }: { categorySlug
                 }
             } catch (error) {
                 if (!ignore) {
-                    console.error("Error fetchign tech stacks: ", error)
+                    console.error("Error fetching tech stacks: ", error)
                     setError("An error occured while fetching tech stacks")
                 }
             } finally {
@@ -95,7 +95,6 @@ export default function TechStacks({ categorySlug = 'frontend' }: { categorySlug
                     setLoading(false)
                 }
             }
-            console.log("Fetching category from:", `/api/categories/${categorySlug}`)
         }
         fetchTechStacks();
 
@@ -198,10 +197,7 @@ export default function TechStacks({ categorySlug = 'frontend' }: { categorySlug
                     {error && !loading && (
                         <div className="text-center py-16">
                             <div className="w-24 h-24 bg-black/70 rounded-full flex items-center justify-center mx-auto mb-6">
-                                <AlertTriangle className="w-12 h-12 text-red-8
-              
-              
-              00" />
+                                <AlertTriangle className="w-12 h-12 text-red-800" />
                             </div>
                             <h3 className="text-2xl font-bold text-white mb-2">Error Loading Data</h3>
                             <p className="text-gray-400 mb-4">{error}</p>
@@ -247,7 +243,8 @@ export default function TechStacks({ categorySlug = 'frontend' }: { categorySlug
                                         logo={stack.logo}
                                         major_use_cases={stack.major_use_cases}
                                         slug={stack.slug}
-                                        official_docs={stack.official_docs} />
+                                        official_docs={stack.official_docs}
+                                        category_slug={category?.slug} />
                                 ))}
                             </div>
                         </div>
