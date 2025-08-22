@@ -8,7 +8,7 @@ const stack1Mock: TechStack = {
     slug: 'react',
     logo_url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-    short_description: 'A JavaScript library for building user interfaces',
+    short_description: 'A JavaScript library for building user interfaces A JavaScript library for building user interfaces A JavaScript library for building user interfaces',
     official_docs: 'https://react.dev',
     learning_curve: 'Intermediate',
     popularity: 'Very High',
@@ -23,7 +23,7 @@ const stack2Mock: TechStack = {
     slug: 'vue',
     logo_url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
     logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-    short_description: 'The Progressive JavaScript Framework',
+    short_description: 'A JavaScript library for building user interfaces A JavaScript library for building user interfaces A JavaScript library for building user interfaces',
     official_docs: 'https://vuejs.org',
     learning_curve: 'Beginner',
     popularity: 'High',
@@ -71,7 +71,7 @@ export function InteractiveComparison({ stack1, stack2 }: { stack1: TechStack, s
                 <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
                     <Zap className="w-8 h-8 text-gray-400" />
                 </div>
-                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                <h3 className="text-lg font-medium text-muted-foreground mb-2">
                     Ready to Compare?
                 </h3>
                 <p className="text-gray-600">
@@ -81,31 +81,27 @@ export function InteractiveComparison({ stack1, stack2 }: { stack1: TechStack, s
         )
     }
     return (
-        <div className="max-w-6xl mx-auto p-6">
+        <div className="max-w-5xl mx-auto p-6 bg-black/30 rounded-md">
             {/* compairson */}
             <div className="rounded-lg p-6">
-                <div className="grid grid-cols-3 gap-4 mb-6 pb-4 border-b border-gray-200">
-                    <div className="font-semibold text-gray-600 text-sm uppercase tracking-wider">Feature</div>
-                    <div className="text-center">
-                        <div className="flex-items justify-center space-x-2 mb-2">
+                <div className="grid grid-cols-12 gap-4 mb-6 pb-4 border-b border-gray-200">
+                    <div className=" col-span-2 font-semibold text-gray-300 text-lg uppercase  tracking-wider flex justify-center">Feature</div>
+                        <div className="flex items-center justify-center space-x-2 mb-2 col-span-5">
                             {/* Change this img to Image */}
                             <img
                                 src={stack1.logo}
                                 alt={stack1.name}
                                 className="w-6 h-6 object-contain" />
-                            <span className="font-semibold text-gray-900">{stack1.name}</span>
+                            <span className="font-semibold text-xl">{stack1.name}</span>
                         </div>
-                    </div>
-                    <div className="text-center">
-                        <div className="flex-items justify-center space-x-2 mb-2">
+                        <div className="flex items-center justify-center space-x-2 mb-2 col-span-5">
                             {/* Change this img to Image */}
                             <img
                                 src={stack2.logo}
                                 alt={stack2.name}
                                 className="w-6 h-6 object-contain" />
-                            <span className="font-semibold text-gray-900">{stack2.name}</span>
+                            <span className="font-semibold text-xl">{stack2.name}</span>
                         </div>
-                    </div>
                 </div>
 
                 <div className="space-y-0">
@@ -120,6 +116,12 @@ export function InteractiveComparison({ stack1, stack2 }: { stack1: TechStack, s
                         value1={stack1.popularity}
                         value2={stack2.popularity}
                         type="badge"
+                    />
+                    <ComparisonRow
+                        label="Description"
+                        value1={stack1.short_description}
+                        value2={stack2.short_description}
+                        type="text"
                     />
                     <ComparisonRow
                         label="Pros"
@@ -171,7 +173,13 @@ interface ComparisonRowProps {
 
 function ComparisonRow({ label, value1, value2, type = 'text' }: ComparisonRowProps) {
     const renderValue = (value: string | string[] | null | undefined) => {
-        if (!value) return <span className="text-gray-400">Not specified</span>
+        if (!value) {
+            return (
+                <div className="flex justify-center items-center h-full">
+                    <span className="text-gray-400">Not specified</span>
+                </div>
+            );
+        }
 
         const getBadgeClasses = (value: string) => {
             switch (value.toLowerCase()) {
@@ -180,7 +188,7 @@ function ComparisonRow({ label, value1, value2, type = 'text' }: ComparisonRowPr
                 case 'advanced': return 'bg-red-100 text-red-700';
                 case 'very high': return 'bg-purple-100 text-purple-700';
                 case 'high': return 'bg-blue-100 text-blue-700';
-                case 'growing': return 'bg-emerald-100 text-emerald-700';
+                case 'medium': return 'bg-emerald-100 text-emerald-700';
                 default: return 'bg-gray-100 text-gray-700';
             }
         }
@@ -188,46 +196,55 @@ function ComparisonRow({ label, value1, value2, type = 'text' }: ComparisonRowPr
         switch (type) {
             case 'list':
                 return (
-                    <ul className="space-y-1">
-                        {Array.isArray(value) && value.slice(0, 3).map((item, index) => (
-                            <li key={index} className="text-sm flex items-start">
-                                <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0"></span>
-                                {item}
-                            </li>
-                        ))}
-                        {value.length > 3 && (
-                            <li className="text-xs text-gray-500">+{value.length - 3} more</li>
-                        )}
+                <div className="flex justify-center items-center h-full">
+                    <ul className="space-y-1 text-center">
+                        {Array.isArray(value) &&
+                            value.map((item, index) => (
+                                <li key={index} className="text-muted-foreground text-xs md:text-base">{item}</li>
+                            ))}
                     </ul>
+                </div>
                 );
             case 'badge':
                 return (
-                    <span className={`px-2 py-1 rounded-md text-xs font-medium ${getBadgeClasses(value.toString())}`}>
+                <div className="flex justify-center items-center h-full">
+                    <span
+                        className={`px-2 py-1 rounded-md font-medium ${getBadgeClasses(
+                            value.toString()
+                        )}`}
+                    >
                         {value}
                     </span>
+                </div>
                 )
             case 'link':
                 return (
+                <div className="flex justify-center items-center h-full">
                     <a
                         href={value.toString()}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 inline-flex items-center gap-1 text-sm"
+                        className="text-blue-600 hover:text-blue-800 inline-flex items-center gap-1 text-md"
                     >
                         View Docs
                         <ExternalLink className="w-3 h-3" />
                     </a>
+                </div>
                 )
             default:
-                return <span className="text-gray-900 text-sm">{value}</span>;
-        }
-
+                return (
+                       <div className="flex justify-center items-center h-full">
+                    <span className="text-muted-foreground text-xs md:text-base text-center">{value}</span>
+                </div>
+                )
     }
+
+}
     return (
-        <div className="grid grid-cols-3 gap-4 py-4 border-b border-gray-100 last:border-b-0">
-            <div className="font-medium text-gray-900 text-sm">{label}</div>
-            <div>{renderValue(value1)}</div>
-            <div>{renderValue(value2)}</div>
+        <div className="grid grid-cols-12 gap-4 py-4 border-b border-gray-100 last:border-b-0">
+            <div className="font-medium col-span-2 text-gray-200 flex items-center  text-xs  md:text-base justify-center">{label}</div>
+            <div className="col-span-5">{renderValue(value1)}</div>
+            <div className="col-span-5">{renderValue(value2)}</div>
         </div>
     )
 }
