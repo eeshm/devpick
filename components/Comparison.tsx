@@ -64,3 +64,5 @@ const mockTechStacks = [
     basic_prerequisites: ['Basic JavaScript', 'HTML & CSS', 'Component concepts']
   }
 ];
+
+
