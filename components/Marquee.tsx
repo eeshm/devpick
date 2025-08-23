@@ -72,7 +72,7 @@ const ReviewCard = ({
     );
 };
 
-export default function MarqueeDemo({speed = "15s"} :{speed?:string}) {
+export default function MarqueeDemo() {
     return (
         <div className="mt-5 relative flex w-full flex-col items-center justify-center overflow-hidden">
             <Marquee pauseOnHover className="[--duration:15s]">
@@ -80,11 +80,10 @@ export default function MarqueeDemo({speed = "15s"} :{speed?:string}) {
                     <ReviewCard key={index} {...logo} />
                 ))}
             </Marquee>
-            <Marquee pauseOnHover  reverse className="[--duration:15s]">
-                {secondRow.map((logo,index) => (
-                    <ReviewCard key={index} {...logo} />
-                ))}
-            </Marquee>
+
+
+
+
             <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r "></div>
             <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l "></div>
         </div>

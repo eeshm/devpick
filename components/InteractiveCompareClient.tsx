@@ -1,36 +1,46 @@
 'use client'
-import { useState } from 'react';
+import { useState ,useEffect} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ChevronDown, ExternalLink, RefreshCw, Zap, ArrowRight } from 'lucide-react';
+import { ChevronDown, ExternalLink, RefreshCw, Zap, ChevronRight,ChevronLeft} from 'lucide-react';
 import TechComparisonGrid from './ComparisonGrid';
 
-
 interface TechStack {
-  id: string
-  name: string
-  slug?: string
-  category_slug?: string
-  logo?: string
-  logo_url?: string
-  short_description: string
-  detailed_description?: string
-  official_docs: string
-  learning_curve: string
-  popularity: string
-  pros: string[]
-  cons: string[]
-  major_use_cases: string[]
-  basic_prerequisites: string[]
+    id: string
+    name: string
+    slug?: string
+    category_slug?: string
+    logo?: string
+    logo_url?: string
+    short_description: string
+    detailed_description?: string
+    official_docs: string
+    learning_curve: string
+    popularity: string
+    pros: string[]
+    cons: string[]
+    major_use_cases: string[]
+    basic_prerequisites: string[]
+}
+
+interface ApiResponse<T> {
+    success: boolean;
+    error: string | null;
+    data: T
+    count?: number;
 }
 
 interface Category {
-    id: string;
-    name: string;
-    slug: string;
-    description: string;
+    id: string
+    name: string
+    slug: string
+    description: string
 }
 
+interface InteractiveComparePageProps {
+    categorySlug: string;
+
+}
 interface InteractiveComparisonClientProps {
     techStacks: TechStack[];
     category: Category;
@@ -75,8 +85,7 @@ function TechStackSelector({
             {/* Selected Stack Preview */}
             {selected && (
                 <div className="mt-3 flex items-center space-x-3 p-3 bg-gray-50 rounded-lg border">
-                    <div className="w-8 h-8 relative flex-shrink-0">
-                    </div>
+
                     <div className="flex-1 min-w-0">
                         <p className="font-medium text-gray-900 truncate">{selected.name}</p>
                         <p className="text-sm text-gray-600 truncate">{selected.short_description}</p>
@@ -87,9 +96,105 @@ function TechStackSelector({
     );
 }
 
+export default function InteractiveComparePage({ categorySlug }: InteractiveComparePageProps) {
+
+    const [category, setCategory] = useState<Category | null>(null);
+    const [techStacks, setTechStacks] = useState<TechStack[] | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    useEffect(() => {
+    if (!categorySlug) return;
+
+    const getComparisonData = async () => {
+      try {
+        const [categoryResponse, stacksResponse] = await Promise.all([
+          fetch(`/api/categories/${categorySlug}`, { cache: 'no-store' }),
+          fetch(`/api/tech-stacks/comparison/${categorySlug}`, { cache: 'no-store' }),
+        ]);
+
+        if (!categoryResponse.ok || !stacksResponse.ok) {
+          throw new Error('Failed to fetch data');
+        }
+
+        const results = await Promise.all([
+          categoryResponse.json(),
+          stacksResponse.json(),
+        ]);
+
+        const [categoryResult, stacksResult]: [ApiResponse<Category>, ApiResponse<TechStack[]>] = results;
+
+        if (!categoryResult.success || !stacksResult.success) {
+          throw new Error('API returned error');
+        }
+
+        setCategory(categoryResult.data);
+        setTechStacks(stacksResult.data);
+      } catch (error) {
+        setError('Error fetching comparison data');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getComparisonData();
+  }, [categorySlug]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error || !category || !techStacks || techStacks.length < 2) {
+    return <div>Something went wrong or there are not enough tech stacks to compare.</div>;
+  }
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Breadcrumb */}
+          <nav className="flex items-center space-x-2 py-4 text-sm">
+            <Link href="/" className="text-gray-500 hover:text-gray-700">
+              Home
+            </Link>
+            <ChevronRight className="w-4 h-4 text-gray-400" />
+            <Link
+              href={`/category/${category.slug}`}
+              className="text-gray-500 hover:text-gray-700 capitalize"
+            >
+              {category.name}
+            </Link>
+            <ChevronRight className="w-4 h-4 text-gray-400" />
+            <span className="text-gray-900">Compare</span>
+          </nav>
+
+          {/* Page Header */}
+          <div className="py-8">
+            <div className="text-center">
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                Compare {category.name} Technologies
+              </h1>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                {category.description} Select any two technologies below for an instant side-by-side comparison.
+              </p>
+              <div className="mt-4 text-sm text-gray-500">
+                {techStacks.length} technologies available for comparison
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Interactive Comparison Component */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <InteractiveComparisonClient techStacks={techStacks} category={category} />
+      </div>
+    </div>
+  );
+}
 
 
-export default function InteractiveComparisonClient({
+export function InteractiveComparisonClient({
     techStacks,
     category
 }: InteractiveComparisonClientProps) {
@@ -185,13 +290,13 @@ export default function InteractiveComparisonClient({
                                 <div className="flex items-center justify-center space-x-2">
                                     <div className="w-6 h-6 relative">
                                         {stack1.logo_url || stack1.logo &&
-                                        <Image
-                                            src={stack1.logo_url || stack1.logo}
-                                            alt={stack1.name}
-                                            width={24}
-                                            height={24}
-                                            className="object-contain"
-                                        />}
+                                            <Image
+                                                src={stack1.logo_url || stack1.logo}
+                                                alt={stack1.name}
+                                                width={24}
+                                                height={24}
+                                                className="object-contain"
+                                            />}
                                     </div>
                                     <span className="font-semibold text-gray-900">{stack1.name}</span>
                                 </div>
@@ -200,13 +305,13 @@ export default function InteractiveComparisonClient({
                                 <div className="flex items-center justify-center space-x-2">
                                     <div className="w-6 h-6 relative">
                                         {stack2.logo_url || stack2.logo &&
-                                        <Image
-                                            src={stack2.logo_url || stack2.logo}
-                                            alt={stack2.name}
-                                            width={24}
-                                            height={24}
-                                            className="object-contain"
-                                        />}
+                                            <Image
+                                                src={stack2.logo_url || stack2.logo}
+                                                alt={stack2.name}
+                                                width={24}
+                                                height={24}
+                                                className="object-contain"
+                                            />}
                                     </div>
                                     <span className="font-semibold text-gray-900">{stack2.name}</span>
                                 </div>
@@ -229,7 +334,7 @@ export default function InteractiveComparisonClient({
                             Ready to Compare?
                         </h3>
                         <p className="text-gray-600 mb-4">
-                            Select two {category.name} technologies above to see an instant comparison
+                            Select two {category.name.toLowerCase()} technologies above to see an instant comparison
                         </p>
                         <p className="text-sm text-gray-500">
                             {techStacks.length} technologies available in this category
