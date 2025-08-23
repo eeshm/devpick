@@ -35,8 +35,12 @@ export default function RootLayout({
           defaultTheme="dark"
           forcedTheme="dark"
         >
+         <div className="min-h-screen flex flex-col">
           <BackgroundEffect />
+          <main className="flex-1"></main>
           {children}
+          <Footer />
+          </div>
         </ThemeProvider>
       </body>
     </html>

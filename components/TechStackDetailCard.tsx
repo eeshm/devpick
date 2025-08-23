@@ -67,7 +67,7 @@ function Main(props: TechStack) {
             <h1 className="text-3xl font-semibold font-mono underline">
                 Overview
             </h1>
-            <div className="text-sm">
+            <div className="text-sm text-muted-foreground">
                 {props.detailed_description}
             </div>
 
@@ -105,10 +105,10 @@ function Main(props: TechStack) {
 
             {/* Major Use Cases */}
             <div className="flex flex-col mt-5 ">
-                <h1 className="text-3xl font-semibold font-mono underline mb-2">Major Use Cases</h1>
+                <h1 className="text-3xl font-semibold font-mono  tracking-tighter underline mb-2">Major Use Cases</h1>
                 {props.major_use_cases?.map((useCase, index) => (
-                    <ul key={index} className="flex-1 shadow-md rounded-lg list-disc pl-7">
-                        <li className="font-semibold text-sm py-3 text-muted-foreground">{useCase}</li>
+                    <ul key={index} className="flex-1 w-max shadow-md rounded-lg list-disc px-7">
+                        <li className="font-semibold text-sm py-1.5 text-muted-foreground">{useCase}</li>
                     </ul>
                 ))}
             </div>
@@ -123,7 +123,7 @@ function Side1({ name, logo, basic_prerequisites, learning_curve, popularity }: 
         if (!level) return 'text-gray-400'
         if (level == "Intermediate") return 'text-yellow-600'
         if (level == "Hard") return 'text-red-600'
-        return 'text-green-500'
+        return 'text-green-700'
     }
     return (
         <nav
@@ -137,15 +137,15 @@ function Side1({ name, logo, basic_prerequisites, learning_curve, popularity }: 
             </div>
 
             {/* Prerequisites Section */}
-            <Button className="flex flex-col w-full h-full">
-                <h2 className="uppercase underline md:text-right tracking-wide">
+            <Button className="flex flex-col w-full h-full text-xs bg-black/40 py-1 px-2">
+                <h2 className="uppercase underline md:text-right text-white ">
                     Prerequisites
                 </h2>
-                <div className="flex flex-wrap md:justify-end gap-1">
+                <div className="flex flex-wrap md:justify-end ">
                     {basic_prerequisites?.map((prerequisite, index) => (
                         <span
                             key={index}
-                            className="bg-white bg-gradient-to-r from-indigo-700 to-red-700 bg-clip-text text-transparent py-0.5 px-2.5 shadow-lg rounded-sm text-xs font-semibold transition-colors"
+                            className="bg-gradient-to-r text-xs from-indigo-700 to-red-700 bg-clip-text text-transparent py-0 px-1.5 shadow-lg rounded-sm font-semibold transition-colors"
                         >
                             {prerequisite}
                         </span>
@@ -153,16 +153,16 @@ function Side1({ name, logo, basic_prerequisites, learning_curve, popularity }: 
                 </div>
             </Button>
 
-            <Button>
-                <div className={`flex gap-1 text-black `}>
-                    <span>Popularity: </span>
-                    <span className="capitalize">{popularity}</span>
+            <Button className="bg-black/40 text-white w-full px-2 py-1">
+                <div className={`flex gap-1   `}>
+                    <span className="text-xs">Popularity: </span>
+                    <span className="capitalize text-xs">{popularity}</span>
                 </div>
             </Button>
 
-            <Button>
-                <div className={` flex ${getDifficultyColor(learning_curve)}`}>
-                    <Clock className="size-4 pt-1" />
+            <Button  className="bg-black/40 w-full text-white py-1 px-2" >
+                <div className={` flex text-xs ${getDifficultyColor(learning_curve)}`}>
+                    <Clock className="size-3 pt-1" />
                     {learning_curve}
 
                 </div>

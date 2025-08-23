@@ -46,14 +46,14 @@ interface TechStack {
 const LearningCurveBadge = ({ level }: { level: string }) => {
   const getVariant = (level: string) => {
     if (level == "Beginner") return "bg-green-600/50";
-    if (level == "Intermediate") return "bg-yellow-600/50";
+    if (level == "Intermediate") return "bg-yellow-400/50";
     if (level == "high" || level == 'High') return "bg-green-500/50"
-    if (level == "Medium" || level == 'medium') return "bg-yellow-500/50"
+    if (level == "Medium" || level == 'medium') return "bg-yellow-400/50"
     if (level == "Low" || level == 'low') return "bg-red-500/50"
     return "bg-red-800/50";
   };
 
-  return <Badge className={`p-1.5  text-white ${getVariant(level)}`}>{level}</Badge>;
+  return <Badge className={`p-1.5  text-white  capitalize ${getVariant(level)}`}>{level}</Badge>;
 };
 
 export default function TechCard({ stack }: { stack: TechStack }) {
@@ -145,9 +145,7 @@ export default function TechCard({ stack }: { stack: TechStack }) {
             <Star className="w-5 h-5 text-amber-600" />
             Popularity
           </h3>
-          <div className="">
             <LearningCurveBadge level={stack.popularity} />
-          </div>
           {/* Popularity Bar */}
           {/* <div className="space-y-2">
             <div className="flex justify-between text-sm">

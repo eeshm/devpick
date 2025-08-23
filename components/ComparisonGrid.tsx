@@ -1,4 +1,4 @@
-import TechCard from "./ComparisonTable";
+import TechCard from "./ComparisonCard";
 interface TechStack {
   id: string
   name: string

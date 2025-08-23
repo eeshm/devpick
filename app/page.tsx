@@ -11,8 +11,7 @@ export default function Home() {
         <Hero />
         <MarqueeDemo />
         <Categories />
-        <div className="flex-grow"></div>
-        <Footer />
+        {/* <div className="flex-grow"></div> */}
       </Container>
     </>
   );
