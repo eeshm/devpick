@@ -17,21 +17,21 @@ import {
 } from "lucide-react";
 
 interface TechStack {
-    id: string
-    name: string
-    slug?: string
-    category_slug?: string
-    logo?: string
-    logo_url?: string
-    short_description:string
-    detailed_description?: string
-    official_docs: string
-    learning_curve: string
-    popularity: string
-    pros: string[]
-    cons: string[]
-    major_use_cases: string[]
-    basic_prerequisites: string[]
+  id: string
+  name: string
+  slug?: string
+  category_slug?: string
+  logo?: string
+  logo_url?: string
+  short_description: string
+  detailed_description?: string
+  official_docs: string
+  learning_curve: string
+  popularity: string
+  pros: string[]
+  cons: string[]
+  major_use_cases: string[]
+  basic_prerequisites: string[]
 }
 
 // const PopularityBar = ({ percentage }: { percentage: number }) => (
@@ -45,23 +45,30 @@ interface TechStack {
 
 const LearningCurveBadge = ({ level }: { level: string }) => {
   const getVariant = (level: string) => {
-    if (level=="Beginner") return "bg-green-600";
-    if (level=="Intermediate") return "bg-yellow-300 ";
-    if(level=="high" || level=='High') return "bg-green-500"
-    if(level=="Medium" || level=='medium') return "bg-yellow-500 "
-    if(level=="Low" || level=='low') return "bg-red-500"
-    return "bg-red-800";
+    if (level == "Beginner") return "bg-green-600/50";
+    if (level == "Intermediate") return "bg-yellow-600/50";
+    if (level == "high" || level == 'High') return "bg-green-500/50"
+    if (level == "Medium" || level == 'medium') return "bg-yellow-500/50"
+    if (level == "Low" || level == 'low') return "bg-red-500/50"
+    return "bg-red-800/50";
   };
 
-  return <Badge className={`p-1.5 text-xs text-white ${getVariant(level)}`}>{level}</Badge>;
+  return <Badge className={`p-1.5  text-white ${getVariant(level)}`}>{level}</Badge>;
 };
 
 export default function TechCard({ stack }: { stack: TechStack }) {
   return (
-    <Card className="h-full bg-black/40 shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <Card className="h-full bg-black/30 shadow-lg hover:shadow-xl transition-shadow duration-300">
       <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
-          <CardTitle className="text-2xl text-card-foreground">{stack.name}</CardTitle>
+          <CardTitle className="text-2xl text-card-foreground flex justify-between w-full">
+            <span>
+              {stack.name}
+            </span>
+            <span>
+              {stack.logo_url}
+            </span>
+          </CardTitle>
           {/* Github star to add later */}
           {/* <div className="flex items-center gap-2">
             <Star className="w-4 h-4 text-accent" />
@@ -128,7 +135,7 @@ export default function TechCard({ stack }: { stack: TechStack }) {
             Learning Curve
           </h3>
           <div className="">
-             <LearningCurveBadge level={stack.learning_curve} />
+            <LearningCurveBadge level={stack.learning_curve} />
           </div>
         </div>
 
@@ -138,8 +145,8 @@ export default function TechCard({ stack }: { stack: TechStack }) {
             <Star className="w-5 h-5 text-amber-600" />
             Popularity
           </h3>
-            <div className="">
-             <LearningCurveBadge level={stack.popularity}/>
+          <div className="">
+            <LearningCurveBadge level={stack.popularity} />
           </div>
           {/* Popularity Bar */}
           {/* <div className="space-y-2">
