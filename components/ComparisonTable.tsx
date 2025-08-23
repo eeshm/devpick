@@ -1,253 +1,171 @@
-import { ExternalLink, Zap } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-
-const stack1Mock: TechStack = {
-    id: '1',
-    name: 'React',
-    slug: 'react',
-    logo_url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-    short_description: 'A JavaScript library for building user interfaces A JavaScript library for building user interfaces A JavaScript library for building user interfaces',
-    official_docs: 'https://react.dev',
-    learning_curve: 'Intermediate',
-    popularity: 'Very High',
-    pros: ['Large ecosystem', 'Virtual DOM', 'Component-based', 'Strong dev tools'],
-    cons: ['Steep learning curve', 'Requires additional libraries', 'JSX syntax complexity'],
-    major_use_cases: ['SPAs', 'PWAs', 'Mobile apps with React Native', 'Large-scale apps'],
-    basic_prerequisites: ['JavaScript ES6+', 'HTML & CSS', 'DOM manipulation', 'npm/yarn']
-};
-const stack2Mock: TechStack = {
-    id: '2',
-    name: 'Vue.js',
-    slug: 'vue',
-    logo_url: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
-    logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-    short_description: 'A JavaScript library for building user interfaces A JavaScript library for building user interfaces A JavaScript library for building user interfaces',
-    official_docs: 'https://vuejs.org',
-    learning_curve: 'Beginner',
-    popularity: 'High',
-    pros: ['Easy to learn', 'Excellent docs', 'Small bundle size', 'Progressive adoption'],
-    cons: ['Smaller ecosystem', 'Less job demand', 'Fewer libraries'],
-    major_use_cases: ['Small-medium apps', 'Rapid prototyping', 'E-commerce', 'CMS'],
-    basic_prerequisites: ['Basic JavaScript', 'HTML & CSS', 'Reactive programming', 'CLI basics']
-};
-
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge"
+import {
+  CheckCircle,
+  XCircle,
+  Star,
+  BookOpen,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 
 interface TechStack {
     id: string
     name: string
     slug?: string
     category_slug?: string
-    logo: string
+    logo?: string
     logo_url?: string
-    short_description?: string
+    short_description:string
     detailed_description?: string
-    official_docs?: string
-    learning_curve?: string
-    popularity?: string
-    pros?: string[]
-    cons?: string[]
-    major_use_cases?: string[]
-    basic_prerequisites?: string[]
+    official_docs: string
+    learning_curve: string
+    popularity: string
+    pros: string[]
+    cons: string[]
+    major_use_cases: string[]
+    basic_prerequisites: string[]
 }
 
-export default function InteractiveComparisonPage() {
-    return (
-        <div className="max-w-7xl mx-auto p-6">
-            <InteractiveComparison stack1={stack1Mock} stack2={stack2Mock} />
+// const PopularityBar = ({ percentage }: { percentage: number }) => (
+//   <div className="w-full bg-muted rounded-full h-2">
+//     <div
+//       className="bg-primary h-2 rounded-full transition-all duration-300"
+//       style={{ width: `${percentage}%` }}
+//     />
+//   </div>
+// );
+
+const LearningCurveBadge = ({ level }: { level: string }) => {
+  const getVariant = (level: string) => {
+    if (level=="Beginner") return "bg-green-600";
+    if (level=="Intermediate") return "bg-yellow-300 ";
+    if(level=="high" || level=='High') return "bg-green-500"
+    if(level=="Medium" || level=='medium') return "bg-yellow-500 "
+    if(level=="Low" || level=='low') return "bg-red-500"
+    return "bg-red-800";
+  };
+
+  return <Badge className={`p-1.5 text-xs text-white ${getVariant(level)}`}>{level}</Badge>;
+};
+
+export default function TechCard({ stack }: { stack: TechStack }) {
+  return (
+    <Card className="h-full bg-black/40 shadow-lg hover:shadow-xl transition-shadow duration-300">
+      <CardHeader className="pb-4">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-2xl text-card-foreground">{stack.name}</CardTitle>
+          {/* Github star to add later */}
+          {/* <div className="flex items-center gap-2">
+            <Star className="w-4 h-4 text-accent" />
+            <span className="text-sm font-medium text-muted-foreground">
+              {stack.githubStars}
+            </span>
+          </div> */}
         </div>
-    )
-}
+        <CardDescription className="text-base leading-relaxed">{stack.short_description}</CardDescription>
+      </CardHeader>
 
+      <CardContent className="space-y-6">
+        {/* Pros */}
+        <div>
+          <h3 className="flex items-center gap-2 font-semibold text-card-foreground mb-3">
+            <CheckCircle className="w-5 h-5 text-green-700" />
+            Pros
+          </h3>
+          <ul className="space-y-2">
+            {stack.pros.map((pro, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm">
+                <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                <span>{pro}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-export function InteractiveComparison({ stack1, stack2 }: { stack1: TechStack, stack2: TechStack }) {
+        {/* Cons */}
+        <div>
+          <h3 className="flex items-center gap-2 font-semibold text-card-foreground mb-3">
+            <XCircle className="w-5 h-5 text-destructive" />
+            Cons
+          </h3>
+          <ul className="space-y-2">
+            {stack.cons.map((con, i) => (
+              <li key={i} className="flex items-start gap-2 text-sm">
+                <XCircle className="w-4 h-4 text-destructive mt-0.5 flex-shrink-0" />
+                <span>{con}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-    const showComparison = stack1 && stack2
+        {/* Use Cases */}
+        <div>
+          <h3 className="flex items-center gap-2 font-semibold text-card-foreground mb-3">
+            <Users className="w-5 h-5 text-amber-600" />
+            Major Use Cases
+          </h3>
+          <ul className="space-y-1">
+            {stack.major_use_cases.map((useCase, i) => (
+              <li key={i} className="text-sm text-muted-foreground">
+                • {useCase}
+              </li>
+            ))}
+          </ul>
+        </div>
 
-    if (!showComparison) {
-        return (
-            <div className="text-center py-12">
-                <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
-                    <Zap className="w-8 h-8 text-gray-400" />
-                </div>
-                <h3 className="text-lg font-medium text-muted-foreground mb-2">
-                    Ready to Compare?
-                </h3>
-                <p className="text-gray-600">
-                    Select two technologies above to see an instant comparison
-                </p>
+        {/* Learning Curve */}
+        <div>
+          <h3 className="flex items-center gap-2 font-semibold text-card-foreground mb-3">
+            <TrendingUp className="w-5 h-5 text-amber-600" />
+            Learning Curve
+          </h3>
+          <div className="">
+             <LearningCurveBadge level={stack.learning_curve} />
+          </div>
+        </div>
+
+        {/* Popularity */}
+        <div>
+          <h3 className="flex items-center gap-2 font-semibold text-card-foreground mb-3">
+            <Star className="w-5 h-5 text-amber-600" />
+            Popularity
+          </h3>
+            <div className="">
+             <LearningCurveBadge level={stack.popularity}/>
+          </div>
+          {/* Popularity Bar */}
+          {/* <div className="space-y-2">
+            <div className="flex justify-between text-sm">
+              <span>Developer Adoption</span>
+              <span className="font-medium">{stack.popularity}%</span>
             </div>
-        )
-    }
-    return (
-        <div className="max-w-5xl mx-auto p-6 bg-black/30 rounded-md">
-            {/* compairson */}
-            <div className="rounded-lg p-6">
-                <div className="grid grid-cols-12 gap-4 mb-6 pb-4 border-b border-gray-200">
-                    <div className=" col-span-2 font-semibold text-gray-300 text-lg uppercase  tracking-wider flex justify-center">Feature</div>
-                        <div className="flex items-center justify-center space-x-2 mb-2 col-span-5">
-                            {/* Change this img to Image */}
-                            <img
-                                src={stack1.logo}
-                                alt={stack1.name}
-                                className="w-6 h-6 object-contain" />
-                            <span className="font-semibold text-xl">{stack1.name}</span>
-                        </div>
-                        <div className="flex items-center justify-center space-x-2 mb-2 col-span-5">
-                            {/* Change this img to Image */}
-                            <img
-                                src={stack2.logo}
-                                alt={stack2.name}
-                                className="w-6 h-6 object-contain" />
-                            <span className="font-semibold text-xl">{stack2.name}</span>
-                        </div>
-                </div>
-
-                <div className="space-y-0">
-                    <ComparisonRow
-                        label="Learning Curve"
-                        value1={stack1.learning_curve}
-                        value2={stack2.learning_curve}
-                        type="badge"
-                    />
-                    <ComparisonRow
-                        label="Popularity"
-                        value1={stack1.popularity}
-                        value2={stack2.popularity}
-                        type="badge"
-                    />
-                    <ComparisonRow
-                        label="Description"
-                        value1={stack1.short_description}
-                        value2={stack2.short_description}
-                        type="text"
-                    />
-                    <ComparisonRow
-                        label="Pros"
-                        value1={stack1.pros}
-                        value2={stack2.pros}
-                        type="list"
-                    />
-                    <ComparisonRow
-                        label="Cons"
-                        value1={stack1.cons}
-                        value2={stack2.cons}
-                        type="list"
-                    />
-                    <ComparisonRow
-                        label="Use Cases"
-                        value1={stack1.major_use_cases}
-                        value2={stack2.major_use_cases}
-                        type='list'
-                    />
-                    <ComparisonRow
-                        label="Prerequisites"
-                        value1={stack1.basic_prerequisites}
-                        value2={stack2.basic_prerequisites}
-                        type='list'
-                    />
-                    <ComparisonRow
-                        label="Documentation"
-                        value1={stack1.official_docs}
-                        value2={stack2.official_docs}
-                        type="link"
-                    />
-                </div>
-            </div>
-
-
-
+            <PopularityBar percentage={stack.popularity} />
+          </div> */}
         </div>
-    )
-}
 
-
-interface ComparisonRowProps {
-    label: string,
-    value1: string | string[] | null | undefined;
-    value2: string | string[] | null | undefined;
-    type?: 'text' | 'list' | 'badge' | 'link';
-}
-
-
-function ComparisonRow({ label, value1, value2, type = 'text' }: ComparisonRowProps) {
-    const renderValue = (value: string | string[] | null | undefined) => {
-        if (!value) {
-            return (
-                <div className="flex justify-center items-center h-full">
-                    <span className="text-gray-400">Not specified</span>
-                </div>
-            );
-        }
-
-        const getBadgeClasses = (value: string) => {
-            switch (value.toLowerCase()) {
-                case 'beginner': return 'bg-green-100 text-green-700';
-                case 'intermediate': return 'bg-yellow-100 text-yellow-700';
-                case 'advanced': return 'bg-red-100 text-red-700';
-                case 'very high': return 'bg-purple-100 text-purple-700';
-                case 'high': return 'bg-blue-100 text-blue-700';
-                case 'medium': return 'bg-emerald-100 text-emerald-700';
-                default: return 'bg-gray-100 text-gray-700';
-            }
-        }
-
-        switch (type) {
-            case 'list':
-                return (
-                <div className="flex justify-center items-center h-full">
-                    <ul className="space-y-1 text-center">
-                        {Array.isArray(value) &&
-                            value.map((item, index) => (
-                                <li key={index} className="text-muted-foreground text-xs md:text-base">{item}</li>
-                            ))}
-                    </ul>
-                </div>
-                );
-            case 'badge':
-                return (
-                <div className="flex justify-center items-center h-full">
-                    <span
-                        className={`px-2 py-1 rounded-md font-medium ${getBadgeClasses(
-                            value.toString()
-                        )}`}
-                    >
-                        {value}
-                    </span>
-                </div>
-                )
-            case 'link':
-                return (
-                <div className="flex justify-center items-center h-full">
-                    <a
-                        href={value.toString()}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 inline-flex items-center gap-1 text-md"
-                    >
-                        View Docs
-                        <ExternalLink className="w-3 h-3" />
-                    </a>
-                </div>
-                )
-            default:
-                return (
-                       <div className="flex justify-center items-center h-full">
-                    <span className="text-muted-foreground text-xs md:text-base text-center">{value}</span>
-                </div>
-                )
-    }
-
-}
-    return (
-        <div className="grid grid-cols-12 gap-4 py-4 border-b border-gray-100 last:border-b-0">
-            <div className="font-medium col-span-2 text-gray-200 flex items-center  text-xs  md:text-base justify-center">{label}</div>
-            <div className="col-span-5">{renderValue(value1)}</div>
-            <div className="col-span-5">{renderValue(value2)}</div>
+        {/* Docs Link */}
+        <div className="pt-4">
+          <Button asChild className="w-full">
+            <a
+              href={stack.official_docs}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2"
+            >
+              <BookOpen className="w-4 h-4" />
+              View Official Documentation
+            </a>
+          </Button>
         </div>
-    )
+      </CardContent>
+    </Card>
+  );
 }
-
-
-
