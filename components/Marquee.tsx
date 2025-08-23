@@ -76,12 +76,12 @@ export default function MarqueeDemo() {
     return (
         <div className="mt-5 relative flex w-full flex-col items-center justify-center overflow-hidden">
  
-            <Marquee pauseOnHover className="[--duration:15s]">
+            <Marquee  className="[--duration:15s]">
                 {firstRow.map((logo,index) => (
                     <ReviewCard key={index} {...logo} />
                 ))}
             </Marquee>
-            <Marquee pauseOnHover  reverse className="[--duration:15s]">
+            <Marquee  reverse className="[--duration:15s]">
                 {secondRow.map((logo,index) => (
                     <ReviewCard key={index} {...logo} />
                 ))}
