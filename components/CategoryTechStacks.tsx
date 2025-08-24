@@ -185,8 +185,10 @@ export default function TechStacks({ categorySlug }: { categorySlug?: string }) 
                     </div>
                 </div>
 
+                {/* Compare Stacks button */}
+                {techStacks && !loading &&(
                 <div className="mt-6 mb-10 ">
-                    <Link href={'/category'}
+                    <Link href={`/category/${categorySlug}/compare`}
                         rel="noopener noreferrer ">
                         <Button className="bg-white py-6 text-black text-sm cursor-pointer">
                             <span className="px-2 flex font-medium tracking-wide">Compare Stacks
@@ -195,6 +197,7 @@ export default function TechStacks({ categorySlug }: { categorySlug?: string }) 
                         </Button>
                     </Link>
                 </div>
+                )}
 
                 {/*Controls  */}
                 <div className="flex flex-col gap-2 mb-4">
@@ -271,7 +274,7 @@ export default function TechStacks({ categorySlug }: { categorySlug?: string }) 
                                         id={stack.id}
                                         name={stack.name}
                                         short_description={stack.short_description}
-                                        logo={stack.logo}
+                                        logo_url={stack.logo_url}
                                         major_use_cases={stack.major_use_cases}
                                         slug={stack.slug}
                                         official_docs={stack.official_docs}

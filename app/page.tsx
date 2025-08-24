@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <Container className="flex flex-col min-h-screen">
         <Hero />
-        {/* <MarqueeDemo /> */}
+        <MarqueeDemo />
         <Categories />
         {/* <div className="flex-grow"></div> */}
       </Container>

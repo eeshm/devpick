@@ -55,7 +55,7 @@ const reviews = [
 interface Logo{
     Logo:React.ReactNode
 }
-const firstRow = reviews.slice(0, reviews.length / 2);
+const firstRow = reviews.slice(0, reviews.length);
 const secondRow = reviews.slice(reviews.length / 2)
 
 const ReviewCard = ({
@@ -81,13 +81,9 @@ export default function MarqueeDemo() {
                     <ReviewCard key={index} {...logo} />
                 ))}
             </Marquee>
-            <Marquee  reverse className="[--duration:15s]">
-                {secondRow.map((logo,index) => (
-                    <ReviewCard key={index} {...logo} />
-                ))}
-            </Marquee>
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r "></div>
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l "></div>
+
+            {/* <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r "></div> */}
+            {/* <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l "></div> */}
         </div>
     );
 }

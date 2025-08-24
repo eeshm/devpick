@@ -3,6 +3,8 @@ import RightArrow from "./icons/RightArrow";
 import { Button } from "./ui/button";
 
 import { CardSpotlight } from "@/components/ui/card-spotlight";
+import OptimizedTechImage from "./OptimizedImages";
+import { log } from "console";
 
 
 interface Category {
@@ -17,7 +19,7 @@ interface TechStack {
   name: string
   slug: string
   category_slug?: string
-  logo: string
+  logo?: string
   logo_url?: string
   short_description: string
   official_docs: string
@@ -25,7 +27,7 @@ interface TechStack {
   major_use_cases: string[]
 }
 
-export function TechStackCard({ id, name, short_description, slug, logo, major_use_cases, official_docs ,category_slug}: TechStack) {
+export function TechStackCard({ id, name, short_description, slug, logo_url, major_use_cases, official_docs ,category_slug}: TechStack) {
   return (
     <CardSpotlight className="h-full w-full  overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between ">
       <div className="flex-grow">
@@ -33,7 +35,12 @@ export function TechStackCard({ id, name, short_description, slug, logo, major_u
           <p className="font-normal relative z-20 mt-2 text-white">
             {name}
           </p>
-          {logo}
+          <OptimizedTechImage 
+          logoUrl={logo_url}
+          name={name}
+          size="large"
+          className="w-12 h-12 flex-shrink-0"
+          />
         </div>
         <div className="text-neutral-200 text-sm mt-4 relative z-20 line-clamp-5">
           <p>{short_description}</p>

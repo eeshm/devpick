@@ -61,7 +61,7 @@ export default function Categories() {
     return (
         <div>
             <div className="mt-5 flex justify-center">
-                <h2 className=" inline-block flex-col justify-center items-center text-4xl font-thin font-opensans border-b-2 tracking-tight">
+                <h2 className=" inline-block flex-col justify-center items-center text-3xl font-thin font-opensans border-b-2 tracking-tight">
                     Major categories
                 </h2>
             </div>
@@ -72,7 +72,7 @@ export default function Categories() {
                     placeholder="Search categories..."
                     value={searchItem}
                     onChange={(e) => setSearchItem(e.target.value)}
-                    className="w-80 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-70 h-8 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
             </div>
             {loading ? (

@@ -28,7 +28,7 @@ export function TechStackDetailCard(props: TechStack) {
                 <div className="col-span-12 md:col-span-3">
                     <Side1 
                         name={props.name} 
-                        logo={props.logo} 
+                        logo_url={props.logo_url} 
                         basic_prerequisites={props.basic_prerequisites} 
                         learning_curve={props.learning_curve} 
                         popularity={props.popularity} 
@@ -116,7 +116,7 @@ function Main(props: TechStack) {
     )
 }
 
-function Side1({ name, logo, basic_prerequisites, learning_curve, popularity }: TechStack) {
+function Side1({ name, logo_url, basic_prerequisites, learning_curve, popularity }: TechStack) {
     const getDifficultyColor = (level?: string) => {
         if (!level) return 'text-gray-400'
         if (level == "Intermediate") return 'text-yellow-600'
@@ -130,7 +130,7 @@ function Side1({ name, logo, basic_prerequisites, learning_curve, popularity }: 
         >
             {/* Header Section */}
             <div className="flex items-center gap-2 text-4xl">
-                <span>{logo}</span>
+                <span>{logo_url}</span>
                 <span className="font-medium">{name}</span>
             </div>
 
