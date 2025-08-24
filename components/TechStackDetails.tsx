@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react'
 import Container from './Container'
 import { AlertTriangle } from 'lucide-react'
+import Link from 'next/link'
+import { ChevronRight } from 'lucide-react'
 import { TechStackDetailCard } from './TechStackDetailCard'
 
 
@@ -36,7 +38,7 @@ interface ApiResponse<T> {
     error: string | null
     data: T
 }
-export default function TechStackDetailPage({ techStackSlug ="react",categorySlug="frontend-development" }: { techStackSlug: string,categorySlug:string}) {
+export default function TechStackDetailPage({ techStackSlug, categorySlug }: { techStackSlug: string, categorySlug: string }) {
     const [techStack, setTechStack] = useState<TechStack | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null)
@@ -49,8 +51,8 @@ export default function TechStackDetailPage({ techStackSlug ="react",categorySlu
             setError(null)
 
             try {
-                const repsonse = await fetch(`/api/tech-stacks/${techStackSlug}`)
-                const json: ApiResponse<TechStack> = await repsonse.json()
+                const response = await fetch(`/api/tech-stacks/${techStackSlug}`)
+                const json: ApiResponse<TechStack> = await response.json()
 
                 if (!ignore) {
                     if (json.success) {
@@ -73,15 +75,32 @@ export default function TechStackDetailPage({ techStackSlug ="react",categorySlu
                 }
             }
         }
-        fetchTechStack();
+        fetchTechStack()
         return () => {
-            ignore = true;
+            ignore = true
         }
-    }, [techStackSlug])
-    
+    }, [techStackSlug, categorySlug])
+
     return (
         <div className='min-h-screen'>
             <Container className='max-w-7xl py-8 px-4'>
+
+
+
+                <nav className="flex items-center space-x-2 py-4 text-sm">
+                    <Link href="/" className="text-gray-500 hover:text-gray-700">
+                        Home
+                    </Link>
+                    <ChevronRight className="w-4 h-4 text-gray-400" />
+                    
+                    <Link href={`/category/${categorySlug}`}
+                        className="text-gray-500 hover:text-gray-700 capitalize"
+                    >
+                        {categorySlug}
+                    </Link>
+                    <ChevronRight className="w-4 h-4 text-gray-400" />
+                    <span className='text-gray-500'> {techStack?.name}</span>
+                </nav>
 
                 {error && !loading && (
                     <div className="text-center py-16">
@@ -91,7 +110,7 @@ export default function TechStackDetailPage({ techStackSlug ="react",categorySlu
                         <h3 className="text-2xl font-bold text-white mb-2">Error Loading Data</h3>
                         <p className="text-gray-400 mb-4">{error}</p>
                         <button
-                            onClick={() => window.location.reload}
+                            onClick={() => window.location.reload()}
                             className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 cursor-pointer text-white rounded-lg hover:shadow-lg transition-all"
                         >
                             Try Again
@@ -130,23 +149,26 @@ export default function TechStackDetailPage({ techStackSlug ="react",categorySlu
                     </div>
                 ) : (
                     <div>
-                        <TechStackDetailCard {...techStack} />
+                        {techStack && <TechStackDetailCard {...techStack} />}
 
                     </div>
                 )}
+                {!loading && !error && (
+                    <>
+                        {techStack === null ? (
+                            <div className="flex justify-center flex-col items-center gap-y-2">
+                                <h3 className="text-2xl font-bold text-white mb-2">No technology found</h3>
+                                <p className="text-gray-400">Look for another tech stack</p>
+                            </div>
+                        ) : techStack.category_slug !== categorySlug ? (
+                            <div className="flex justify-center flex-col items-center gap-y-2">
+                                <h3 className="text-2xl font-bold text-white mb-2">This technology can't be found in this category</h3>
+                                <p className="text-gray-400">Look for another tech stack or category</p>
+                            </div>
+                        ) : null}
+                    </>
+                )}
 
-                {!loading && !error && techStack == null && (
-                    <div className="flex justify-center flex-col items-center gap-y-2">
-                        <h3 className="text-2xl font-bold text-white mb-2">No technology found</h3>
-                        <p className="text-gray-400">Look for another techstack</p>
-                    </div>
-                )}
-                {!loading && !error && techStack?.category_slug != categorySlug && (
-                    <div className="flex justify-center flex-col items-center gap-y-2">
-                        <h3 className="text-2xl font-bold text-white mb-2">This technology can't be found in this category</h3>
-                        <p className="text-gray-400">Look for another techstack or category</p>
-                    </div>
-                )}
 
             </Container>
         </div>

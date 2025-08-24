@@ -74,7 +74,7 @@ export function TechStackCard({ id, name, short_description, slug, logo, major_u
             className="w-1/2"
           >
             <Button
-              className="inline-flex items- border-black border bg-black/60 w-full h-10 focus-visible:ring-1 transition hover:-translate-y-0.5 hover:brightness-110 cursor-pointer font-medium  text-white  hover:bg-gray-500  relative"
+              className="inline-flex items-center border-black border bg-black/60 w-full h-10 focus-visible:ring-1 transition hover:-translate-y-0.5 hover:brightness-110 cursor-pointer font-medium  text-white  hover:bg-gray-500  relative"
             >
               <span className="mx-auto mb-1 ">Docs</span>
               <span className="absolute right-2">

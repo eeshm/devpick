@@ -3,9 +3,10 @@ import React, { useState, useEffect } from "react";
 import BackgroundEffect from "@/components/BackgroundEffect";
 import { TechStackCard } from "@/components/TechStackCard";
 import Container from "@/components/Container";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Filter, SortAsc, SortDesc, TrendingDownIcon, TrendingUp, AlertTriangle, Search } from "lucide-react";
+import { Filter, SortAsc, SortDesc, ChevronRight, TrendingUp, AlertTriangle, Search } from "lucide-react";
 
 interface Category {
     id: string
@@ -43,7 +44,7 @@ interface ApiResponse<T> {
 }
 
 
-export default function TechStacks({ categorySlug = 'frontend' }: { categorySlug?: string }) {
+export default function TechStacks({ categorySlug }: { categorySlug?: string }) {
     const [techStacks, setTechStacks] = useState<TechStack[]>([]);
     const [category, setCategory] = useState<Category | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -101,7 +102,7 @@ export default function TechStacks({ categorySlug = 'frontend' }: { categorySlug
         return () => {
             ignore = true;
         }
-    }, [categorySlug, sortBy, sortDirection])
+    }, [categorySlug])
 
 
 
@@ -155,14 +156,44 @@ export default function TechStacks({ categorySlug = 'frontend' }: { categorySlug
 
     return (
         <div className="min-h-screen">
-            
             <Container className="max-w-4xl py-8 px-4 ">
+                <nav className="flex items-center space-x-2 py-4 text-sm">
+                    <Link href="/" className="text-gray-500 hover:text-gray-700">
+                        Home
+                    </Link>
+                    <ChevronRight className="w-4 h-4 text-gray-400" />
+                    <span
+                        className="text-gray-500 hover:text-gray-700 capitalize"
+                    >
+                        {category?.name}
+                    </span>
+                </nav>
                 {/* Header */}
                 <div className="flex flex-col ">
                     <div className="flex flex-col space-y-2">
-                        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-grostek">{category ? category.name : "Loading..."}</h1>
-                        <p className="text-sm max-w-3xl">{category ? category.description : " "}</p>
+                        {category ? (
+                            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-grostek">
+                                {category.name}
+                                <p className="text-sm max-w-3xl">{category.description}</p>
+                            </h1>
+                        ) : (
+                            <div>
+                            <div className="h-10 w-1/3 bg-white/10 animate-pulse rounded-md" />
+                            <div className="h-20 w-2/3 mt-2 bg-white/10 animate-pulse rounded-md" />
+                            </div>
+                        )}
                     </div>
+                </div>
+
+                <div className="mt-6 mb-10 ">
+                    <Link href={'/category'}
+                        rel="noopener noreferrer ">
+                        <Button className="bg-white py-6 text-black text-sm cursor-pointer">
+                            <span className="px-2 flex font-medium tracking-wide">Compare Stacks
+                                {/* <ArrowRightIcon className="size-3 ml-1 mt-1" /> */}
+                            </span>
+                        </Button>
+                    </Link>
                 </div>
 
                 {/*Controls  */}
@@ -202,7 +233,7 @@ export default function TechStacks({ categorySlug = 'frontend' }: { categorySlug
                             <h3 className="text-2xl font-bold text-white mb-2">Error Loading Data</h3>
                             <p className="text-gray-400 mb-4">{error}</p>
                             <button
-                                onClick={() => window.location.reload}
+                                onClick={() => window.location.reload()}
                                 className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 cursor-pointer text-white rounded-lg hover:shadow-lg transition-all"
                             >
                                 Try Again
@@ -249,26 +280,20 @@ export default function TechStacks({ categorySlug = 'frontend' }: { categorySlug
                             </div>
                         </div>
                     )}
+                    {!loading && !error && filterStacks.length === 0 && (
+                        <div className="flex justify-center flex-col items-center gap-y-2">
+                            <Search className="w-12 h-12 text-gray-400" />
+                            <h3 className="text-2xl font-bold text-white mb-2">
+                                {techStacks.length === 0 ? "No technologies found" : "No matches found"}
+                            </h3>
+                            <p className="text-gray-400">
+                                {techStacks.length === 0
+                                    ? "This category doesn't have any technologies yet."
+                                    : "Sorry! Couldn't find any tech stacks matching your search"}
+                            </p>
+                        </div>
+                    )}
 
-                    {!loading && !error && filterStacks.length == 0 && techStacks.length > 0 && (
-                        <div className="flex justify-center flex-col items-center gap-y-2">
-                            <div>
-                                <Search size={"34px"} />
-                            </div>
-                            <div className="text-gray-500 w-56 font-medium text-center">
-                                Sorry! Couldn't find any  tech stacks matching your search
-                            </div>
-                        </div>
-                    )}
-                    {!loading && !error && filterStacks.length == 0 && techStacks.length == 0 && (
-                        <div className="flex justify-center flex-col items-center gap-y-2">
-                            <div className="">
-                                <Search className="w-12 h-12 text-gray-400" />
-                            </div>
-                            <h3 className="text-2xl font-bold text-white mb-2">No technologies found</h3>
-                            <p className="text-gray-400">This category doesn't have any technologies yet.</p>
-                        </div>
-                    )}
 
                 </div>
             </Container>

@@ -1,7 +1,5 @@
 import React, { useState, useEffect, ReactNode } from "react"
-import { cn } from "@/lib/utils"
 import Link from "next/link"
-import ReactLogo from "./icons/React"
 import { Clock } from "lucide-react"
 import { Button } from "./ui/button"
 
@@ -27,7 +25,7 @@ export function TechStackDetailCard(props: TechStack) {
     return (
         <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-12 gap-6">
-                <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3">
+                <div className="col-span-12 md:col-span-3">
                     <Side1 
                         name={props.name} 
                         logo={props.logo} 
@@ -37,7 +35,7 @@ export function TechStackDetailCard(props: TechStack) {
                     />
                 </div>
 
-                <div className="col-span-12 sm:col-span-12 md:col-span-4 lg:col-span-6">
+                <div className="col-span-12 md:col-span-6">
                     <Main 
                         detailed_description={props.detailed_description} 
                         pros={props.pros} 
@@ -46,7 +44,7 @@ export function TechStackDetailCard(props: TechStack) {
                     />
                 </div>
 
-                <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3">
+                <div className="col-span-12 md:col-span-3">
                     <Side2 
                         name={props.name} 
                         official_docs={props.official_docs} 
@@ -167,8 +165,6 @@ function Side1({ name, logo, basic_prerequisites, learning_curve, popularity }: 
 
                 </div>
             </Button>
-
-
         </nav>
     );
 }

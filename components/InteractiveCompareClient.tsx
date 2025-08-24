@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronDown, ExternalLink, RefreshCw, Zap, ChevronRight, ChevronLeft } from 'lucide-react';
 import TechComparisonGrid from './ComparisonGrid';
-import { LoaderOne } from "@/components/ui/Loader";
+import { LoaderOne } from './ui/loader';
 
 interface TechStack {
     id: string
@@ -189,7 +189,7 @@ if (loading) {
 
             {/* Interactive Comparison Component */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                <InteractiveComparisonClient techStacks={techStacks} category={category} />
+                {techStacks && <InteractiveComparisonClient techStacks={techStacks} category={category} />}
             </div>
         </div>
     );

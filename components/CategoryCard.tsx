@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { CardSpotlight } from "./ui/card-spotlight";
 import RightArrow from "./icons/RightArrow";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
 
 interface Categories {
@@ -17,7 +18,7 @@ interface Categories {
 export default function CategoryCard({ name, description, slug, logo }: Categories) {
     return (
         <CardSpotlight className="h-80 w-80 overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col justify-between">
-            <div >
+            <div className="flex-grow">
             <div className="flex items-center text-2xl">
                 <p className="font-semibold relative z-20 mt-2 text-white">{name}</p>
                 {logo}
@@ -26,19 +27,32 @@ export default function CategoryCard({ name, description, slug, logo }: Categori
                 <p>{description}</p>
             </div>
             </div>
-            <Link href={`/category/${slug}`}>
 
-            <div className="mt-5">
-             <Button variant={"default"}
-             className="w-full  cursor-pointer text-xl text-gray-800  bg-gray-100 font-normal relative"
+
+            <div className="mt-5 flex text-sm justify-between gap-2 font-sans tracking-tight w-full">
+                <Link href={`/category/${slug}`}
+                 rel="noopener noreferrer"
+                 className="w-1/2">
+                    <Button variant={"default"}
+                        className="w-full  cursor-pointer text-gray-800  bg-gray-100 font-normal relative"
                 >
-                        <span className="mx-auto mb-1">explore</span>
-                        <span className="absolute right-4">
-                            <RightArrow />
+                        <span className="flex pl-4">explore
+                            <ArrowUpRight className="size-4 mt-1 ml-1"/>
                         </span>
                     </Button>
-                </div>
-            </Link>
+                </Link>
+                <Link href={`/category/${slug}/compare`}
+                 rel="noopener noreferrer"
+                 className="w-1/2">
+                    <Button variant={"default"}
+                        className="w-full cursor-pointer text-white bg-black/80 font-normal relative"
+                >
+                        <span className="flex pl-4">compare
+                            <ArrowUpRight className="size-4 mt-1 ml-1"/>
+                        </span>
+                    </Button>
+                </Link>
+            </div>
         </CardSpotlight>
-    );
+    ); 
 }

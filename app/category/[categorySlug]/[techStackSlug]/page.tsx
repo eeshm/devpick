@@ -8,7 +8,7 @@ export default async function TechStackPage({ params }:
   const { categorySlug,techStackSlug} = await params
   return (
     <div>
-      <TechStackDetailPage techStackSlug={techStackSlug} categorySlug={categorySlug}/>;
+      <TechStackDetailPage techStackSlug={techStackSlug} categorySlug={categorySlug}/>
     </div>
   )
 }

@@ -1,14 +1,13 @@
 'use client'
 import React, { useState } from "react";
 import { Button } from "./ui/button";
-import MarqueeDemo from "./Marquee";
 import Link from "next/link";
-import { ArrowBigRightDash, ArrowRightFromLine, ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon } from "lucide-react";
 export default function Hero() {
     const [searchItem, setSearchItem] = useState("")
     
     return (
-        <div className="items-center mt-10 flex flex-col gap-y-3 font-grostek">
+        <div className="items-center mt-10 flex flex-col gap-y-3 pt-10 font-grostek">
             <h1 className="text-5xl md:text-6xl tracking-tight text-center font-extralight">
                 Choose your tech stack
             </h1>
@@ -17,13 +16,15 @@ export default function Hero() {
             </p>
 
         <Link href={'/category'}       
-        rel="noopener noreferrer mt-5">
-            <Button className="bg-white text-black  text-xs py-6">
-                Compare Stacks
-                <ArrowRightIcon className="size-3"/>
+        rel="noopener noreferrer ">
+            <div className="mt-5">
+            <Button className="bg-white py-6 text-black text-sm cursor-pointer">
+                <span className="px-2 flex font-medium tracking-wide">Compare Stacks
+                <ArrowRightIcon className="size-3 ml-1 mt-1"/>
+                </span>
             </Button>
+            </div>
         </Link>
-        <MarqueeDemo />
         </div>
     )
 }
