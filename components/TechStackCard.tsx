@@ -1,11 +1,8 @@
 import Link from "next/link";
 import RightArrow from "./icons/RightArrow";
 import { Button } from "./ui/button";
-
 import { CardSpotlight } from "@/components/ui/card-spotlight";
 import OptimizedTechImage from "./OptimizedImages";
-import { log } from "console";
-
 
 interface Category {
   id: string

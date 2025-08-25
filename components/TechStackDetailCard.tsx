@@ -2,10 +2,11 @@ import React, { useState, useEffect, ReactNode } from "react"
 import Link from "next/link"
 import { Clock } from "lucide-react"
 import { Button } from "./ui/button"
+import OptimizedTechImage from "./OptimizedImages"
 
 interface TechStack {
     id?: string
-    name?: string
+    name: string
     slug?: string
     category_slug?: string
     logo?: string | ReactNode
@@ -26,28 +27,29 @@ export function TechStackDetailCard(props: TechStack) {
         <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-12 md:col-span-3">
-                    <Side1 
-                        name={props.name} 
-                        logo_url={props.logo_url} 
-                        basic_prerequisites={props.basic_prerequisites} 
-                        learning_curve={props.learning_curve} 
-                        popularity={props.popularity} 
+                    <Side1
+                        name={props.name}
+                        logo_url={props.logo_url}
+                        basic_prerequisites={props.basic_prerequisites}
+                        learning_curve={props.learning_curve}
+                        popularity={props.popularity}
                     />
                 </div>
 
                 <div className="col-span-12 md:col-span-6">
-                    <Main 
-                        detailed_description={props.detailed_description} 
-                        pros={props.pros} 
-                        cons={props.cons} 
-                        major_use_cases={props.major_use_cases} 
+                    <Main
+                        detailed_description={props.detailed_description}
+                        pros={props.pros}
+                        cons={props.cons}
+                        major_use_cases={props.major_use_cases}
+                        name={props.name}
                     />
                 </div>
 
                 <div className="col-span-12 md:col-span-3">
-                    <Side2 
-                        name={props.name} 
-                        official_docs={props.official_docs} 
+                    <Side2
+                        name={props.name}
+                        official_docs={props.official_docs}
                     />
                 </div>
             </div>
@@ -129,9 +131,14 @@ function Side1({ name, logo_url, basic_prerequisites, learning_curve, popularity
             className="sticky top-0 flex flex-col md:items-end space-y-3 text-sm"
         >
             {/* Header Section */}
-            <div className="flex items-center gap-2 text-4xl">
-                <span>{logo_url}</span>
+            <div className="flex items-center text-3xl w-full justify-between ">
                 <span className="font-medium">{name}</span>
+                <OptimizedTechImage
+                    logoUrl={logo_url}
+                    name={name}
+                    size="large"
+                    className="w-12 h-12 flex-shrink-0"
+                />
             </div>
 
             {/* Prerequisites Section */}
@@ -158,7 +165,7 @@ function Side1({ name, logo_url, basic_prerequisites, learning_curve, popularity
                 </div>
             </Button>
 
-            <Button  className="bg-black/40 w-full text-white py-1 px-2" >
+            <Button className="bg-black/40 w-full text-white py-1 px-2" >
                 <div className={` flex text-xs ${getDifficultyColor(learning_curve)}`}>
                     <Clock className="size-3 pt-1" />
                     {learning_curve}

@@ -15,6 +15,7 @@ import {
   TrendingUp,
   Users,
 } from "lucide-react";
+import OptimizedTechImage from "./OptimizedImages";
 
 interface TechStack {
   id: string
@@ -66,7 +67,13 @@ export default function TechCard({ stack }: { stack: TechStack }) {
               {stack.name}
             </span>
             <span>
-              {stack.logo_url}
+          <OptimizedTechImage 
+          logoUrl={stack.logo_url}
+          name={stack.name}
+          size="large"
+          className="w-12 h-12 flex-shrink-0"
+          />
+
             </span>
           </CardTitle>
           {/* Github star to add later */}

@@ -29,7 +29,7 @@ export default function OptimizedTechImage({
   const imageProps = getOptimizedImageProps(
     error ? undefined : logoUrl,
     fallbackLogo,
-    `${name} logo`,
+    `${name}`,
     size,
     priority
   );

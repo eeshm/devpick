@@ -20,7 +20,7 @@ interface TechStack {
     name: string
     slug: string
     category_slug: string
-    logo: string
+    logo?: string
     logo_url?: string
     short_description: string
     detailed_description: string
