@@ -107,8 +107,12 @@ export default function InteractiveComparePage({ categorySlug }: InteractiveComp
         const getComparisonData = async () => {
             try {
                 const [categoryResponse, stacksResponse] = await Promise.all([
-                    fetch(`/api/categories/${categorySlug}`, { cache: 'no-store' }),
-                    fetch(`/api/tech-stacks/comparison/${categorySlug}`, { cache: 'no-store' }),
+                    fetch(`/api/categories/${categorySlug}`,{
+                    next:{revalidate:60},
+                }),
+                    fetch(`/api/tech-stacks/comparison/${categorySlug}`,{
+                    next:{revalidate:60},
+                }),
                 ]);
 
                 if (!categoryResponse.ok || !stacksResponse.ok) {

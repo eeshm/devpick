@@ -7,7 +7,7 @@ export async function GET(
     { params }: { params: { slug: string } }
 ) {
     try {
-        const {slug}  =await params
+        const { slug } = await params
         const result = await getCategoryBySlug(slug);
         if (result.error) {
             return NextResponse.json({
@@ -19,8 +19,13 @@ export async function GET(
         return NextResponse.json({
             success: true,
             error: null,
-            data: result.data
-        }, { status: 200 })
+            data: result.data,
+        }, {
+            status: 200,
+            headers: {
+                'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=30',
+            },
+        });
     } catch (error) {
         console.error("API Error in api/categories/[slug]: ", error)
         return NextResponse.json({

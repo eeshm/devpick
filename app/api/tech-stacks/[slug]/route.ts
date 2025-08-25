@@ -3,32 +3,37 @@ import { getTechStackBySlug } from "@/lib/database";
 import { data, param } from "framer-motion/client";
 
 export async function GET(
-    request:Request,
-    {params}:{params:{slug:string}}
-){
-    try{
-        const {slug} = params
+    request: Request,
+    { params }: { params: { slug: string } }
+) {
+    try {
+        const { slug } = params
 
         const result = await getTechStackBySlug(slug)
-        if(result.error){
-               const status = result.error === 'Tech stack not found' ? 404 : 500
+        if (result.error) {
+            const status = result.error === 'Tech stack not found' ? 404 : 500
             return NextResponse.json({
-                success:false,
-                error:result.error,
-                data:null
-            },{status})
+                success: false,
+                error: result.error,
+                data: null
+            }, { status })
         }
         return NextResponse.json({
-            success:true,
-            error:null,
-            data:result.data
-        },{status:200})
-    }catch(error){
-    console.error('API Error in /api/tech-stacks/[slug]:', error)
-    return NextResponse.json({
-      success: false,
-      error: 'Internal server error',
-      data: null
-    }, { status: 500 })
+            success: true,
+            error: null,
+            data: result.data
+        }, {
+            status: 200,
+            headers: {
+                'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=30',
+            }
+        })
+    } catch (error) {
+        console.error('API Error in /api/tech-stacks/[slug]:', error)
+        return NextResponse.json({
+            success: false,
+            error: 'Internal server error',
+            data: null
+        }, { status: 500 })
     }
 }

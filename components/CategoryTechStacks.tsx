@@ -62,7 +62,9 @@ export default function TechStacks({ categorySlug }: { categorySlug?: string }) 
             setLoading(true)
             setError(null)
             try {
-                const response = await fetch(`/api/tech-stacks/category/${categorySlug}`)
+                const response = await fetch(`/api/tech-stacks/category/${categorySlug}`,{
+                    next:{revalidate:60},
+                })
                 const stackJson: ApiResponse<TechStack[]> & { count: number } = await response.json()
 
 
@@ -282,7 +284,7 @@ export default function TechStacks({ categorySlug }: { categorySlug?: string }) 
                                 ))}
                             </div>
                         </div>
-                    )}
+                    )} 
                     {!loading && !error && filterStacks.length === 0 && (
                         <div className="flex justify-center flex-col items-center gap-y-2">
                             <Search className="w-12 h-12 text-gray-400" />

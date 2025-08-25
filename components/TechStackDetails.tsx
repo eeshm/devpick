@@ -52,14 +52,12 @@ export default function TechStackDetailPage({ techStackSlug, categorySlug }: { t
             setError(null)
 
             try {
-                const response = await fetch(`/api/tech-stacks/${techStackSlug}`)
+                const response = await fetch(`/api/tech-stacks/${techStackSlug}` ,{
+                    next:{revalidate:60},
+                })
                 const json: ApiResponse<TechStack> = await response.json()
 
                 if (!ignore) {
-
-
-
-                    
                     if (json.success) {
                         setTechStack(json.data)
                     }
@@ -67,8 +65,7 @@ export default function TechStackDetailPage({ techStackSlug, categorySlug }: { t
                         setError(json.error || "Error while fetching tech stack")
                     }
                 }
-
-            } catch (error) {
+            }catch (error) {
                 if (!ignore) {
                     console.error("Error fetching tech stack", error)
                     setError("An error occured while fetching tech stack");

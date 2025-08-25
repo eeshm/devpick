@@ -1,9 +1,11 @@
 'use client'
-import React, { ReactNode, useEffect, useState } from "react"
+import React, { useMemo, useEffect, useState } from "react"
 import CategoryCard from "./CategoryCard"
 import { Search } from "lucide-react";
+import { usePathname} from "next/navigation";
 
 import { AlertTriangle } from "lucide-react";
+import { Button } from "./ui/button";
 interface Category {
     id?: string,
     name: string,
@@ -11,7 +13,7 @@ interface Category {
     slug: string,
     logo?: string,
     created_at?: string
-}
+} 
 
 interface Apiresponse<T> {
     success: boolean;
@@ -26,38 +28,50 @@ export default function Categories() {
     const [searchItem, setSearchItem] = useState("")
     const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        let isMounted = true; // To avoid setting state on unmounted component
-        async function fetchCategories() {
+    const pathname = usePathname();
+
+     const fetchCategories = async()=> {
+            setLoading(true)
             try {
-                const response = await fetch("api/categories"); //backend
+                const response = await fetch(`api/categories`,{
+                    next:{revalidate:60},
+                });
                 const json: Apiresponse<Category[]> = await response.json()
 
-                if (json.success && isMounted) {
+                if (json.success) {
                     setCategories(json.data)
+                    setError(null)
                 } else {
                     setError(json.error || "Sorry! Failed to load categories");
                 }
             } catch (error: any) {
-                if (error.name === "AbortError") {
-                    return;
-                }
                 setError("An error occurred while fetching categories.")
-
             } finally {
-                setLoading(false)
+            setLoading(false)
             }
         }
+    useEffect(() => {
+        
         fetchCategories();
+
+        const handleVisibilityChange = ()=>{
+            if(document.visibilityState=='visible'){
+                fetchCategories();
+            }
+        }
+        document.addEventListener('visibilitychange',handleVisibilityChange)
         return () => {
-            isMounted = false; // Cleanup function
+            document.removeEventListener("visibilitychange",handleVisibilityChange)
         };
-    }, [])
-    const filteredCategories = categories.filter(
-        (category) =>
-            category.name.toLowerCase().includes(searchItem.toLowerCase()) ||
-            category.description.toLowerCase().includes(searchItem.toLowerCase())
-    );
+    }, [pathname])
+    const filteredCategories = useMemo(() => {
+      const lowerSearch = searchItem.toLowerCase();
+      return categories.filter(
+        category =>
+          category.name.toLowerCase().includes(lowerSearch) ||
+          category.description.toLowerCase().includes(lowerSearch)
+      );
+    }, [categories, searchItem]);
     return (
         <div>
             <div className="mt-5 flex justify-center">
@@ -95,12 +109,12 @@ export default function Categories() {
                         </div>
                         <h3 className="text-2xl font-bold text-white mb-2">Error Loading Data</h3>
                         <p className="text-gray-400 mb-4">{error}</p>
-                        <button
-                            onClick={() => window.location.reload()}
-                            className="px-6 py-3 bg-gradient-to-r cursor-pointer from-blue-500 to-purple-600 text-white rounded hover:shadow-lg transition-all"
+                        <Button
+                            onClick={fetchCategories}
+                            className="px-6 py-3 bg-gradient-to-r cursor-pointer from-blue-500 to-purple-600 text-white rounded hover:opacity-55 hover:text-black transition-all"
                         >
                             Try Again
-                        </button>
+                        </Button>
                     </div>
                     ) : (
                     <div className="flex flex-col gap-4 items-center justify-center mt-10">

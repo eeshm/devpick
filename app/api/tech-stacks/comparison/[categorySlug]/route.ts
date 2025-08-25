@@ -1,35 +1,39 @@
 import { NextResponse } from "next/server";
 import { getTechStacksForComparison } from "@/lib/database";
 
-export async function GET(request:Request,
-    {params} :{params:{categorySlug:string}}
-){
-    try{
-        const {categorySlug}=params
+export async function GET(request: Request,
+    { params }: { params: { categorySlug: string } }
+) {
+    try {
+        const { categorySlug } = params
 
         const result = await getTechStacksForComparison(categorySlug)
 
-        if(result.error){
+        if (result.error) {
             const status = result.error.includes("Category not found") ? 404 : 500
             return NextResponse.json({
-                success:false,
-                error:result.error,
-                data:null
-            },{status})
+                success: false,
+                error: result.error,
+                data: null
+            }, { status })
         }
 
         return NextResponse.json({
-            data:result.data,
-            success:true,
-            error:null,
-            count:result.data?.length || 0
-        },{status:200})
-    }catch(error){
+            data: result.data,
+            success: true,
+            error: null,
+            count: result.data?.length || 0
+        }, {
+            status: 200, headers: {
+                'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=30',
+            }
+        })
+    } catch (error) {
         console.error("API error in /api/tech-stacks/comparison/[categorySlug]")
         return NextResponse.json({
-            success:false,
-            data:null,
-            error:"Internal error in fetching categories for comparison"
-        },{status:500})
+            success: false,
+            data: null,
+            error: "Internal error in fetching categories for comparison"
+        }, { status: 500 })
     }
 }

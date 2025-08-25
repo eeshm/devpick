@@ -9,8 +9,8 @@ export async function GET(
   { params }: { params: { categorySlug: string } }
 ) {
   try {
-    const {categorySlug} =  await params
-      console.log('categorySlug in API route:', categorySlug);
+    const { categorySlug } = await params
+    console.log('categorySlug in API route:', categorySlug);
     const { searchParams } = new URL(request.url)
 
 
@@ -29,7 +29,12 @@ export async function GET(
       error: null,
       data: result.data,
       count: result.count
-    }, { status: 200 })
+    }, {
+      status: 200,
+      headers: {
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=30',
+      }
+    })
   } catch (error) {
     console.error('API Error in /api/tech-stacks/category/[categorySlug]:', error)
     return NextResponse.json({
