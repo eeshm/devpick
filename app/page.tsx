@@ -12,7 +12,7 @@ export default function Home() {
         <Hero />
         <MarqueeDemo />
         <FeaturesSectionDemo />
-        <Categories />
+        {/* <Categories /> */}
         {/* <div className="flex-grow"></div> */}
       </Container>
     </>
