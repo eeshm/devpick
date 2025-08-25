@@ -5,7 +5,6 @@ import { AlertTriangle } from 'lucide-react'
 import Link from 'next/link'
 import { ChevronRight } from 'lucide-react'
 import { TechStackDetailCard } from './TechStackDetailCard'
-
 import { LoaderOne } from './ui/loader'
 
 interface Category {

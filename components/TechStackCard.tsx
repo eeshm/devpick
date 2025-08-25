@@ -65,7 +65,7 @@ export function TechStackCard({ id, name, short_description, slug, logo_url, maj
             <Button variant={'default'}
               className="inline-flex items-center w-full h-10 cursor-pointer transition hover:-translate-y-0.5 hover:brightness-110 text-gray-800 hover:bg-white focus-visible:ring-1 bg-gray-200 font-medium relative"
             >
-              <span className="mx-auto mb-1 ">Know more</span>
+              <span className="mx-auto  ">Know more</span>
               <span className="absolute right-2">
                 <RightArrow />
               </span>
@@ -80,7 +80,7 @@ export function TechStackCard({ id, name, short_description, slug, logo_url, maj
             <Button
               className="inline-flex items-center border-black border bg-black/60 w-full h-10 focus-visible:ring-1 transition hover:-translate-y-0.5 hover:brightness-110 cursor-pointer font-medium  text-white  hover:bg-gray-500  relative"
             >
-              <span className="mx-auto mb-1 ">Docs</span>
+              <span className="mx-auto">Docs</span>
               <span className="absolute right-2">
                 <RightArrow />
               </span>

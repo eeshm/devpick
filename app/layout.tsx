@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import Footer from "@/components/Footer";
 import BackgroundEffect from "@/components/BackgroundEffect";
+import Header from "@/components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
         >
          <div className="min-h-screen flex flex-col">
           <BackgroundEffect />
+          <Header/>
           <main className="flex-1">
           {children}
           </main>

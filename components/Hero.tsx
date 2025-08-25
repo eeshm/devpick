@@ -15,8 +15,8 @@ export default function Hero() {
         <Link href={'/category'}       
         rel="noopener noreferrer ">
             <div className="mt-5">
-            <Button className="bg-white py-6 text-black text-base rounded-sm font-medium cursor-pointer">
-                <span className="px-2 flex font-medium">Compare Stacks
+            <Button className="bg-gray-100 font-medium text-base py-6 text-black rounded-lg cursor-pointer">
+                <span className="px-2 flex ">Compare Stacks
                 <ArrowRightIcon className="size-3 ml-1 mt-1.5"/>
                 </span>
             </Button>

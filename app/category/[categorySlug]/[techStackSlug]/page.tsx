@@ -1,5 +1,4 @@
 import TechStackDetailPage from "@/components/TechStackDetails"
-import BackgroundEffect from "@/components/BackgroundEffect"
 
 export default async function TechStackPage({ params }: 
   { params: { 
