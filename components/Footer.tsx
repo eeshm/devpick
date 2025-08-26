@@ -5,7 +5,7 @@ import { Heart } from "lucide-react";
 import TwitterIcon from "./icons/Twitter";
 export default function Footer() {
     return (
-        <footer className=" px-4 mb-4 text-white">
+        <footer className=" px-4 mt-10 mb-2 text-white">
             <div className=" container mx-auto text-center flex justify-between">
                 <div className="flex items-center  justify-center space-x-1">
                     <span className="text-white">Made with</span>

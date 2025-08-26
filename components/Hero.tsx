@@ -13,7 +13,7 @@ export default function Hero() {
               </p>
 
         <Link href={'/category'}       
-        rel="noopener noreferrer ">
+        rel="noopener noreferrer">
             <div className="mt-5">
             <Button className="bg-gray-100 font-medium text-base py-6 text-black rounded-lg cursor-pointer">
                 <span className="px-2 flex ">Compare Stacks

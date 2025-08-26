@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 export default async function CategoriesRedirect() {
   return (
     <div className="min-h-screen">
-      <Header/>
+      {/* <Header/> */}
       <div className="flex flex-col mx-auto  max-w-4xl  mt-10 px-4 ">
         <nav className="flex items-center space-x-2 py-4 text-sm">
           <Link href="/" className="text-gray-500 hover:text-gray-700">

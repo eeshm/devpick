@@ -8,12 +8,12 @@ import Header from "@/components/Header";
 export default function Home() {
   return (
     <>
-      <Header/>
+      {/* <Header/> */}
       <Container className="flex flex-col min-h-screen">
         <Hero />
         <MarqueeDemo />
         <FeaturesSectionDemo />
-        {/* <Categories /> */}
+        <Categories />
         {/* <div className="flex-grow"></div> */}
       </Container>
     </>
