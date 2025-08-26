@@ -20,6 +20,8 @@ const ReviewCard = ({ src, alt }: LogoItem) => {
           objectFit="contain"
           loading="lazy"
           quality={50}
+          // height={40}
+          // width={40}
         />
       </div>
     </div>

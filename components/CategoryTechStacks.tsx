@@ -158,7 +158,7 @@ export default function TechStacks({ categorySlug }: { categorySlug?: string }) 
 
     return (
         <div className="min-h-screen">
-            <Container className="max-w-4xl py-8 px-4 ">
+            <Container className="max-w-4xl  px-4 ">
                 <nav className="flex items-center space-x-2 py-4 text-sm">
                     <Link href="/" className="text-gray-500 hover:text-gray-700">
                         Home

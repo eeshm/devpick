@@ -95,7 +95,7 @@ export default function TechStackDetailPage({ techStackSlug, categorySlug }: { t
 
     return (
         <div className='min-h-screen'>
-            <Container className='max-w-7xl py-8 px-4'>
+            <Container className='max-w-7xl px-4'>
                 <nav className="flex items-center space-x-2 py-4 md:pb-10 text-sm">
                     <Link href="/" className="text-gray-500 hover:text-gray-700">
                         Home
