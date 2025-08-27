@@ -34,11 +34,11 @@ export default function Home() {
           variants={staggerContainer}
           initial="hidden"
           animate="visible"
-          className="items-center mt-15 flex flex-col gap-y-4 pt-10 px-2"
+          className="items-center mt-5 flex flex-col gap-y-4 pt-10 px-2"
         >
           <motion.h1
             variants={fadeInUp}
-            className="text-4xl md:text-5xl tracking-tight font-medium text-center w-full"
+            className="text-5xl tracking-tight font-medium text-center w-full"
           >
             The Smart Way to Explore Tech Stacks
           </motion.h1>
