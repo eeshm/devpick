@@ -142,11 +142,11 @@ function Side1({ name, logo_url, basic_prerequisites, learning_curve, popularity
             </div>
 
             {/* Prerequisites Section */}
-            <Button className="flex flex-col w-full h-full text-xs bg-black/40 py-1 px-2">
-                <h2 className="uppercase underline md:text-right text-white ">
+            <Button className="flex flex-col w-full h-full text-xs bg-black/40 py-1 px-2 overflow-hidden">
+                <h2 className="uppercase underline md:text-right text-white break-words ">
                     Prerequisites
                 </h2>
-                <div className="flex flex-wrap md:justify-end ">
+                <div className="flex flex-wrap md:justify-end gap-1 max-w-full">
                     {basic_prerequisites?.map((prerequisite, index) => (
                         <span
                             key={index}
@@ -181,9 +181,9 @@ function Side2(props: TechStack) {
     return (
         <nav
             aria-label="Quick Links"
-            className="text-sm sticky top-0 overflow-clip gap-2 px-4  text-gray-400 font-medium">
+            className="text-sm sticky top-0 overflow-clip gap-2  text-gray-400 font-medium">
             <div className="space-y-1 flex flex-col">
-                <div className="pb-2" >
+                <div className="flex items-center text-3xl w-full justify-between pb-2 text-white" >
                     Quick Links
                 </div>
                 <div className="inline-flex  hover:text-white underline">
