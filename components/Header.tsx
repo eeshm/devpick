@@ -10,7 +10,7 @@ function handleClick(): void {
 export default function Header() {
     return (
         <header className="border-b bg-background z-30 sticky top-0">
-            <div className="flex h-16 items-center justify-between px-4 container mx-auto">
+            <div className="flex h-16 items-center justify-between px-4 container">
                 <Link href="/" rel="noopener noreferrer">
                 <div className="font-bold text-2xl">DevPicks</div>
                 </Link>

@@ -1,7 +1,6 @@
 import Categories from "@/components/Categories";
 import Link from "next/link";
 import { ChevronRight } from 'lucide-react'
-import Header from "@/components/Header";
 
 export default async function CategoriesRedirect() {
   return (
