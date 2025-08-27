@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// app/layout.tsx - Add basic metadata
+
 export const metadata = {
   title: 'DevPick - Find Your Perfect Tech Stack',
   description: 'Explore, compare, and choose the right technologies for your next project',
@@ -24,7 +24,7 @@ export const metadata = {
   openGraph: {
     title: 'DevPick',
     description: 'Find Your Perfect Tech Stack',
-    url: 'https://your-domain.com',
+    url: 'https://dev-pick.vercel.app',
     siteName: 'DevPick',
   },
 }

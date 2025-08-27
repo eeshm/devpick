@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Github } from "lucide-react";
 
 function handleClick(): void {
-    window.open("https://github.com/eeshm/techstack-hub", "_blank");
+    window.open("https://github.com/eeshm/devpick", "_blank");
 };
 
 export default function Header() {
