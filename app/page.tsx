@@ -40,7 +40,7 @@ export default function Home() {
             variants={fadeInUp}
             className="text-5xl tracking-tight font-medium text-center w-full"
           >
-            The Smart Way to Explore Tech Stacks
+            The Smart Way to Explore Tech
           </motion.h1>
 
           <motion.p
