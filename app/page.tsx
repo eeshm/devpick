@@ -38,24 +38,23 @@ export default function Home() {
         >
           <motion.h1
             variants={fadeInUp}
-            className="text-5xl tracking-tight font-medium text-center w-full"
+            className="text-4xl md:text-5xl tracking-tight font-medium text-center w-full"
           >
-            The Smart Way to Explore Tech Stacks
+            The Smart Way to Explore Tech 
           </motion.h1>
 
           <motion.p
             variants={fadeInUp}
-            className="text-center max-w-md md:max-w-2xl leading-6 font-medium px-4 md:px-0"
+            className="text-center max-w-md md:max-w-2xl leading-6  font-grostek px-4 md:px-0"
           >
             Explore tools across frontend, backend, databases, DevOps, AI, styling, and more — browse categories, weigh pros and cons, and compare stacks to find what fits your next build.
           </motion.p>
 
           <motion.div variants={fadeInUp} className="mt-5">
             <Link href="/category" rel="noopener noreferrer">
-              <Button className="bg-gray-100 font-medium text-base py-6 text-black rounded-lg cursor-pointer transition hover:brightness-110 hover:-translate-y-0.5">
-                <span className="px-2 flex">
+              <Button className="bg-white font-grostek py-6 text-black rounded-lg cursor-pointer transition hover:brightness-110 hover:-translate-y-0.5">
+                <span className="px-2 flex ">
                   Compare Stacks
-                  <ArrowRightIcon className="size-3 ml-1 mt-1.5" />
                 </span>
               </Button>
             </Link>
