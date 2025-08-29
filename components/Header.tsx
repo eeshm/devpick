@@ -12,7 +12,7 @@ export default function Header() {
         <header className="border-b bg-transparent z-30 left-0 top-0">
             <div className="flex h-16 items-center justify-between px-4 container">
                 <Link href="/" rel="noopener noreferrer">
-                <div className="font-bold text-2xl">DevPicks</div>
+                <div className="font-bold text-2xl">DevPick</div>
                 </Link>
                 <Button
                     variant="outline"
