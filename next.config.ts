@@ -4,7 +4,6 @@ import type { NextConfig } from "next";
 
 const nextConfig :NextConfig= {
   images: {
-    // Allowed external image domains
     domains: [
       'cdn.jsdelivr.net',
       'raw.githubusercontent.com',

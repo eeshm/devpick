@@ -1,0 +1,10 @@
+{
+  "name": "DevPick",
+  "short_name": "DevPick",
+  "description": "Find Your Perfect Tech Stack",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "categories": ["productivity", "developer", "technology"]
+}

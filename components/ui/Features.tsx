@@ -41,7 +41,7 @@ export function FeaturesSectionDemo() {
     {
       title: "Pick the Right Tools Faster",
       description:
-        "Stop doomscrolling through Reddit threads. TechStack Hub helps you cut through the noise and pick what works for you.",
+        "Stop doomscrolling through Reddit threads. DevPick helps you cut through the noise and pick what works for you.",
       icon: <RocketIcon />,
     },
   ];
