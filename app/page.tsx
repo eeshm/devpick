@@ -8,7 +8,7 @@ import { FeaturesSectionDemo } from "@/components/ui/Features";
 import LazyLoadOnView from "@/components/LazyLoadOnView";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon, Scale } from "lucide-react";
 import { motion } from "framer-motion";
 
 // Animation Variants
@@ -29,7 +29,7 @@ const staggerContainer = {
 export default function Home() {
   return (
     <>
-      <Container className="flex flex-col min-h-screen">
+      <Container className="flex flex-col min-h-screen ">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -40,7 +40,7 @@ export default function Home() {
             variants={fadeInUp}
             className="text-4xl md:text-5xl tracking-tight font-medium text-center w-full"
           >
-            The Smart Way to Explore Tech 
+            The Smart Way to Explore Tech
           </motion.h1>
 
           <motion.p
@@ -52,10 +52,14 @@ export default function Home() {
 
           <motion.div variants={fadeInUp} className="mt-5">
             <Link href="/category" rel="noopener noreferrer">
-              <Button className="bg-white font-grostek py-6 text-black rounded-lg cursor-pointer transition hover:brightness-110 hover:-translate-y-0.5">
-                <span className="px-2 flex ">
-                  Compare Stacks
-                </span>
+              <Button
+                size="lg"
+                className="font-grostek bg-white text-black rounded-lg
+             shadow-lg hover:shadow-xl hover:bg-zinc-100
+             hover:-translate-y-1 active:scale-95
+             transition-all duration-300 ease-in-out"
+              >
+                Compare Stacks
               </Button>
             </Link>
           </motion.div>
@@ -71,7 +75,7 @@ export default function Home() {
           <MarqueeDemo />
         </motion.div>
 
-          <FeaturesSectionDemo />
+        <FeaturesSectionDemo />
 
         <LazyLoadOnView>
           <Categories />

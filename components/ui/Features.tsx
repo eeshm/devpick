@@ -13,7 +13,7 @@ const staggerContainer = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.3,
     },
   },
 };
@@ -56,9 +56,9 @@ export function FeaturesSectionDemo() {
     >
       {/* Section Heading */}
       <motion.div variants={fadeInUp} className="mt-5 flex justify-center">
-        <h2 className="inline-block text-3xl font-thin font-opensans border-b-2 tracking-tight">
+        <motion.h2  variants={fadeInUp} className="inline-block text-3xl font-thin font-opensans border-b-2 tracking-tight">
           Features
-        </h2>
+        </motion.h2>
       </motion.div>
 
       {/* Features Grid */}

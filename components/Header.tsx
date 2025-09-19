@@ -17,10 +17,10 @@ export default function Header() {
                 <Button
                     variant="outline"
                     onClick={handleClick}
-                    className="flex items-center cursor-pointer md:space-x-2"
+                    className="flex items-center cursor-pointer md:space-x-1"
                 >
                     <Github/>
-                    <span className="hidden md:block">Star Project</span>
+                    <span className="hidden md:block pb-0.5">Star Project</span>
                 </Button>
             </div>
         </header>
