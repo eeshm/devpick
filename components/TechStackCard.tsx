@@ -26,7 +26,7 @@ interface TechStack {
 
 export function TechStackCard({ id, name, short_description, slug, logo_url, major_use_cases, official_docs ,category_slug}: TechStack) {
   return (
-    <CardSpotlight className="h-full w-full overflow-hidden hover:shadow-xl transition-all duration-100 ease-in-out flex flex-col justify-between backdrop-blur-sm bg-gradient-to-b from-black/70 to-black/50">
+    <CardSpotlight className="h-full w-full flex flex-col justify-between backdrop-blur-sm bg-gradient-to-b from-black/30 to-black/40 border-none">
       <div className="flex-grow p-2 pt-0">
         <div className="flex justify-between items-center text-4xl text-center gap-2">
           <p className="font-medium relative z-20 text-white text-3xl tracking-tight">
