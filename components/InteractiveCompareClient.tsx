@@ -286,7 +286,7 @@ export function InteractiveComparisonClient({
 
                 </div>
             ) : (
-                <div className="rounded-2xl bg-black/20 backdrop-blur-sm border border-white/10 p-12">
+                <div className="p-12">
                     <div className="text-center">
                         <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
                             <div className="p-4 rounded-xl bg-white/5 border border-white/10">

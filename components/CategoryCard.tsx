@@ -18,7 +18,7 @@ interface Categories {
 
 export default function CategoryCard({ name, description, slug, logo }: Categories) {
     return (
-        <CardSpotlight className="h-[340px] w-80 overflow-hidden hover:shadow-xl  flex flex-col justify-between group backdrop-blur-sm bg-gradient-to-b from-black/70 to-black/50">
+        <CardSpotlight className="h-[340px] w-80  flex flex-col justify-between group backdrop-blur-sm bg-gradient-to-b from-black/30 to-black/40 border-none">
             <div className="flex-grow p-1">
                 <div className="flex items-center justify-between gap-2">
                     <h3 className="font-medium relative z-20 text-2xl text-white tracking-tight group-hover:text-white/90 transition-all duration-300">{name}</h3>
