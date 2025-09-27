@@ -142,21 +142,23 @@ function Side1({ name, logo_url, basic_prerequisites, learning_curve, popularity
             </div>
 
             {/* Prerequisites Section */}
-            <Button className="flex flex-col w-full h-full text-xs bg-black/40 py-1 px-2 overflow-hidden">
-                <h2 className="uppercase underline md:text-right text-white break-words ">
+            <div className=" rounded-xl bg-black/40 p-4 backdrop-blur-sm">
+                <h2 className="text-sm font-medium text-neutral-200 mb-3">
                     Prerequisites
                 </h2>
-                <div className="flex flex-wrap md:justify-end gap-1 max-w-full">
+                <div className="flex flex-wrap gap-2">
                     {basic_prerequisites?.map((prerequisite, index) => (
                         <span
                             key={index}
-                            className="bg-gradient-to-r text-xs from-indigo-700 to-red-700 bg-clip-text text-transparent py-0 px-1.5 shadow-lg rounded-sm font-semibold transition-colors"
+                            className="inline-flex px-2.5 py-1 text-xs rounded-lg 
+                            bg-black/30 border border-white/10 text-neutral-300
+                            hover:bg-black/40 hover:text-white transition-all duration-200"
                         >
                             {prerequisite}
                         </span>
                     ))}
                 </div>
-            </Button>
+            </div>
 
             <Button className="bg-black/40 text-white w-full px-2 py-1">
                 <div className={`flex gap-1   `}>
