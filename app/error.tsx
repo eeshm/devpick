@@ -15,14 +15,13 @@ export default function Error({ error, reset }: ErrorProps) {
   }, [error]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center">
         <div className="mb-8">
-          <div className="text-6xl mb-4">⚠️</div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <h1 className="text-3xl font-bold text-gray-300 mb-2">
             Something went wrong!
           </h1>
-          <p className="text-gray-600 mb-6">
+          <p className="text-white mb-6">
             We encountered an unexpected error. Don't worry, it's not your fault.
           </p>
         </div>
