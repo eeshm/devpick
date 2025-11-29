@@ -2,21 +2,8 @@ import CompareIcon from "../icons/CompareIcon";
 import LayerIcon from "../icons/LayerIcon";
 import RocketIcon from "../icons/Rocket";
 import SearchIcon from "../icons/SearchIcon";
+import { BlurFade } from "./blur-fade";
 import { Feature } from "./FeaturesSection";
-import { motion } from "framer-motion"
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.3,
-    },
-  },
-};
 
 export function FeaturesSectionDemo() {
   const features = [
@@ -47,28 +34,26 @@ export function FeaturesSectionDemo() {
   ];
 
   return (
-    <motion.div
+    <div
       className="font-grostek relative z-10 max-w-7xl mx-auto"
-      variants={staggerContainer}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
     >
+      <BlurFade delay={0.10*6}>
       {/* Section Heading */}
-      <motion.div variants={fadeInUp} className="mt-5 flex justify-center">
-        <motion.h2  variants={fadeInUp} className="inline-block text-3xl font-thin font-opensans border-b-2 tracking-tight">
+      <div className="mt-5 flex justify-center">
+        <h2 className="inline-block text-3xl font-thin font-opensans border-b-2 tracking-tight">
           Features
-        </motion.h2>
-      </motion.div>
+        </h2>
+      </div>
 
       {/* Features Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2">
         {features.map((feature, index) => (
-          <motion.div key={feature.title} variants={fadeInUp}>
+          <div key={feature.title}>
             <Feature {...feature} index={index} />
-          </motion.div>
+          </div>
         ))}
       </div>
-    </motion.div>
+      </BlurFade>
+    </div>
   );
 }

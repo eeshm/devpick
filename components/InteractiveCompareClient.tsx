@@ -61,8 +61,8 @@ function TechStackSelector({
 }) {
     return (
         <div className="relative">
-            <label className="block text-sm font-medium text-muted-foreground text-center mb-2">{label}</label>
-            <div className="relative">
+            <label className="block text-sm font-medium text-neutral-200 mb-3">{label}</label>
+            <div className="relative group">
                 <select
                     value={selected?.id || ''}
                     onChange={(e) => {
@@ -70,25 +70,29 @@ function TechStackSelector({
                         onSelect(stack);
                     }}
                     disabled={disabled}
-                    className="w-full  border border-gray-700 rounded-md   px-4 py-3 pr-10 text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 disabled:bg-gray-50 disabled:text-gray-500 appearance-none cursor-pointer"
+                    className="w-full rounded-xl px-4 py-3.5 pr-10 text-white
+                        focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/20 
+                        disabled:opacity-50 text-sm appearance-none cursor-pointer backdrop-blur-sm
+                        hover:bg-white/10 transition-colors duration-200"
                 >
-                    <option className="text-black" value="">Select a tech stack...</option>
+                    <option className="text-gray-900 bg-white" value="">Select a tech stack...</option>
                     {options.map((stack) => (
-                        <option className="text-black" key={stack.id} value={stack.id}>
+                        <option className="text-gray-900 bg-white" key={stack.id} value={stack.id}>
                             {stack.name}
                         </option>
                     ))}
                 </select>
-                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-blue-700 pointer-events-none" />
+                <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 
+                    text-neutral-400 group-hover:text-white transition-colors duration-200 pointer-events-none" />
             </div>
 
             {/* Selected Stack Preview */}
             {selected && (
-                <div className="mt-3 flex items-center space-x-3 p-2  rounded-lg border">
-                    <div className="flex-1 min-w-0 text-center" >
-                        <p className="font-medium text-white truncate">{selected.name} </p>
+                <div className="mt-3 p-3 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm
+                    hover:bg-white/10 transition-all duration-200">
+                    <div className="flex-1 min-w-0">
+                        <p className="font-medium text-white text-center">{selected.name}</p>
                     </div>
-
                 </div>
             )}
         </div>
@@ -107,12 +111,12 @@ export default function InteractiveComparePage({ categorySlug }: InteractiveComp
         const getComparisonData = async () => {
             try {
                 const [categoryResponse, stacksResponse] = await Promise.all([
-                    fetch(`/api/categories/${categorySlug}`,{
-                    next:{revalidate:60},
-                }),
-                    fetch(`/api/tech-stacks/comparison/${categorySlug}`,{
-                    next:{revalidate:60},
-                }),
+                    fetch(`/api/categories/${categorySlug}`, {
+                        next: { revalidate: 60 },
+                    }),
+                    fetch(`/api/tech-stacks/comparison/${categorySlug}`, {
+                        next: { revalidate: 60 },
+                    }),
                 ]);
 
                 if (!categoryResponse.ok || !stacksResponse.ok) {
@@ -142,13 +146,13 @@ export default function InteractiveComparePage({ categorySlug }: InteractiveComp
         getComparisonData();
     }, [categorySlug]);
 
-if (loading) {
-    return (
-        <div className="flex items-center justify-center min-h-screen">
-            <LoaderOne />
-        </div>
-    );
-}
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <LoaderOne />
+            </div>
+        );
+    }
 
 
     if (error || !category || !techStacks || techStacks.length < 2) {
@@ -158,31 +162,31 @@ if (loading) {
     return (
         <div className="min-h-screen">
             {/* Header */}
-            <div className="shadow-sm">
+            <div className="">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Breadcrumb */}
                     <nav className="flex items-center space-x-2 py-4 text-sm">
-                        <Link href="/" className="text-gray-500 hover:text-gray-700">
+                        <Link href="/" className="text-neutral-400 hover:text-white transition-colors duration-200">
                             Home
                         </Link>
-                        <ChevronRight className="w-4 h-4 text-gray-400" />
+                        <ChevronRight className="w-4 h-4 text-neutral-600" />
                         <Link
                             href={`/category/${category.slug}`}
-                            className="text-gray-500 hover:text-gray-700 capitalize"
+                            className="text-neutral-400 hover:text-white transition-colors duration-200 capitalize"
                         >
                             {category.name}
                         </Link>
-                        <ChevronRight className="w-4 h-4 text-gray-400" />
-                        <span className="text-gray-500">Compare</span>
+                        <ChevronRight className="w-4 h-4 text-neutral-600" />
+                        <span className="text-neutral-400">Compare</span>
                     </nav>
 
                     {/* Page Header */}
-                    <div className="py-8">
+                    <div className="py-12">
                         <div className="text-center w-full">
-                            <h1 className="text-4xl  font-bold text-white font-grostek mb-2">
+                            <h1 className="text-4xl md:text-5xl font-semibold ">
                                 Compare {category.name} Technologies
                             </h1>
-                            <div className="mt-4 text-sm  text-muted-foreground">
+                            <div className="mt-4 text-neutral-400">
                                 {techStacks.length} technologies available for comparison
                             </div>
                         </div>
@@ -214,8 +218,8 @@ export function InteractiveComparisonClient({
     return (
         <div className="space-y-8">
             {/* Selection Area */}
-            <div className="rounded-lg shadow-sm ">
-                <div className="grid grid-cols-2 gap-4">
+            <div className="rounded-2xl bg-black/20 backdrop-blur-sm border border-white/10 p-6">
+                <div className="grid md:grid-cols-2 gap-6">
                     <TechStackSelector
                         label="First Technology"
                         selected={stack1}
@@ -232,9 +236,6 @@ export function InteractiveComparisonClient({
                         disabled={isLoading}
                     />
                 </div>
-
-                {/* Action Buttons */}
-
             </div>
 
             {/* Comparison Results */}
@@ -285,18 +286,20 @@ export function InteractiveComparisonClient({
 
                 </div>
             ) : (
-                <div className="">
-                    <div className="text-center text-muted-foreground py-16">
-                        <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                            <Zap className="w-8 h-8 text-white" />
+                <div className="p-12">
+                    <div className="text-center">
+                        <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center">
+                            <div className="p-4 rounded-xl bg-white/5 border border-white/10">
+                                <Zap className="w-8 h-8 text-white/80" />
+                            </div>
                         </div>
-                        <h3 className="text-lg font-semibold text-white mb-2">
+                        <h3 className="text-xl font-medium text-white mb-3">
                             Ready to Compare?
                         </h3>
-                        <p className="mb-4">
+                        <p className="mb-4 text-neutral-300 max-w-md mx-auto">
                             Select two {category.name} technologies above to see an instant comparison
                         </p>
-                        <p className="text-sm ">
+                        <p className="text-sm text-neutral-400">
                             {techStacks.length} technologies available in this category
                         </p>
                     </div>

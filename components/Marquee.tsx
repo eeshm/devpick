@@ -51,7 +51,9 @@ export default function MarqueeDemo() {
   );
 
   return (
-    <div className="mt-5 relative flex w-full flex-col items-center justify-center overflow-hidden">
+    <div className={cn("mt-5 relative flex w-full flex-col items-center justify-center overflow-hidden"
+    ,"mask-radial-from-10%"
+)}>
       <Marquee className="[--duration:15s]">
         {logos.map((logo, index) => (
           <ReviewCard key={index} {...logo} />
