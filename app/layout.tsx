@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import BackgroundEffect from "@/components/BackgroundEffect";
 import Header from "@/components/Header";
 import { Analytics } from "@vercel/analytics/next"
+import ScrollToTop from "@/components/ScrollToTop";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -148,6 +149,7 @@ export default function RootLayout({
           </main>
           <Analytics/>
           <Footer />
+          <ScrollToTop />
           </div>
         </ThemeProvider>
       </body>
