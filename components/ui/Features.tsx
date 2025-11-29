@@ -62,7 +62,7 @@ export function FeaturesSectionDemo() {
       </motion.div>
 
       {/* Features Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+      <div className="grid grid-cols-1 md:grid-cols-2">
         {features.map((feature, index) => (
           <motion.div key={feature.title} variants={fadeInUp}>
             <Feature {...feature} index={index} />
