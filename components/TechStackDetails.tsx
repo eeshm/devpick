@@ -51,8 +51,8 @@ export default function TechStackDetailPage({ techStackSlug, categorySlug }: { t
             setError(null)
 
             try {
-                const response = await fetch(`/api/tech-stacks/${techStackSlug}` ,{
-                    next:{revalidate:60},
+                const response = await fetch(`/api/tech-stacks/${techStackSlug}`, {
+                    next: { revalidate: 60 },
                 })
                 const json: ApiResponse<TechStack> = await response.json()
 
@@ -64,7 +64,7 @@ export default function TechStackDetailPage({ techStackSlug, categorySlug }: { t
                         setError(json.error || "Error while fetching tech stack")
                     }
                 }
-            }catch (error) {
+            } catch (error) {
                 if (!ignore) {
                     console.error("Error fetching tech stack", error)
                     setError("An error occured while fetching tech stack");
@@ -84,7 +84,7 @@ export default function TechStackDetailPage({ techStackSlug, categorySlug }: { t
 
 
 
-    
+
     if (loading) {
         return (
             <div className="flex items-center justify-center min-h-screen">
@@ -95,32 +95,32 @@ export default function TechStackDetailPage({ techStackSlug, categorySlug }: { t
 
     return (
         <div className='min-h-screen'>
-            <Container className='max-w-7xl px-4'>
-                <nav className="flex items-center space-x-2 py-4 md:pb-10 text-sm">
-                    <Link href="/" className="text-gray-500 hover:text-gray-700">
+            <Container className='max-w-5xl px-4 sm:px-6'>
+                <nav className="flex items-center gap-1.5 py-4 sm:py-5">
+                    <Link href="/" className="dp-breadcrumb-link">
                         Home
                     </Link>
-                    <ChevronRight className="w-4 h-4 text-gray-400" />
-                    
-                    <Link href={`/category/${categorySlug}`}
-                        className="text-gray-500 hover:text-gray-700 capitalize"
+                    <ChevronRight size={12} style={{ color: 'var(--mono-700)', flexShrink: 0 }} />
+                    <Link
+                        href={`/category/${categorySlug}`}
+                        className="dp-breadcrumb-link"
+                        style={{ textTransform: 'capitalize' }}
                     >
                         {categorySlug}
                     </Link>
-                    <ChevronRight className="w-4 h-4 text-gray-400" />
-                    <span className='text-gray-500'> {techStack?.name}</span>
+                    <ChevronRight size={12} style={{ color: 'var(--mono-700)', flexShrink: 0 }} />
+                    <span className="dp-breadcrumb-current">
+                        {techStack?.name}
+                    </span>
                 </nav>
 
                 {error && !loading && (
-                    <div className="text-center py-16">
-                        <div className="w-24 h-24 bg-black/70 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <AlertTriangle className="w-12 h-12 text-red-800" />
-                        </div>
-                        <h3 className="text-2xl font-bold text-white mb-2">Error Loading Data</h3>
-                        <p className="text-gray-400 mb-4">{error}</p>
+                    <div className="py-20 flex flex-col items-center gap-4">
+                        <AlertTriangle size={20} style={{ color: 'var(--mono-600)' }} />
+                        <p style={{ fontFamily: 'var(--font-geist-sans)', fontSize: 14, color: 'var(--mono-500)' }}>{error}</p>
                         <button
                             onClick={() => window.location.reload()}
-                            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 cursor-pointer text-white rounded-lg hover:shadow-lg transition-all"
+                            className="dp-btn"
                         >
                             Try Again
                         </button>
@@ -130,49 +130,59 @@ export default function TechStackDetailPage({ techStackSlug, categorySlug }: { t
 
 
                 {loading ? (
-                    <div className="min-h-screen ">
-                        <div className="max-w-6xl mx-auto px-4">
-                            <div className="animate-pulse">
-                                {/* Header skeleton */}
-                                <div className="flex items-center space-x-4 mb-8">
-                                    <div className="w-24 h-24 bg-gray-600 rounded-2xl"></div>
-                                    <div className="flex-1">
-                                        <div className="h-8 bg-gray-600 rounded mb-3 w-1/3"></div>
-                                        <div className="h-4 bg-gray-700 rounded mb-2 w-2/3"></div>
-                                        <div className="h-4 bg-gray-700 rounded w-1/2"></div>
-                                    </div>
+                    <div className="py-8">
+                        {/* Header skeleton */}
+                        <div className="flex items-start justify-between gap-4 pb-8 dp-border-bottom mb-8">
+                            <div style={{ flex: 1 }}>
+                                <div className="dp-skeleton h-3 w-20 mb-4" />
+                                <div className="dp-skeleton h-10 w-56 mb-3" />
+                                <div className="dp-skeleton h-4 w-full max-w-sm mb-2" />
+                                <div className="dp-skeleton h-4 w-3/4 max-w-xs mb-5" />
+                                <div className="flex gap-2">
+                                    <div className="dp-skeleton h-6 w-24" />
+                                    <div className="dp-skeleton h-6 w-20" />
                                 </div>
-
-                                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                                    <div className="lg:col-span-2 space-y-6">
-                                        <div className="h-64 bg-gray-600 rounded-2xl"></div>
-                                        <div className="h-32 bg-gray-600 rounded-2xl"></div>
-                                    </div>
-                                    <div className="space-y-6">
-                                        <div className="h-48 bg-gray-600 rounded-2xl"></div>
-                                        <div className="h-32 bg-gray-600 rounded-2xl"></div>
-                                    </div>
+                            </div>
+                            <div className="dp-skeleton w-16 h-16 flex-shrink-0" />
+                        </div>
+                        {/* Body skeleton */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div className="md:col-span-2 flex flex-col gap-6">
+                                <div className="dp-skeleton h-3 w-16 mb-2" />
+                                <div className="dp-skeleton h-4 w-full mb-2" />
+                                <div className="dp-skeleton h-4 w-full mb-2" />
+                                <div className="dp-skeleton h-4 w-4/5" />
+                                <div className="dp-skeleton h-3 w-16 mt-4 mb-2" />
+                                <div className="grid grid-cols-2 gap-4">
+                                    {[...Array(4)].map((_, i) => (
+                                        <div key={i} className="dp-skeleton h-4 w-full" />
+                                    ))}
                                 </div>
+                            </div>
+                            <div className="flex flex-col gap-4">
+                                <div className="dp-skeleton h-3 w-20 mb-2" />
+                                {[...Array(3)].map((_, i) => (
+                                    <div key={i} className="dp-skeleton h-5 w-16" />
+                                ))}
                             </div>
                         </div>
                     </div>
                 ) : (
-                    <div>
+                    <div className="py-4">
                         {techStack && <TechStackDetailCard {...techStack} />}
-
                     </div>
                 )}
                 {!loading && !error && (
                     <>
                         {techStack === null ? (
-                            <div className="flex justify-center flex-col items-center gap-y-2">
-                                <h3 className="text-2xl font-bold text-white mb-2">No technology found</h3>
-                                <p className="text-gray-400">Look for another tech stack</p>
+                            <div className="py-20 flex flex-col items-center gap-3">
+                                <p style={{ fontFamily: 'var(--font-geist-mono)', fontSize: 12, color: 'var(--mono-500)' }}>No technology found.</p>
+                                <Link href="/category" className="dp-btn">Browse Categories</Link>
                             </div>
                         ) : techStack.category_slug !== categorySlug ? (
-                            <div className="flex justify-center flex-col items-center gap-y-2">
-                                <h3 className="text-2xl font-bold text-white mb-2">This technology can't be found in this category</h3>
-                                <p className="text-gray-400">Look for another tech stack or category</p>
+                            <div className="py-20 flex flex-col items-center gap-3">
+                                <p style={{ fontFamily: 'var(--font-geist-mono)', fontSize: 12, color: 'var(--mono-500)' }}>This technology isn&apos;t in this category.</p>
+                                <Link href={`/category/${categorySlug}`} className="dp-btn">Go Back</Link>
                             </div>
                         ) : null}
                     </>

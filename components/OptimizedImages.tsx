@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { getOptimizedImageProps } from '@/lib/image-utils';
 
 interface OptimizedTechImageProps {
@@ -11,6 +11,7 @@ interface OptimizedTechImageProps {
   size?: 'small' | 'medium' | 'large' | 'hero';
   priority?: boolean;
   className?: string;
+  style?: React.CSSProperties;
   onClick?: () => void;
 }
 
@@ -21,6 +22,7 @@ export default function OptimizedTechImage({
   size = 'medium',
   priority = false,
   className = '',
+  style,
   onClick
 }: OptimizedTechImageProps) {
   const [error, setError] = useState(false);
@@ -45,11 +47,12 @@ export default function OptimizedTechImage({
         }}
         style={{
           transition: 'opacity 0.1s ease-in-out',
-          opacity: loading ? 0 : 1
+          opacity: loading ? 0 : 1,
+          ...style,
         }}
       />
       {loading && (
-        <div 
+        <div
           className="absolute inset-0 bg-gray-200 animate-pulse rounded"
           style={{ width: imageProps.width, height: imageProps.height }}
         />
