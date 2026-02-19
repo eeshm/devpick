@@ -370,13 +370,13 @@
 
 /* ── Logo grayscale hover ─────────────────── */
 .dp-logo-img {
-  filter: grayscale(1) brightness(0.55);
+  filter: grayscale(0) brightness(1);
   transition: filter 0.25s ease;
 }
 
 .dp-logo-img:hover,
 .dp-logo-wrap:hover .dp-logo-img {
-  filter: grayscale(0) brightness(1);
+  filter: grayscale(0) brightness(1.1);
 }
 
 /* ── Marquee fade masks ───────────────────── */

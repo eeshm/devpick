@@ -72,7 +72,7 @@ export default function Home() {
           </div>
 
           <BlurFade delay={0.2}>
-            <div className="mt-10 sm:mt-14 pt-6 sm:pt-8 flex items-center gap-8 sm:gap-12">
+            <div className="mt-10 sm:mt-14 pt-6 sm:pt-8 flex flex-col sm:flex-row items-start sm:items-center gap-8 sm:gap-12">
 
               {/* Stats */}
               <div
@@ -93,9 +93,9 @@ export default function Home() {
                 ))}
               </div>
 
-              {/* Marquee — fills remaining width inside max-w-5xl, hidden on mobile */}
+              {/* Marquee — fills remaining width inside max-w-5xl */}
               <div
-                className="hidden sm:block flex-1 min-w-0 overflow-hidden"
+                className="w-full sm:flex-1 sm:min-w-0 overflow-hidden"
                 style={{
                   WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 72px)',
                   maskImage: 'linear-gradient(to right, transparent 0%, black 72px)',

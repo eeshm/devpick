@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Covered_By_Your_Grace,
+  Doto,
+  Instrument_Serif,
+  Manrope,
+  Oswald,
+} from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import Footer from "@/components/Footer";
@@ -16,6 +24,42 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const coveredByYourGrace = Covered_By_Your_Grace({
+  variable: "--font-covered-by-your-grace",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const doto = Doto({
+  variable: "--font-doto",
+  subsets: ["latin"],
+  weight: ["100", "400", "700", "900"],
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  weight: ["200", "400", "600", "800"],
+  display: "swap",
+});
+
+const oswald = Oswald({
+  variable: "--font-oswald",
+  subsets: ["latin"],
+  weight: ["200", "400", "600", "700"],
   display: "swap",
 });
 
@@ -71,7 +115,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${coveredByYourGrace.variable} ${doto.variable} ${instrumentSerif.variable} ${manrope.variable} ${oswald.variable} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
           <div className="min-h-screen flex flex-col" style={{ background: '#000' }}>
             <BackgroundEffect />

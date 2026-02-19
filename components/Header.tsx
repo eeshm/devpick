@@ -1,15 +1,13 @@
 'use client'
 import Link from "next/link";
-import { Github, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { Github, LucideGithub} from "lucide-react";
+import { IconBrandGithub, IconBrandGithubCopilot, IconBrandGithubFilled } from "@tabler/icons-react";
 
 function handleStar(): void {
     window.open("https://github.com/eeshm/devpick");
 }
 
 export default function Header() {
-    const [mobileOpen, setMobileOpen] = useState(false);
-
     return (
         <header
             className="sticky top-0 z-30 border-bottom-[var(--mono-800)]"
@@ -26,11 +24,12 @@ export default function Header() {
                         </svg> */}
                         <span
                             style={{
-                                fontFamily: 'var(--font-geist-sans)',
-                                fontSize: '18px',
+                                fontFamily: 'var(--font-doto)',
+                                fontSize: '20px',
                                 fontWeight: 600,
                                 color: 'var(--mono-white)',
-                                letterSpacing: '-0.01em',
+                                letterSpacing: '0.04em',
+                                textTransform: 'uppercase',
                             }}
                         >
                             DevPick
@@ -42,11 +41,11 @@ export default function Header() {
                 <div className="flex items-center gap-2">
                     <button
                         onClick={handleStar}
-                        className=" flex items-center gap-2 cursor-pointer rounded-md"
-                        style={{ padding: '5px 12px', fontSize: '12px' }}
+                        className="inline-flex items-center justify-center gap-2  rounded-lg text-sm font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 px-4 py-2 h-7 cursor-pointer"
+                        style={{ padding: '5px 12px', fontSize: '12px', borderRadius: '4px' }}
                     >
-                        <Github size={13} />
-                        <span className="hidden sm:inline" style={{ fontFamily: 'var(--font-geist-sans)' }}>Star</span>
+                        <IconBrandGithub size={13} />
+                        <span className="sm:inline" style={{ fontFamily: 'var(--font-geist-sans)' }}>Star Github</span>
                     </button>
                 </div>
             </div>
