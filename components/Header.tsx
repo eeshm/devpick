@@ -1,34 +1,52 @@
 'use client'
-import { Button } from "./ui/button";
 import Link from "next/link";
-import { Github } from "lucide-react";
+import { Github, LucideGithub} from "lucide-react";
+import { IconBrandGithub, IconBrandGithubCopilot, IconBrandGithubFilled } from "@tabler/icons-react";
 
-function handleClick(): void {
+function handleStar(): void {
     window.open("https://github.com/eeshm/devpick");
-};
+}
 
 export default function Header() {
     return (
-        <header className="border-b border-white/10 bg-black/20 backdrop-blur-md z-30 left-0 top-0 sticky">
-            <div className="flex h-16 items-center justify-between px-6 max-w-7xl mx-auto">
-                <div>
-                    <Link href="/" rel="noopener noreferrer" className="group">
-                        <div className="font-semibold text-2xl bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent 
-                            tracking-tight hover:to-white transition-colors duration-200">
+        <header
+            className="sticky top-0 z-30 border-bottom-[var(--mono-800)]"
+            style={{ background: 'rgba(0,0,0,0.92)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}
+        >
+            {/* Main bar */}
+            <div className="flex h-12 items-center justify-between px-4  mx-auto">
+
+                {/* Left: logo + desktop nav */}
+                <div className="flex items-center gap-6">
+                    <Link href="/" rel="noopener noreferrer" className="flex items-center gap-2 group">
+                        {/* <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ color: 'var(--mono-white)' }}>
+                            <polygon points="7,1 50,50 1,50" fill="currentColor" />
+                        </svg> */}
+                        <span
+                            style={{
+                                fontFamily: 'var(--font-doto)',
+                                fontSize: '20px',
+                                fontWeight: 600,
+                                color: 'var(--mono-white)',
+                                letterSpacing: '0.04em',
+                                textTransform: 'uppercase',
+                            }}
+                        >
                             DevPick
-                        </div>
+                        </span>
                     </Link>
                 </div>
-                <div>
-                    <Button
-                        variant="outline"
-                        onClick={handleClick}
-                        className="flex items-center cursor-pointer gap-2 bg-white/5 border-white/10 hover:bg-white/10 
-                            hover:border-white/20 transition-all duration-200 text-white group"
+
+                {/* Right */}
+                <div className="flex items-center gap-2">
+                    <button
+                        onClick={handleStar}
+                        className="inline-flex items-center justify-center gap-2  rounded-lg text-sm font-medium bg-[#27272a] text-secondary-foreground hover:bg-secondary/80 px-4 py-2 h-7 cursor-pointer"
+                        style={{ padding: '5px 12px', fontSize: '12px', borderRadius: '4px' }}
                     >
-                        <Github className="group-hover:scale-110 transition-transform duration-200"/>
-                        <span className="hidden md:block">Star Project</span>
-                    </Button>
+                        <IconBrandGithub size={13} />
+                        <span className="sm:inline" style={{ fontFamily: 'var(--font-geist-sans)' }}>Star Github</span>
+                    </button>
                 </div>
             </div>
         </header>

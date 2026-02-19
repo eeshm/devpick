@@ -1,7 +1,6 @@
-import React, { useState, useEffect, ReactNode } from "react"
+import React, { ReactNode } from "react"
 import Link from "next/link"
-import { Clock } from "lucide-react"
-import { Button } from "./ui/button"
+import { Clock, ExternalLink, Star } from "lucide-react"
 import OptimizedTechImage from "./OptimizedImages"
 
 interface TechStack {
@@ -22,184 +21,229 @@ interface TechStack {
     basic_prerequisites?: string[]
 }
 
+const getDifficultyColor = (level?: string) => {
+    if (!level) return 'var(--mono-500)'
+    if (level === 'Intermediate') return '#d4a843'
+    if (level === 'Hard' || level === 'Advanced') return '#c0392b'
+    return '#27ae60'
+}
+
 export function TechStackDetailCard(props: TechStack) {
     return (
-        <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-12 gap-6">
-                <div className="col-span-12 md:col-span-3">
-                    <Side1
-                        name={props.name}
-                        logo_url={props.logo_url}
-                        basic_prerequisites={props.basic_prerequisites}
-                        learning_curve={props.learning_curve}
-                        popularity={props.popularity}
-                    />
-                </div>
-
-                <div className="col-span-12 md:col-span-6">
-                    <Main
-                        detailed_description={props.detailed_description}
-                        pros={props.pros}
-                        cons={props.cons}
-                        major_use_cases={props.major_use_cases}
-                        name={props.name}
-                    />
-                </div>
-
-                <div className="col-span-12 md:col-span-3">
-                    <Side2
-                        name={props.name}
-                        official_docs={props.official_docs}
-                    />
-                </div>
-            </div>
-        </div>
-    );
-}
-
-
-
-
-
-function Main(props: TechStack) {
-    return (
-        <div className="flex flex-col gap-y-4 ">
-            <h1 className="text-3xl font-semibold font-mono underline">
-                Overview
-            </h1>
-            <div className="text-sm text-muted-foreground">
-                {props.detailed_description}
-            </div>
-
-            {/* Pros and cons */}
-            {/* Pros and cons */}
-            <div className="flex flex-col mt-5">
-                <h1 className="text-3xl font-semibold font-mono underline mb-2 tracking-tighter">Pros & Cons</h1>
-                <div className="flex md:flex-row flex-col gap-4">
-                    {/* Pros Section */}
-                    <div className="flex-1 rounded-lg shadow-md">
-                        <div className="font-semibold mb-1">Pros:</div>
-                        <ul className="list-disc pl-5 text-sm font-medium">
-                            {props.pros?.map((pro, index) => (
-                                <li key={index} className="hover:bg-black/40 transition-colors py-1 px-1 text-muted-foreground">
-                                    {pro}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Cons Section */}
-                    <div className="flex-1 rounded-lg shadow-md">
-                        <div className="font-semibold mb-1">Cons:</div>
-                        <ul className="list-disc pl-5  text-sm font-medium">
-                            {props.cons?.map((con, index) => (
-                                <li key={index} className="hover:bg-black/40 transition-colors py-1 px-1 text-muted-foreground">
-                                    {con}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            {/* Major Use Cases */}
-            <div className="flex flex-col mt-5 ">
-                <h1 className="text-3xl font-semibold font-mono  tracking-tighter underline mb-2">Major Use Cases</h1>
-                {props.major_use_cases?.map((useCase, index) => (
-                    <ul key={index} className="flex-1 w-max shadow-md rounded-lg list-disc px-7">
-                        <li className="font-semibold text-sm py-1.5 text-muted-foreground">{useCase}</li>
-                    </ul>
-                ))}
-            </div>
-
-
-        </div>
-    )
-}
-
-function Side1({ name, logo_url, basic_prerequisites, learning_curve, popularity }: TechStack) {
-    const getDifficultyColor = (level?: string) => {
-        if (!level) return 'text-gray-400'
-        if (level == "Intermediate") return 'text-yellow-600'
-        if (level == "Hard") return 'text-red-600'
-        return 'text-green-700'
-    }
-    return (
-        <nav
-            aria-label="Tech Details"
-            className="sticky top-0 flex flex-col md:items-end space-y-3 text-sm"
-        >
-            {/* Header Section */}
-            <div className="flex items-center text-3xl w-full justify-between ">
-                <span className="font-medium">{name}</span>
-                <OptimizedTechImage
-                    logoUrl={logo_url}
-                    name={name}
-                    size="large"
-                    className="w-12 h-12 flex-shrink-0"
-                />
-            </div>
-
-            {/* Prerequisites Section */}
-            <div className=" rounded-xl bg-black/40 p-4 backdrop-blur-sm">
-                <h2 className="text-sm font-medium text-neutral-200 mb-3">
-                    Prerequisites
-                </h2>
-                <div className="flex flex-wrap gap-2">
-                    {basic_prerequisites?.map((prerequisite, index) => (
-                        <span
-                            key={index}
-                            className="inline-flex px-2.5 py-1 text-xs rounded-lg 
-                            bg-black/30 border border-white/10 text-neutral-300
-                            hover:bg-black/40 hover:text-white transition-all duration-200"
-                        >
-                            {prerequisite}
-                        </span>
-                    ))}
-                </div>
-            </div>
-
-            <Button className="bg-black/40 text-white w-full px-2 py-1">
-                <div className={`flex gap-1   `}>
-                    <span className="text-xs">Popularity: </span>
-                    <span className="capitalize text-xs">{popularity}</span>
-                </div>
-            </Button>
-
-            <Button className="bg-black/40 w-full text-white py-1 px-2" >
-                <div className={` flex text-xs ${getDifficultyColor(learning_curve)}`}>
-                    <Clock className="size-3 pt-1" />
-                    {learning_curve}
-
-                </div>
-            </Button>
-        </nav>
-    );
-}
-
-
-function Side2(props: TechStack) {
-    return (
-        <nav
-            aria-label="Quick Links"
-            className="text-sm sticky top-0 overflow-clip gap-2  text-gray-400 font-medium">
-            <div className="space-y-1 flex flex-col">
-                <div className="flex items-center text-3xl w-full justify-between pb-2 text-white" >
-                    Quick Links
-                </div>
-                <div className="inline-flex  hover:text-white underline">
-                    {props.official_docs !== undefined && props.official_docs !== "" && (
-                        <Link href={props.official_docs}>
-                            Offical docs
-                        </Link>
+        <div className="max-w-5xl mx-auto">
+            {/* ── Hero header ─────────────────────── */}
+            <div
+                className="flex items-start justify-between gap-4 pb-8 dp-border-bottom mb-8"
+            >
+                <div style={{ flex: 1, minWidth: 0 }}>
+                    <p className="dp-label mb-3">{props.category_slug?.replace(/-/g, ' ')}</p>
+                    <h1
+                        style={{
+                            fontFamily: 'var(--font-geist-sans)',
+                            fontSize: 'clamp(32px, 5vw, 52px)',
+                            fontWeight: 800,
+                            letterSpacing: '-0.04em',
+                            lineHeight: 1,
+                            color: 'var(--mono-white)',
+                            marginBottom: 12,
+                        }}
+                    >
+                        {props.name}
+                    </h1>
+                    {props.short_description && (
+                        <p style={{
+                            fontFamily: 'var(--font-geist-sans)',
+                            fontSize: 15,
+                            color: 'var(--mono-400)',
+                            lineHeight: 1.6,
+                            maxWidth: 560,
+                        }}>
+                            {props.short_description}
+                        </p>
                     )}
+
+                    {/* Meta pills */}
+                    <div className="flex flex-wrap gap-3 mt-5">
+                        {props.popularity && (
+                            <div className="dp-meta-pill">
+                                <Star size={11} />
+                                <span>{props.popularity} popularity</span>
+                            </div>
+                        )}
+                        {props.learning_curve && (
+                            <div
+                                className="dp-meta-pill"
+                                style={{ color: getDifficultyColor(props.learning_curve) }}
+                            >
+                                <Clock size={11} />
+                                <span>{props.learning_curve}</span>
+                            </div>
+                        )}
+                        {props.official_docs && (
+                            <Link
+                                href={props.official_docs}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="dp-meta-pill"
+                                style={{ textDecoration: 'none' }}
+                            >
+                                <ExternalLink size={11} />
+                                <span>Docs</span>
+                            </Link>
+                        )}
+                    </div>
                 </div>
 
-                <div className="inline-flex hover:text-white underline">
-                    Github
+                {/* Logo */}
+                <div
+                    className="w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center border flex-shrink-0"
+                    style={{ borderColor: 'var(--mono-800)', background: 'var(--mono-950)' }}
+                >
+                    <OptimizedTechImage
+                        logoUrl={props.logo_url}
+                        name={props.name}
+                        size="large"
+                        className="w-10 h-10 sm:w-12 sm:h-12 dp-logo-img"
+                        style={{ filter: 'none', opacity: 1 }}
+                    />
                 </div>
             </div>
-        </nav>
+
+            {/* ── Body grid ───────────────────────── */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                {/* Main content — spans 2 cols on md */}
+                <div className="md:col-span-2 flex flex-col gap-8">
+
+                    {/* Overview */}
+                    {props.detailed_description && (
+                        <section>
+                            <p className="dp-label mb-4">Overview</p>
+                            <p style={{
+                                fontFamily: 'var(--font-geist-sans)',
+                                fontSize: 14,
+                                color: 'var(--mono-400)',
+                                lineHeight: 1.75,
+                            }}>
+                                {props.detailed_description}
+                            </p>
+                        </section>
+                    )}
+
+                    {/* Pros & Cons */}
+                    {(props.pros?.length || props.cons?.length) ? (
+                        <section>
+                            <p className="dp-label mb-4">Pros &amp; Cons</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                {/* Pros */}
+                                <div>
+                                    <p style={{
+                                        fontFamily: 'var(--font-geist-mono)',
+                                        fontSize: 11,
+                                        color: '#27ae60',
+                                        letterSpacing: '0.1em',
+                                        marginBottom: 12,
+                                    }}>PROS</p>
+                                    <ul className="flex flex-col gap-2">
+                                        {props.pros?.map((pro, i) => (
+                                            <li
+                                                key={i}
+                                                className="flex items-start gap-2 dp-border-bottom pb-2"
+                                            >
+                                                <span style={{ color: '#27ae60', flexShrink: 0, marginTop: 2, fontSize: 12 }}>+</span>
+                                                <span style={{ fontFamily: 'var(--font-geist-sans)', fontSize: 13, color: 'var(--mono-300)', lineHeight: 1.5 }}>{pro}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                {/* Cons */}
+                                <div>
+                                    <p style={{
+                                        fontFamily: 'var(--font-geist-mono)',
+                                        fontSize: 11,
+                                        color: '#c0392b',
+                                        letterSpacing: '0.1em',
+                                        marginBottom: 12,
+                                    }}>CONS</p>
+                                    <ul className="flex flex-col gap-2">
+                                        {props.cons?.map((con, i) => (
+                                            <li
+                                                key={i}
+                                                className="flex items-start gap-2 dp-border-bottom pb-2"
+                                            >
+                                                <span style={{ color: '#c0392b', flexShrink: 0, marginTop: 2, fontSize: 12 }}>−</span>
+                                                <span style={{ fontFamily: 'var(--font-geist-sans)', fontSize: 13, color: 'var(--mono-300)', lineHeight: 1.5 }}>{con}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                    ) : null}
+
+                    {/* Use Cases */}
+                    {props.major_use_cases?.length ? (
+                        <section>
+                            <p className="dp-label mb-4">Major Use Cases</p>
+                            <ul className="flex flex-col gap-0">
+                                {props.major_use_cases.map((uc, i) => (
+                                    <li
+                                        key={i}
+                                        className="flex items-center gap-3 py-3 dp-border-bottom"
+                                    >
+                                        <span style={{
+                                            fontFamily: 'var(--font-geist-mono)',
+                                            fontSize: 11,
+                                            color: 'var(--mono-600)',
+                                            minWidth: 24,
+                                        }}>
+                                            {String(i + 1).padStart(2, '0')}
+                                        </span>
+                                        <span style={{ fontFamily: 'var(--font-geist-sans)', fontSize: 14, color: 'var(--mono-300)' }}>
+                                            {uc}
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </section>
+                    ) : null}
+                </div>
+
+                {/* Sidebar */}
+                <div className="flex flex-col gap-6">
+
+                    {/* Prerequisites */}
+                    {props.basic_prerequisites?.length ? (
+                        <section>
+                            <p className="dp-label mb-4">Prerequisites</p>
+                            <div className="flex flex-wrap gap-2">
+                                {props.basic_prerequisites.map((p, i) => (
+                                    <span key={i} className="dp-tag">{p}</span>
+                                ))}
+                            </div>
+                        </section>
+                    ) : null}
+
+                    {/* Quick Links */}
+                    <section>
+                        <p className="dp-label mb-4">Quick Links</p>
+                        <div className="flex flex-col gap-0">
+                            {props.official_docs && (
+                                <Link
+                                    href={props.official_docs}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="dp-quick-link"
+                                >
+                                    <ExternalLink size={13} />
+                                    Official Docs
+                                </Link>
+                            )}
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
     )
 }

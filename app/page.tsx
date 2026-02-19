@@ -1,67 +1,116 @@
 "use client";
 
-import Hero from "../components/Hero";
 import Container from "../components/Container";
 import Categories from "@/components/Categories";
 import MarqueeDemo from "@/components/Marquee";
 import { FeaturesSectionDemo } from "@/components/ui/Features";
 import LazyLoadOnView from "@/components/LazyLoadOnView";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { ArrowRightIcon, Scale } from "lucide-react";
 import { BlurFade } from "@/components/ui/blur-fade";
-
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   return (
     <>
       <Container className="flex flex-col min-h-screen">
-        <div
-          className="items-center mt-5 md:mt-5 flex flex-col gap-y-4 pt-5 px-2 relative z-10"
+        {/* ── Hero ──────────────────────────────────────── */}
+        {/*
+          overflow-x:hidden on the section clips the marquee at the
+          max-w-5xl right edge — no scrollbar, no bleed past the app width.
+        */}
+        <section
+          className="px-4 sm:px-6 pt-10 sm:pt-16 pb-8 sm:pb-10 max-w-5xl mx-auto w-full overflow-hidden"
         >
-          <div
-            className="relative"
-          >
-            <BlurFade delay={0.10}>
-            <h1 className="text-4xl md:text-xl lg:text-5xl tracking-tight font-semibold text-center w-full bg-gradient-to-b from-white via-white to-white/70 bg-clip-text text-transparent pb-2">
-              The Smart Way to Explore Tech
-            </h1>
+          {/* Title + description */}
+          <div className="flex flex-col md:flex-row md:items-start gap-8 md:gap-16">
+            {/* Left — big title */}
+            <BlurFade delay={0.05}>
+              <div>
+                <h1 className="dp-hero-pixel" style={{ letterSpacing: '-0.045em' }}>
+                  DEV<br className="hidden lg:inline" />
+                  PICK
+                </h1>
+                <p
+                  className="dp-label mt-4"
+                  style={{ color: 'var(--mono-500)' }}
+                >
+                  THE OPEN TECH STACK EXPLORER
+                  <span style={{ color: 'var(--mono-white)', marginLeft: 2 }}>■</span>
+                </p>
+              </div>
+            </BlurFade>
+
+            {/* Right — description + CTAs */}
+            <BlurFade delay={0.12}>
+              <div className="flex flex-col gap-5 md:pt-3 md:max-w-lg">
+                <p className="dp-subtitle">
+                  Explore tools across frontend, backend, databases, DevOps, AI, and more. Browse categories, weigh pros and cons, and compare stacks to find what fits your next build.
+                </p>
+
+                {/* CTAs */}
+                <div className="flex items-center gap-3 flex-wrap">
+                  <Link href="/category" rel="noopener noreferrer">
+                    <button
+                      id="hero-cta-compare"
+                      className="dp-btn dp-btn-solid flex items-center gap-2"
+                    >
+                      Compare Stacks
+                      <ArrowRight size={13} />
+                    </button>
+                  </Link>
+                  <Link href="/category" rel="noopener noreferrer">
+                    <button
+                      id="hero-cta-browse"
+                      className="dp-btn"
+                    >
+                      Browse Categories
+                    </button>
+                  </Link>
+                </div>
+              </div>
             </BlurFade>
           </div>
 
-            <BlurFade delay={0.10*2}>
-          <p
-            className="text-center max-w-md md:max-w-2xl text-base leading-relaxed font-grostek px-4 md:px-0 text-neutral-300/90"
-          >
-            Explore tools across frontend, backend, databases, DevOps, AI, styling, and more — browse categories, weigh pros and cons, and compare stacks to find what fits your next build.
-          </p>
-          </BlurFade>
+          <BlurFade delay={0.2}>
+            <div className="mt-10 sm:mt-14 pt-6 sm:pt-8 flex flex-col sm:flex-row items-start sm:items-center gap-8 sm:gap-12">
 
-          <div className="mt-8">
-            <BlurFade delay={0.10*3}>
-            <Link href="/category" rel="noopener noreferrer">
-              <Button
-                variant="default"
-                size="lg"
-                className="font-grostek h-12 rounded-lg
-                text-gray-800 bg-white hover:bg-white/90 font-seminold text-sm relative
-                shadow-lg hover:shadow-xl cursor-pointer group
-                transition-all duration-300 ease-in-out hover:-translate-y-0.5"
+              {/* Stats */}
+              <div
+                className="grid grid-cols-3 gap-4 sm:gap-6 flex-shrink-0"
+                style={{ minWidth: 220 }}
               >
-                Compare Stacks
-                  <ArrowRightIcon className="transition-transform stroke-[1.5px] duration-300 group-hover:translate-x-1 relative top-[1px]" />
-              </Button>
-            </Link>
-            </BlurFade>
-          </div>
-        </div>
-        <div>
-        <BlurFade delay={0.10*5}>
-          <MarqueeDemo />
-        </BlurFade>
-        </div>
+                {[
+                  { value: '50+', label: 'Tech Stacks' },
+                  { value: '10+', label: 'Categories' },
+                  { value: '∞', label: 'Comparisons' },
+                ].map((s) => (
+                  <div key={s.label}>
+                    <div style={{ fontFamily: 'var(--font-geist-sans)', fontSize: 26, fontWeight: 700, color: 'var(--mono-white)', letterSpacing: '-0.03em' }}>
+                      {s.value}
+                    </div>
+                    <div className="dp-label mt-1">{s.label}</div>
+                  </div>
+                ))}
+              </div>
 
+              {/* Marquee — fills remaining width inside max-w-5xl */}
+              <div
+                className="w-full sm:flex-1 sm:min-w-0 overflow-hidden"
+                style={{
+                  WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 72px)',
+                  maskImage: 'linear-gradient(to right, transparent 0%, black 72px)',
+                }}
+              >
+                <MarqueeDemo />
+              </div>
+            </div>
+          </BlurFade>
+        </section>
+
+        {/* ── Features ───────────────────────────────── */}
         <FeaturesSectionDemo />
+
+        {/* ── Categories ─────────────────────────────── */}
         <LazyLoadOnView>
           <Categories />
         </LazyLoadOnView>

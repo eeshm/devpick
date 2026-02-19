@@ -4,9 +4,8 @@ import BackgroundEffect from "@/components/BackgroundEffect";
 import { TechStackCard } from "@/components/TechStackCard";
 import Container from "@/components/Container";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Filter, SortAsc, SortDesc, ChevronRight, TrendingUp, AlertTriangle, Search } from "lucide-react";
+
 
 interface Category {
     id: string
@@ -62,8 +61,8 @@ export default function TechStacks({ categorySlug }: { categorySlug?: string }) 
             setLoading(true)
             setError(null)
             try {
-                const response = await fetch(`/api/tech-stacks/category/${categorySlug}`,{
-                    next:{revalidate:60},
+                const response = await fetch(`/api/tech-stacks/category/${categorySlug}`, {
+                    next: { revalidate: 60 },
                 })
                 const stackJson: ApiResponse<TechStack[]> & { count: number } = await response.json()
 
@@ -158,93 +157,98 @@ export default function TechStacks({ categorySlug }: { categorySlug?: string }) 
 
     return (
         <div className="min-h-screen">
-            <Container className="max-w-4xl  px-4 ">
-                <nav className="flex items-center space-x-2 py-4 text-sm">
-                    <Link href="/" className="text-gray-500 hover:text-gray-700">
+            <Container className="max-w-4xl px-4 sm:px-6">
+                <nav className="flex items-center gap-1.5 py-4 sm:py-5">
+                    <Link href="/" className="dp-breadcrumb-link">
                         Home
                     </Link>
-                    <ChevronRight className="w-4 h-4 text-gray-400" />
-                    <Link href="/category" className="text-gray-500 hover:text-gray-700">
+                    <ChevronRight size={12} style={{ color: 'var(--mono-700)', flexShrink: 0 }} />
+                    <Link href="/category" className="dp-breadcrumb-link">
                         Categories
                     </Link>
-                    <ChevronRight className="w-4 h-4 text-gray-400" />
-                    <span
-                        className="text-gray-500 hover:text-gray-700 capitalize"
-                    >
+                    <ChevronRight size={12} style={{ color: 'var(--mono-700)', flexShrink: 0 }} />
+                    <span className="dp-breadcrumb-current">
                         {category?.name}
                     </span>
                 </nav>
                 {/* Header */}
-                <div className="flex flex-col ">
-                    <div className="flex flex-col space-y-2">
-                        {category ? (
-                            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-grostek">
+                <div className="flex flex-col mb-2">
+                    {category ? (
+                        <div>
+                            <h1
+                                style={{
+                                    fontFamily: 'var(--font-geist-sans)',
+                                    fontSize: 'clamp(28px, 4vw, 42px)',
+                                    fontWeight: 700,
+                                    letterSpacing: '-0.03em',
+                                    color: 'var(--mono-white)',
+                                    lineHeight: 1.1,
+                                    marginBottom: 10,
+                                }}
+                            >
                                 {category.name}
-                                <p className="text-sm max-w-3xl">{category.description}</p>
                             </h1>
-                        ) : (
-                            <div>
-                            <div className="h-10 w-1/3 bg-white/10 animate-pulse rounded-md" />
-                            <div className="h-20 w-2/3 mt-2 bg-white/10 animate-pulse rounded-md" />
-                            </div>
-                        )}
-                    </div>
+                            <p
+                                style={{
+                                    fontFamily: 'var(--font-geist-sans)',
+                                    fontSize: 14,
+                                    color: 'var(--mono-400)',
+                                    lineHeight: 1.6,
+                                    maxWidth: 600,
+                                }}
+                            >
+                                {category.description}
+                            </p>
+                        </div>
+                    ) : (
+                        <div>
+                            <div className="dp-skeleton h-9 w-48 mb-3" />
+                            <div className="dp-skeleton h-4 w-96 mb-2" />
+                            <div className="dp-skeleton h-4 w-72" />
+                        </div>
+                    )}
                 </div>
 
                 {/* Compare Stacks button */}
-                {techStacks && !loading &&(
-                <div className="mt-6 mb-10 ">
-                    <Link href={`/category/${categorySlug}/compare`}
-                        rel="noopener noreferrer ">
-                        <Button className="bg-white py-6 text-black text-sm cursor-pointer">
-                            <span className="px-2 flex font-medium tracking-wide">Compare Stacks
-                                {/* <ArrowRightIcon className="size-3 ml-1 mt-1" /> */}
-                            </span>
-                        </Button>
-                    </Link>
-                </div>
+                {techStacks && !loading && (
+                    <div className="mt-6 mb-8">
+                        <Link href={`/category/${categorySlug}/compare`} rel="noopener noreferrer">
+                            <button className="dp-btn dp-btn-solid" style={{ padding: '8px 20px' }}>
+                                Compare Stacks
+                            </button>
+                        </Link>
+                    </div>
                 )}
 
-                {/*Controls  */}
-                <div className="flex flex-col gap-2 mb-4">
+                {/* Controls */}
+                <div className="flex flex-col gap-3 mb-4">
 
-                    {/* Search */}
-                    <div className="flex-1 relative bg-black/40 mt-5">
-                        <Input type="text" placeholder="Tech stacks" className="" onChange={(e) => setSearchItem(e.target.value)} />
+                    {/* Search — full width on all sizes */}
+                    <div className="dp-search-wrap dp-border-main">
+                        <Search size={14} style={{ color: 'var(--mono-500)', flexShrink: 0 }} />
+                        <input
+                            type="text"
+                            placeholder="Search tech stacks..."
+                            onChange={(e) => setSearchItem(e.target.value)}
+                            className="dp-search-input dp-border-main"
+                        />
                     </div>
 
+                    {/* Sort + count row */}
+                    <div className="flex items-center gap-3">
 
-                    {/* Sort options */}
-                    <div className="flex gap-2">
-                        <Button onClick={() => handleSortChange('popularity')}
-                            className={`flex items-center px-4 py-3 rounded-sm border transition-all ${sortBy == "popularity" ? "bg-black/40  text-white hover:bg-black/80"
-                                : 'bg-white/10 border-white/20 text-gray-300 hover:bg-white/20'
-                                }`}>
-                            <TrendingUp className="w-4 h-4" />
-                            <span>Popularity</span>
-                            {sortBy == "popularity" && (
-                                sortDirection == 'desc' ? <SortDesc className="" /> : <SortAsc className="" />
-                            )}
-                        </Button>
-                    </div>
 
-                    {/* Results */}
-                    <div className="flex items-center justify-between  mt-3">
-                        <p className="text-gray-500">Showing {filterStacks.length} of {techStacks.length} technologies </p>
+                        <span style={{ fontFamily: 'var(--font-geist-mono)', fontSize: 11, color: 'var(--mono-500)' }}>
+                            {filterStacks.length} of {techStacks.length} shown
+                        </span>
                     </div>
 
 
                     {error && !loading && (
-                        <div className="text-center py-16">
-                            <div className="w-24 h-24 bg-black/70 rounded-full flex items-center justify-center mx-auto mb-6">
-                                <AlertTriangle className="w-12 h-12 text-red-800" />
-                            </div>
-                            <h3 className="text-2xl font-bold text-white mb-2">Error Loading Data</h3>
-                            <p className="text-gray-400 mb-4">{error}</p>
-                            <button
-                                onClick={() => window.location.reload()}
-                                className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 cursor-pointer text-white rounded-lg hover:shadow-lg transition-all"
-                            >
+                        <div className="py-16 flex flex-col items-center gap-4">
+                            <AlertTriangle size={20} style={{ color: 'var(--mono-600)' }} />
+                            <p style={{ fontFamily: 'var(--font-geist-sans)', fontSize: 14, color: 'var(--mono-500)' }}>{error}</p>
+                            <button onClick={() => window.location.reload()} className="dp-btn flex items-center gap-2">
                                 Try Again
                             </button>
                         </div>
@@ -252,53 +256,39 @@ export default function TechStacks({ categorySlug }: { categorySlug?: string }) 
 
                     {/* Techstacks */}
                     {loading ? (
-                        <div className="flex flex-col mt-5 justify-between px-2">
-                            <div className="grid grid-cols-1 gap-6">
-                                {[...Array(4)].map((_, i) => (
-                                    <div key={i} className="p-6 h-full w-full bg-white/5 backdrop-blur-lg rounded-2xl border border-white/10 animate-pulse">
-                                        <div className="flex items-start space-x-4">
-                                            <div className="w-16 h-16 bg-gray-600 rounded-xl"></div>
-                                            <div className="flex-1">
-                                                <div className="h-6 bg-gray-600 rounded mb-2"></div>
-                                                <div className="h-4 bg-gray-700 rounded mb-4"></div>
-                                                <div className="flex gap-2">
-                                                    <div className="h-8 w-20 bg-gray-600 rounded"></div>
-                                                    <div className="h-8 w-24 bg-gray-600 rounded"></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div className="flex flex-col mt-5 gap-3">
+                            {[...Array(4)].map((_, i) => (
+                                <div key={i} className="dp-border-bottom py-5 flex items-start gap-4">
+                                    <div className="dp-skeleton w-10 h-10 flex-shrink-0" />
+                                    <div className="flex-1">
+                                        <div className="dp-skeleton h-4 w-36 mb-3" />
+                                        <div className="dp-skeleton h-3 w-full mb-2" />
+                                        <div className="dp-skeleton h-3 w-4/5" />
                                     </div>
-                                ))}
-                            </div>
+                                </div>
+                            ))}
                         </div>
                     ) : (
-                        <div className="flex flex-col mt-5 justify-center px-2">
-                            <div className="grid grid-cols-1 gap-4">
-                                {filterStacks.map((stack) => (
-                                    <TechStackCard
-                                        key={stack.id}
-                                        id={stack.id}
-                                        name={stack.name}
-                                        short_description={stack.short_description}
-                                        logo_url={stack.logo_url}
-                                        major_use_cases={stack.major_use_cases}
-                                        slug={stack.slug}
-                                        official_docs={stack.official_docs}
-                                        category_slug={category?.slug} />
-                                ))}
-                            </div>
+                        <div className="flex flex-col mt-4 gap-4">
+                            {filterStacks.map((stack) => (
+                                <TechStackCard
+                                    key={stack.id}
+                                    id={stack.id}
+                                    name={stack.name}
+                                    short_description={stack.short_description}
+                                    logo_url={stack.logo_url}
+                                    major_use_cases={stack.major_use_cases}
+                                    slug={stack.slug}
+                                    official_docs={stack.official_docs}
+                                    category_slug={category?.slug} />
+                            ))}
                         </div>
-                    )} 
+                    )}
                     {!loading && !error && filterStacks.length === 0 && (
-                        <div className="flex justify-center flex-col items-center gap-y-2">
-                            <Search className="w-12 h-12 text-gray-400" />
-                            <h3 className="text-2xl font-bold text-white mb-2">
-                                {techStacks.length === 0 ? "No technologies found" : "No matches found"}
-                            </h3>
-                            <p className="text-gray-400">
-                                {techStacks.length === 0
-                                    ? "This category doesn't have any technologies yet."
-                                    : "Sorry! Couldn't find any tech stacks matching your search"}
+                        <div className="py-16 flex flex-col items-center gap-3">
+                            <Search size={18} style={{ color: 'var(--mono-700)' }} />
+                            <p style={{ fontFamily: 'var(--font-geist-mono)', fontSize: 12, color: 'var(--mono-500)' }}>
+                                {techStacks.length === 0 ? 'No technologies in this category yet.' : `No results found.`}
                             </p>
                         </div>
                     )}

@@ -1,15 +1,6 @@
 import Link from "next/link";
-import RightArrow from "./icons/RightArrow";
-import { Button } from "./ui/button";
-import { CardSpotlight } from "@/components/ui/card-spotlight";
 import OptimizedTechImage from "./OptimizedImages";
-
-interface Category {
-  id: string
-  name: string
-  slug: string
-  description: string
-}
+import { ExternalLink, ArrowRight } from "lucide-react";
 
 interface TechStack {
   id: string
@@ -24,77 +15,124 @@ interface TechStack {
   major_use_cases: string[]
 }
 
-export function TechStackCard({ id, name, short_description, slug, logo_url, major_use_cases, official_docs ,category_slug}: TechStack) {
+export function TechStackCard({ name, short_description, slug, logo_url, major_use_cases, official_docs, category_slug }: TechStack) {
   return (
-    <CardSpotlight className="h-full w-full flex flex-col justify-between backdrop-blur-sm bg-gradient-to-b from-black/30 to-black/40 border-none">
-      <div className="flex-grow p-2 pt-0">
-        <div className="flex justify-between items-center text-4xl text-center gap-2">
-          <p className="font-medium relative z-20 text-white text-3xl tracking-tight">
-            {name}
-          </p>
-          <OptimizedTechImage 
+    <div
+      className="group dp-border-bottom"
+      style={{ padding: '18px 0', transition: 'background 0.1s' }}
+    >
+      {/* Header row: logo + name + actions */}
+      <div className="flex items-start gap-3 sm:gap-4">
+
+        {/* Logo */}
+        <div
+          className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center border flex-shrink-0"
+          style={{ borderColor: 'var(--mono-800)', background: 'var(--mono-950)', marginTop: 2 }}
+        >
+          <OptimizedTechImage
             logoUrl={logo_url}
             name={name}
             size="large"
-            className="w-14 h-14 flex-shrink-0 hover:scale-110 transition-transform duration-200"
+            className="w-5 h-5 sm:w-6 sm:h-6 dp-logo-img"
           />
         </div>
-        <div className="text-neutral-100 text-sm mt-6 relative z-20 line-clamp-4 leading-relaxed">
-          <p>{short_description}</p>
-        </div>
-        <div>
-          {major_use_cases && major_use_cases.length > 0 && (
-            <ul className="flex flex-wrap gap-2 mt-6 overflow-y-auto max-h-28">
-              {major_use_cases.map((usecases, index) => (
-                <div 
-                  className="inline-flex justify-center items-center text-center rounded-md 
-                  border border-white/10 px-3 py-1 text-xs bg-white/5 backdrop-blur-sm
-                  text-white/90 font-medium break-words max-w-full hover:bg-white/10 transition-colors" 
-                  key={index}
+
+        {/* Content */}
+        <div style={{ flex: 1, minWidth: 0 }}>
+          {/* Name + action row */}
+          <div className="flex items-start justify-between gap-3">
+            <h3
+              style={{
+                fontFamily: 'var(--font-geist-sans)',
+                fontSize: 15,
+                fontWeight: 600,
+                color: 'var(--mono-white)',
+                letterSpacing: '-0.01em',
+                lineHeight: 1.3,
+              }}
+            >
+              {name}
+            </h3>
+
+            {/* Actions — always visible, inline */}
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <Link
+                href={`/category/${category_slug}/${slug}`}
+                rel="noopener noreferrer"
+                className="dp-action-link primary flex items-center gap-1"
+                style={{ fontSize: 11, padding: '3px 10px' }}
+              >
+                Explore
+                <ArrowRight size={10} />
+              </Link>
+              {official_docs && (
+                <Link
+                  href={official_docs}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="dp-action-link hidden sm:inline-flex items-center gap-1"
+                  style={{ fontSize: 11, padding: '3px 10px' }}
                 >
-                  <li className="inline-flex">{usecases}</li>
-                </div>
+                  <ExternalLink size={10} />
+                  Docs
+                </Link>
+              )}
+            </div>
+          </div>
+
+          {/* Description */}
+          {short_description && (
+            <p
+              style={{
+                fontFamily: 'var(--font-geist-sans)',
+                fontSize: 13,
+                color: 'var(--mono-500)',
+                lineHeight: 1.6,
+                marginTop: 6,
+              }}
+            >
+              {short_description}
+            </p>
+          )}
+
+          {/* Use case tags */}
+          {major_use_cases && major_use_cases.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mt-3">
+              {major_use_cases.slice(0, 4).map((uc, i) => (
+                <span key={i} className="dp-tag" style={{ fontSize: 11 }}>
+                  {uc}
+                </span>
               ))}
-            </ul>
+              {major_use_cases.length > 4 && (
+                <span
+                  style={{
+                    fontFamily: 'var(--font-geist-mono)',
+                    fontSize: 11,
+                    color: 'var(--mono-600)',
+                    alignSelf: 'center',
+                  }}
+                >
+                  +{major_use_cases.length - 4}
+                </span>
+              )}
+            </div>
+          )}
+
+          {/* Docs link on mobile (hidden on sm+) */}
+          {official_docs && (
+            <Link
+              href={official_docs}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sm:hidden dp-breadcrumb-link flex items-center gap-1 mt-3"
+              style={{ fontSize: 11 }}
+            >
+              <ExternalLink size={10} />
+              Official Docs
+            </Link>
           )}
         </div>
       </div>
-
-      <div className="mt-4 flex justify-between gap-2 font-sans tracking-tight w-full p-2">
-          <Link 
-              href={`/category/${category_slug}/${slug}`}
-              rel="noopener noreferrer"
-              className="w-1/2">
-            <Button variant={'default'}
-              className="inline-flex items-center w-full h-11 cursor-pointer transition-all duration-300 
-              hover:-translate-y-0.5 hover:shadow-lg text-gray-800 hover:bg-white/95 focus-visible:ring-1 
-              bg-white/90 font-medium relative rounded-lg group"
-            >
-              <span className="mx-auto font-medium">Explore</span>
-              {/* <span className="absolute right-3 transition-transform duration-300 group-hover:translate-x-1">
-                <RightArrow />
-              </span> */}
-            </Button>
-          </Link>
-          <Link
-            href={official_docs}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-1/2"
-          >
-            <Button
-              className="inline-flex items-center border border-white/10 bg-white/5 w-full h-11 
-              focus-visible:ring-1 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10 
-              cursor-pointer font-medium text-white rounded-lg group backdrop-blur-sm"
-            >
-              <span className="mx-auto font-medium">Documentation</span>
-              {/* <span className="absolute right-3 transition-transform duration-300 group-hover:translate-x-1">
-                <RightArrow/>
-              </span> */}
-            </Button>
-          </Link>
-        </div>
-
-    </CardSpotlight>
+    </div>
   )
 }

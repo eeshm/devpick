@@ -1,149 +1,171 @@
 'use client'
 import React, { useMemo, useEffect, useState } from "react"
 import CategoryCard from "./CategoryCard"
-import { Search } from "lucide-react";
-import { usePathname} from "next/navigation";
+import { Search, AlertTriangle, RefreshCw, X } from "lucide-react"
+import { usePathname } from "next/navigation"
+import { BlurFade } from "./ui/blur-fade"
 
-import { AlertTriangle } from "lucide-react";
-import { Button } from "./ui/button";
 interface Category {
-    id?: string,
-    name: string,
-    description: string,
-    slug: string,
-    logo?: string,
+    id?: string
+    name: string
+    description: string
+    slug: string
+    logo?: string
     created_at?: string
-} 
+}
 
-interface Apiresponse<T> {
-    success: boolean;
-    error: string | null;
-    data: T;
-    count?: number;
+interface ApiResponse<T> {
+    success: boolean
+    error: string | null
+    data: T
+    count?: number
 }
 
 export default function Categories() {
     const [categories, setCategories] = useState<Category[]>([])
     const [loading, setLoading] = useState(true)
     const [searchItem, setSearchItem] = useState("")
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null)
+    const pathname = usePathname()
 
-    const pathname = usePathname();
-
-     const fetchCategories = async()=> {
-            setLoading(true)
-            try {
-                const response = await fetch(`api/categories`,{
-                    next:{revalidate:60},
-                });
-                const json: Apiresponse<Category[]> = await response.json()
-
-                if (json.success) {
-                    setCategories(json.data)
-                    setError(null)
-                } else {
-                    setError(json.error || "Sorry! Failed to load categories");
-                }
-            } catch (error: any) {
-                setError("An error occurred while fetching categories.")
-            } finally {
+    const fetchCategories = async () => {
+        setLoading(true)
+        try {
+            const response = await fetch(`api/categories`, { next: { revalidate: 60 } })
+            const json: ApiResponse<Category[]> = await response.json()
+            if (json.success) {
+                setCategories(json.data)
+                setError(null)
+            } else {
+                setError(json.error || "Failed to load categories")
+            }
+        } catch {
+            setError("An error occurred while fetching categories.")
+        } finally {
             setLoading(false)
-            }
         }
+    }
+
     useEffect(() => {
-        
-        fetchCategories();
-
-        const handleVisibilityChange = ()=>{
-            if(document.visibilityState=='visible'){
-                fetchCategories();
-            }
-        }
-        document.addEventListener('visibilitychange',handleVisibilityChange)
-        return () => {
-            document.removeEventListener("visibilitychange",handleVisibilityChange)
-        };
+        fetchCategories()
+        const onVisibility = () => { if (document.visibilityState === 'visible') fetchCategories() }
+        document.addEventListener('visibilitychange', onVisibility)
+        return () => document.removeEventListener('visibilitychange', onVisibility)
     }, [pathname])
+
     const filteredCategories = useMemo(() => {
-      const lowerSearch = searchItem.toLowerCase();
-      return categories.filter(
-        category =>
-          category.name.toLowerCase().includes(lowerSearch) ||
-          category.description.toLowerCase().includes(lowerSearch)
-      );
-    }, [categories, searchItem]);
+        const lower = searchItem.toLowerCase()
+        return categories.filter(c =>
+            c.name.toLowerCase().includes(lower) ||
+            c.description.toLowerCase().includes(lower)
+        )
+    }, [categories, searchItem])
+
     return (
-        <div>
-            <div className="mt-5 flex justify-center">
-                <h2 className=" inline-block flex-col justify-center items-center text-3xl font-thin font-opensans border-b-2 tracking-tight">
-                    Major categories
-                </h2>
+        <section className="px-4 sm:px-6 py-8 sm:py-10 max-w-5xl mx-auto w-full">
+            {/* Header */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                <div>
+                    <p className="dp-label mb-1">Categories</p>
+                    {!loading && !error && (
+                        <p style={{ fontFamily: 'var(--font-geist-mono)', fontSize: 12, color: 'var(--mono-500)' }}>
+                            {filteredCategories.length} of {categories.length} shown
+                        </p>
+                    )}
+                </div>
+
+                {/* Search bar — full width on mobile */}
+                <div className="dp-search-wrap w-full sm:w-auto" style={{ flex: '0 0 auto', minWidth: 0 }}>
+                    <Search size={14} style={{ color: 'var(--mono-500)', flexShrink: 0 }} />
+                    <input
+                        id="category-search"
+                        type="text"
+                        placeholder="Search categories..."
+                        value={searchItem}
+                        onChange={(e) => setSearchItem(e.target.value)}
+                        className="dp-search-input"
+                    />
+                    {searchItem && (
+                        <button
+                            onClick={() => setSearchItem('')}
+                            style={{ background: 'none', border: 'none', color: 'var(--mono-500)', cursor: 'pointer', padding: 0, display: 'flex', alignItems: 'center' }}
+                            aria-label="Clear search"
+                        >
+                            <X size={13} />
+                        </button>
+                    )}
+                    <span className="dp-search-kbd hidden sm:inline">/</span>
+                </div>
             </div>
 
-            <div className="mt-5 flex justify-center">
-                <input
-                    type="text"
-                    placeholder="Search categories..."
-                    value={searchItem}
-                    onChange={(e) => setSearchItem(e.target.value)}
-                    className="w-70 h-8 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-            </div>
+            {/* States */}
             {loading ? (
-                <div className="flex flex-col gap-4 items-center justify-center mt-10">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {[...Array(6)].map((_, i) => (
-                            <div key={i} className="h-80 w-80 p-8 bg-white/5 backdrop-blur-lg rounded-xl border border-white/10 animate-pulse">
-                                <div className="w-16 h-16 bg-gray-600 rounded-2xl mb-6 "></div>
-                                <div className="h-6 bg-gray-600 rounded mb-3"></div>
-                                <div className="h-4 bg-gray-700 rounded mb-2"></div>
-                                <div className="h-4 bg-gray-700 rounded w-3/4"></div>
-                            </div>
-                        ))}
+                <div>
+                    {/* Table head — sm+ only */}
+                    <div className="hidden sm:flex items-center gap-3 pb-2" style={{ paddingLeft: 0 }}>
+                        <span className="dp-label" style={{ minWidth: 28 }}>#</span>
+                        <div style={{ width: 36, flexShrink: 0 }} />
+                        <span className="dp-label" style={{ flex: 1 }}>CATEGORY</span>
+                        <span className="dp-label">ACTIONS</span>
                     </div>
+                    {[...Array(5)].map((_, i) => (
+                        <div key={i} className="" style={{ padding: '16px 0' }}>
+                            <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                                <div className="dp-skeleton h-3 w-5 hidden sm:block" style={{ borderRadius: 0, minWidth: 28, marginTop: 2 }} />
+                                <div className="dp-skeleton flex-shrink-0" style={{ width: 36, height: 36, borderRadius: 0 }} />
+                                <div style={{ flex: 1, minWidth: 0 }}>
+                                    <div className="dp-skeleton h-3 w-32 mb-2" style={{ borderRadius: 0 }} />
+                                    <div className="dp-skeleton h-2.5 w-48 max-w-full" style={{ borderRadius: 0 }} />
+                                </div>
+                                <div className="hidden sm:flex flex-col gap-1.5" style={{ flexShrink: 0 }}>
+                                    <div className="dp-skeleton h-6 w-14" style={{ borderRadius: 0 }} />
+                                    <div className="dp-skeleton h-6 w-14" style={{ borderRadius: 0 }} />
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             ) : error ? (
-                    <div className="text-center py-16">
-                        <div className="w-24 h-24 bg-black/70 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <AlertTriangle className="w-12 h-12 text-red-800" />
-                        </div>
-                        <h3 className="text-2xl font-bold text-white mb-2">Error Loading Data</h3>
-                        <p className="text-gray-400 mb-4">{error}</p>
-                        <Button
-                            onClick={fetchCategories}
-                            className="px-6 py-3 bg-gradient-to-r cursor-pointer from-blue-500 to-purple-600 text-white rounded hover:opacity-55 hover:text-black transition-all"
-                        >
-                            Try Again
-                        </Button>
+                <div className="py-16 flex flex-col items-center gap-4">
+                    <AlertTriangle size={20} style={{ color: 'var(--mono-500)' }} />
+                    <p style={{ fontFamily: 'var(--font-geist-sans)', fontSize: 14, color: 'var(--mono-500)' }}>
+                        {error}
+                    </p>
+                    <button onClick={fetchCategories} className="dp-btn flex items-center gap-2">
+                        <RefreshCw size={13} /> Retry
+                    </button>
+                </div>
+            ) : filteredCategories.length === 0 ? (
+                <div className="py-16 flex flex-col items-center gap-3">
+                    <Search size={18} style={{ color: 'var(--mono-600)' }} />
+                    <p style={{ fontFamily: 'var(--font-geist-mono)', fontSize: 12, color: 'var(--mono-500)' }}>
+                        No results for &ldquo;{searchItem}&rdquo;
+                    </p>
+                </div>
+            ) : (
+                <BlurFade delay={0.05}>
+                    {/* Table head — sm+ only */}
+                    <div className="dp-border-main hidden sm:flex items-center gap-3 pb-2">
+                        <span className="dp-label" style={{ minWidth: 28 }}>#</span>
+                        <div style={{ width: 36, flexShrink: 0 }} />
+                        <span className="dp-label" style={{ flex: 1 }}>CATEGORY</span>
+                        <span className="dp-label">ACTIONS</span>
                     </div>
-                    ) : (
-                    <div className="flex flex-col gap-4 items-center justify-center mt-10">
-                        {categories.filter((category => category.name.toLowerCase().includes(searchItem.toLowerCase())
-                            || category.description.toLowerCase().includes(searchItem.toLowerCase()))).length === 0 && (
-                                <div className="flex justify-center flex-col items-center gap-y-2">
-                                    <div>
-                                        <Search size={"34px"} />
-                                    </div>
-                                    <div className="text-gray-500 w-56 font-medium text-center">
-                                        Sorry! Couldn't find any matching categories.
-                                    </div>
-                                </div>
-                            )}
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 ">
-                            {filteredCategories.map((category) => (
-                                <CategoryCard
-                                    key={category.id}
-                                    name={category.name}
-                                    description={category.description}
-                                    slug={category.slug}
-                                    logo={category.logo}
-                                    created_at={category.created_at} />
-                            ))}
-                        </div>
-                    </div >
-                    )
-            }
-                </div >
-            );
-}
 
+                    {/* Rows */}
+                    {filteredCategories.map((category, idx) => (
+                        <CategoryCard
+                            key={category.id}
+                            index={idx + 1}
+                            name={category.name}
+                            description={category.description}
+                            slug={category.slug}
+                            logo={category.logo}
+                            created_at={category.created_at}
+                        />
+                    ))}
+                </BlurFade>
+            )}
+        </section>
+    )
+}
