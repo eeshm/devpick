@@ -41,7 +41,7 @@ export default function Header() {
                 <div className="flex items-center gap-2">
                     <button
                         onClick={handleStar}
-                        className="inline-flex items-center justify-center gap-2  rounded-lg text-sm font-medium bg-secondary text-secondary-foreground hover:bg-secondary/80 px-4 py-2 h-7 cursor-pointer"
+                        className="inline-flex items-center justify-center gap-2  rounded-lg text-sm font-medium bg-[#27272a] text-secondary-foreground hover:bg-secondary/80 px-4 py-2 h-7 cursor-pointer"
                         style={{ padding: '5px 12px', fontSize: '12px', borderRadius: '4px' }}
                     >
                         <IconBrandGithub size={13} />
