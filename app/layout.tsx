@@ -124,7 +124,7 @@ export default function RootLayout({
               {children}
             </main>
             <Analytics />
-            <Footer />
+            {/* <Footer /> */}
           </div>
         </ThemeProvider>
       </body>

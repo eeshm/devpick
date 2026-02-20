@@ -283,7 +283,7 @@
   border: none;
   outline: none;
   font-family: var(--font-geist-mono), monospace;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--mono-white);
   caret-color: var(--mono-white);
 }
